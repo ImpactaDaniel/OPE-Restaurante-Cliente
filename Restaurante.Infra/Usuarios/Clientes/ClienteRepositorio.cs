@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Restaurante.Domain.Comum.Modelos;
+using Restaurante.Domain.Comum.Modelos.Intefaces;
 using Restaurante.Domain.Usuarios.Modelos;
 using Restaurante.Domain.Usuarios.Repositorios;
 using Restaurante.Infra.Comum.Persistencia;
@@ -13,8 +14,18 @@ namespace Restaurante.Infra.Usuarios.Clientes
         RepositorioDados<IRestauranteDbContext, Cliente>,
         IClienteDomainRepositorio
     {
-        public ClienteRepositorio(IRestauranteDbContext clientesRepositorio) : base(clientesRepositorio)
+        private readonly IClienteValidator _clienteValidator;
+        public ClienteRepositorio(IRestauranteDbContext clientesRepositorio, IClienteValidator clienteValidator) : base(clientesRepositorio)
         {
+            _clienteValidator = clienteValidator;
+        }
+
+        public override async Task<RespostaConsulta<Cliente>> Salvar(Cliente entidade, CancellationToken cancellationToken = default)
+        {
+            var respostaValidator = _clienteValidator.Validar(entidade);
+            if (!respostaValidator.Sucesso)
+                return new RespostaConsulta<Cliente>(respostaValidator.Erros);
+            return await base.Salvar(entidade, cancellationToken);
         }
 
         public async Task<RespostaConsulta<Cliente>> Buscar(int id, CancellationToken cancellationToken = default)

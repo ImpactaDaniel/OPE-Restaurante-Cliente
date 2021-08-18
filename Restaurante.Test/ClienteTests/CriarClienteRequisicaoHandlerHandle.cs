@@ -20,7 +20,7 @@ namespace Restaurante.Test.ClienteTests
             //Arrange
             var factory = FactoryMock.GetClienteFactory();
 
-            var repositorio = new ClienteRepositorio(ClienteRepositorioMock.GetDbContextPadraoUsingMemoryDatabase(Guid.NewGuid().ToString()));
+            var repositorio = new ClienteRepositorio(ClienteRepositorioMock.GetDbContextPadraoUsingMemoryDatabase(Guid.NewGuid().ToString()), ClienteValidatorMock.ClienteValidatorMockPadrao());
 
             var handler = new CriarClienteRequisicaoHandler(factory, repositorio);
 
@@ -30,7 +30,7 @@ namespace Restaurante.Test.ClienteTests
             var client = await handler.Handle(comando, new System.Threading.CancellationToken());
 
             //assert
-            Assert.True(client.Id > 0);
+            Assert.True(client.Sucesso);
         }
     }
 }

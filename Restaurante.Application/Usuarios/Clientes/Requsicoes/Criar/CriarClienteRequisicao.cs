@@ -1,14 +1,16 @@
 ﻿using MediatR;
+using Restaurante.Application.Comum;
 using Restaurante.Application.Usuarios.Clientes.Requsicoes.Comum;
 using Restaurante.Domain.Usuarios.Factories.Clientes;
 using Restaurante.Domain.Usuarios.Modelos;
 using Restaurante.Domain.Usuarios.Repositorios;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Restaurante.Application.Usuarios.Clientes.Requsicoes.Criar
 {
-    public class CriarClienteRequisicao : RequisicaoCliente<CriarClienteRequisicao>, IRequest<CriarClienteResposta>
+    public class CriarClienteRequisicao : RequisicaoCliente<CriarClienteRequisicao>, IRequest<RespostaRequisicao<int>>
     {
         public CriarClienteRequisicao()
         {
@@ -16,7 +18,7 @@ namespace Restaurante.Application.Usuarios.Clientes.Requsicoes.Criar
         public CriarClienteRequisicao(Cliente cliente) : base(cliente)
         {
         }
-        public class CriarClienteRequisicaoHandler : IRequestHandler<CriarClienteRequisicao, CriarClienteResposta>
+        public class CriarClienteRequisicaoHandler : IRequestHandler<CriarClienteRequisicao, RespostaRequisicao<int>>
         {
             private readonly IClienteFactory _clienteFactory;
             private readonly IClienteDomainRepositorio _clienteRepositorio;
@@ -25,15 +27,15 @@ namespace Restaurante.Application.Usuarios.Clientes.Requsicoes.Criar
                 _clienteFactory = clienteFactory;
                 _clienteRepositorio = clienteRepositorio;
             }
-            public async Task<CriarClienteResposta> Handle(CriarClienteRequisicao request, CancellationToken cancellationToken)
+            public async Task<RespostaRequisicao<int>> Handle(CriarClienteRequisicao request, CancellationToken cancellationToken)
             {
                 var cliente = _clienteFactory
                     .ComEndereco(request.Endereco)
                     .ComNome(request.Nome)
                     .ComTelefone(request.Telefone)
                     .Build();
-                await _clienteRepositorio.Salvar(cliente, cancellationToken);
-                return new CriarClienteResposta(cliente.Id);
+                var resposta = await _clienteRepositorio.Salvar(cliente, cancellationToken);
+                return new RespostaRequisicao<int>(cliente.Id);
             }
         }
     }

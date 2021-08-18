@@ -24,7 +24,7 @@ namespace Restaurante.Test.ClienteTests.Mock
 
         public async static Task<IClienteDomainRepositorio> GetContextUsingInMemoryDBComClienteInserido(Cliente cliente)
         {
-            var repositorio = new ClienteRepositorio(GetDbContextPadraoUsingMemoryDatabase(Guid.NewGuid().ToString()));
+            var repositorio = new ClienteRepositorio(GetDbContextPadraoUsingMemoryDatabase(Guid.NewGuid().ToString()), ClienteValidatorMock.ClienteValidatorMockPadrao());
 
             await repositorio.Salvar(cliente);
 

@@ -18,10 +18,19 @@ namespace Restaurante.Infra.Comum.Persistencia
 
         protected IQueryable<TEntidade> All() => Data.Set<TEntidade>();
 
-        public async Task Salvar(TEntidade entidade, CancellationToken cancellationToken = default)
+        public virtual async Task<RespostaConsulta<TEntidade>> Salvar(TEntidade entidade, CancellationToken cancellationToken = default)
         {
-            Data.Update(entidade);
-            await Data.SaveChangesAsync(cancellationToken);
+            try
+            {
+                Data.Update(entidade);
+                await Data.SaveChangesAsync(cancellationToken);
+                return new RespostaConsulta<TEntidade>(entidade);
+            }
+            catch(Exception e)
+            {
+                return RetornaErro<TEntidade>(e.Message);
+            }
+            
         }
 
         protected RespostaConsulta<T> RetornaErro<T>(string erro)

@@ -26,7 +26,8 @@ namespace Restaurante.Test.ClienteTests
             var clienteBusca = await handlerBuscar.Handle(comandoBusca, new System.Threading.CancellationToken());
 
             //Assert
-            Assert.NotNull(clienteBusca);
+            Assert.True(clienteBusca.Sucesso);
+            Assert.NotNull(clienteBusca.Entidade);
         }
 
         [Fact]
@@ -35,7 +36,7 @@ namespace Restaurante.Test.ClienteTests
             //Arrange
             var clientePadrao = ClienteMock.GetClientePadrao();
 
-            var repositorio = new ClienteRepositorio(ClienteRepositorioMock.GetDbContextPadraoUsingMemoryDatabase(Guid.NewGuid().ToString()));
+            var repositorio = new ClienteRepositorio(ClienteRepositorioMock.GetDbContextPadraoUsingMemoryDatabase(Guid.NewGuid().ToString()), ClienteValidatorMock.ClienteValidatorMockPadrao());
 
             var comandoBusca = new BuscarClientePorIdRequisicao() { Id = clientePadrao.Id };
 

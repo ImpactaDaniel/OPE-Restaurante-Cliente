@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Restaurante.Domain.Comum;
+using Restaurante.Domain.Usuarios.Modelos.Intefaces;
 
 namespace Restaurante.Domain
 {
