@@ -4,6 +4,7 @@ using Restaurante.Test.ClienteTests.Mock;
 using Restaurante.Application.Usuarios.Clientes.Requsicoes.Criar;
 using static Restaurante.Application.Usuarios.Clientes.Requsicoes.Criar.CriarClienteRequisicao;
 using Restaurante.Infra.Usuarios.Clientes;
+using System;
 
 namespace Restaurante.Test.ClienteTests
 {
