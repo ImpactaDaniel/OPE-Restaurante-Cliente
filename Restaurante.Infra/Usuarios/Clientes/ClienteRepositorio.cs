@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Restaurante.Domain.Comum.Modelos;
 using Restaurante.Domain.Usuarios.Modelos;
 using Restaurante.Domain.Usuarios.Repositorios;
 using Restaurante.Infra.Comum.Persistencia;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -15,20 +17,43 @@ namespace Restaurante.Infra.Usuarios.Clientes
         {
         }
 
-        public async Task<Cliente> Buscar(int id, CancellationToken cancellationToken = default) =>
-            await All()
+        public async Task<RespostaConsulta<Cliente>> Buscar(int id, CancellationToken cancellationToken = default)
+        {
+            var cliente = await 
+                All()
                 .Include(c => c.Endereco)
                 .Include(c => c.Telefone)
                 .FirstOrDefaultAsync(c => c.Id == id);
 
-        public async Task<Endereco> BuscarEndereco(int id, CancellationToken cancellationToken = default) =>
-            await Data
+            if (cliente is null)
+                return RetornaErro<Cliente>("Cliente não encontrado!");
+            return new RespostaConsulta<Cliente>(cliente);
+        }
+
+        public async Task<RespostaConsulta<Endereco>> BuscarEndereco(int id, CancellationToken cancellationToken = default)
+        {
+            var endereco = await Data
                 .Enderecos
                 .FirstOrDefaultAsync(e => e.Id == id);
-        public async Task<Telefone> BuscarTelefone(int id, CancellationToken cancellationToken = default) =>
-            await Data
+
+            if(endereco is null)
+                return RetornaErro<Endereco>("Endereço não encontrado!");
+
+            return new RespostaConsulta<Endereco>(endereco);
+        }
+        public async Task<RespostaConsulta<Telefone>> BuscarTelefone(int id, CancellationToken cancellationToken = default)
+        {
+            var erros = new List<string>(1);
+
+            var telefone = await
+                Data
                 .Telefones
                 .FirstOrDefaultAsync(t => t.Id == id);
+
+            if (telefone is null)
+                return RetornaErro<Telefone>("Telefone não encontrado!");
+            return new RespostaConsulta<Telefone>(telefone);
+        }
 
         public async Task<bool> Deletar(int id, CancellationToken cancellationToken = default)
         {
@@ -43,5 +68,15 @@ namespace Restaurante.Infra.Usuarios.Clientes
 
             return true;
         }
+
+        public async Task<RespostaConsulta<Cliente>> Logar(string email, string password, CancellationToken cancellationToken = default)
+        {
+            return new RespostaConsulta<Cliente>(new Cliente());
+        }
+
+        //await All()
+        //    .Include(c => c.Endereco)
+        //    .Include(c => c.Telefone)
+        //    .FirstOrDefaultAsync(c => c.Email == email && c.Password == password);
     }
 }

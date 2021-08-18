@@ -1,5 +1,8 @@
-﻿using Restaurante.Domain.Comum.Modelos;
+﻿using Microsoft.EntityFrameworkCore;
+using Restaurante.Domain.Comum.Modelos;
 using Restaurante.Domain.Usuarios.Repositorios;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,6 +22,21 @@ namespace Restaurante.Infra.Comum.Persistencia
         {
             Data.Update(entidade);
             await Data.SaveChangesAsync(cancellationToken);
+        }
+
+        protected RespostaConsulta<T> RetornaErro<T>(string erro)
+        {
+            var erros = new List<string>(1);
+            erros.Add(erro);
+            return new RespostaConsulta<T>(erros);
+        }
+        public async Task<RespostaConsulta<TEntidade>> Buscar(Func<TEntidade, bool> condicao, CancellationToken cancellationToken = default)
+        {
+            var entidade = All().FirstOrDefault(condicao);
+            if (entidade is null)
+                return RetornaErro<TEntidade>($"{nameof(TEntidade)} não encontrada!");
+
+            return new RespostaConsulta<TEntidade>(entidade);
         }
     }
 }

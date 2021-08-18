@@ -20,7 +20,7 @@ namespace Restaurante.Test.ClienteTests
             //Arrange
             var factory = FactoryMock.GetClienteFactory();
 
-            var repositorio = new ClienteRepositorio(ClienteRepositorioMock.GetDbContextPadraoUsingMemoryDatabase());
+            var repositorio = new ClienteRepositorio(ClienteRepositorioMock.GetDbContextPadraoUsingMemoryDatabase(Guid.NewGuid().ToString()));
 
             var handler = new CriarClienteRequisicaoHandler(factory, repositorio);
 
