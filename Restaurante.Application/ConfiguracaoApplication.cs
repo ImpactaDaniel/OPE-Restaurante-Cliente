@@ -1,7 +1,9 @@
 ﻿using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("Restaurante.Test")]
 namespace Restaurante.Application
 {
     public static class ConfiguracaoApplication

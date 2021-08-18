@@ -8,7 +8,7 @@ namespace Restaurante.Test.ClienteTests
 {
     public class ClienteFactoryBuild
     {
-        [Theory, ClassData(typeof(CenariosClienteTestes))]
+        [Theory, ClassData(typeof(CenariosClientesInvalidosTestes))]
         public void DeveLancarExcecaoQuandoAlgumParametroDoClienteForInvalido(Endereco endereco, string nome, Telefone telefone, string mensagemEsperada)
         {
             //Dado uma factory
