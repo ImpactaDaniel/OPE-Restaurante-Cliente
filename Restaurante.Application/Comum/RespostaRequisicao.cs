@@ -9,6 +9,9 @@ namespace Restaurante.Application.Comum
         {
             Entidade = entidade;
         }
+        public RespostaRequisicao(Resposta resposta) : base(resposta.Sucesso, resposta.Erros)
+        {
+        }
         public RespostaRequisicao(T entidade)
         {
             Entidade = entidade;

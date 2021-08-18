@@ -5,7 +5,9 @@ using Restaurante.Domain.Usuarios.Modelos.Intefaces;
 using Restaurante.Domain.Usuarios.Repositorios;
 using Restaurante.Infra.Comum.Persistencia;
 using Restaurante.Infra.Usuarios.Clientes;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("Restaurante.Test")]
 namespace Restaurante.Infra
 {
     public static class ConfiguracaoInfra

@@ -2,6 +2,7 @@
 using Restaurante.Domain.Comum.Modelos;
 using Restaurante.Domain.Comum.Modelos.Intefaces;
 using Restaurante.Domain.Usuarios.Modelos;
+using Restaurante.Infra.Usuarios.Validators;
 
 namespace Restaurante.Test.ClienteTests.Mock
 {
@@ -16,5 +17,7 @@ namespace Restaurante.Test.ClienteTests.Mock
 
             return mock.Object;
         }
+
+        public static IClienteValidator ClienteValidatorPadrao() => new ClientValidator();
     }
 }

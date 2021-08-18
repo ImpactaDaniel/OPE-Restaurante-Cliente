@@ -9,5 +9,7 @@ namespace Restaurante.Domain.Usuarios.Factories.Clientes
         IClienteFactory ComTelefone(Telefone telefone);
         IClienteFactory ComEndereco(Endereco endereco);
         IClienteFactory ComNome(string nome);
+        IClienteFactory ComSenha(string senha);
+        IClienteFactory ComEmail(string email);
     }
 }

@@ -9,7 +9,7 @@ namespace Restaurante.Test.ClienteTests
     public class ClienteFactoryBuild
     {
         [Theory, ClassData(typeof(CenariosClientesInvalidosTestes))]
-        public void DeveLancarExcecaoQuandoAlgumParametroDoClienteForInvalido(Endereco endereco, string nome, Telefone telefone, string mensagemEsperada)
+        public void DeveLancarExcecaoQuandoAlgumParametroDoClienteForInvalido(Endereco endereco, string nome, string email, string senha, Telefone telefone, string mensagemEsperada)
         {
             //Dado uma factory
             var factory = FactoryMock.GetClienteFactory();
@@ -21,9 +21,11 @@ namespace Restaurante.Test.ClienteTests
                     .ComEndereco(endereco)
                     .ComNome(nome)
                     .ComTelefone(telefone)
+                    .ComSenha(senha)
+                    .ComEmail(email)
                     .Build()
             );
-            Assert.Equal(ex.Message, mensagemEsperada);
+            Assert.Equal(mensagemEsperada, ex.Message);
         }
     }
 }
