@@ -8,7 +8,7 @@ namespace Restaurante.Domain.Usuarios.Modelos
     {
         public string DDD { get; private set; }
         public string Numero { get; private set; }
-        public Telefone()
+        private Telefone()
         {
         }
         public Telefone(string ddd, string numero)
