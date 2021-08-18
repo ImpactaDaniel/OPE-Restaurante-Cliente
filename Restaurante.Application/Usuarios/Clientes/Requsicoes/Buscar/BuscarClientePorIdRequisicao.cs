@@ -27,10 +27,8 @@ namespace Restaurante.Application.Usuarios.Clientes.Requsicoes.Buscar
             {
                 var respostaCliente = await _clienteRepositorio.Buscar(request.Id, cancellationToken);
                 // cliente.Password = string.Empty;
-                if (!respostaCliente.Sucesso)
-                    throw new InvalidOperationException(respostaCliente.Erros?.First());
 
-                return new RespostaRequisicao<Cliente>(respostaCliente.Resposta);
+                return new RespostaRequisicao<Cliente>(respostaCliente, respostaCliente.Resposta);
             }
         }
     }

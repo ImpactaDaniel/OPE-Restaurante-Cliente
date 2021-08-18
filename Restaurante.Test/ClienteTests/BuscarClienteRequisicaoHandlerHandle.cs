@@ -31,7 +31,7 @@ namespace Restaurante.Test.ClienteTests
         }
 
         [Fact]
-        public async Task DeveLancarExcecaoQuandoNaoAcharCliente()
+        public async Task DeveRetornarEntidadeNulaESucessoFalseQuandoNaoEncontrar()
         {
             //Arrange
             var clientePadrao = ClienteMock.GetClientePadrao();
@@ -42,11 +42,12 @@ namespace Restaurante.Test.ClienteTests
 
             var handlerBuscar = new BuscarClientePorIdRequisicaoHandler(repositorio);
 
+            //Act
+            var resposta = await handlerBuscar.Handle(comandoBusca, new System.Threading.CancellationToken());
+
             //Assert
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                //Act
-                await handlerBuscar.Handle(comandoBusca, new System.Threading.CancellationToken())
-            );
+            Assert.False(resposta.Sucesso);
+            Assert.Null(resposta.Entidade);
         }
     }
 }

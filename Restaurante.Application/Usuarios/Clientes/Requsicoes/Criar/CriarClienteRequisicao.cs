@@ -35,7 +35,7 @@ namespace Restaurante.Application.Usuarios.Clientes.Requsicoes.Criar
                     .ComTelefone(request.Telefone)
                     .Build();
                 var resposta = await _clienteRepositorio.Salvar(cliente, cancellationToken);
-                return new RespostaRequisicao<int>(cliente.Id);
+                return new RespostaRequisicao<int>(resposta, resposta.Resposta.Id);
             }
         }
     }
