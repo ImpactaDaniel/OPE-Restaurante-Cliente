@@ -22,6 +22,7 @@ namespace Restaurante.Infra
             // Act
             var services = 
                 serviceCollection
+                .AddValidators()
                 .AddRepositorios()
                 .BuildServiceProvider();
 
