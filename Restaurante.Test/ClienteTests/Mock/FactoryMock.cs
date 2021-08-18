@@ -1,10 +1,4 @@
-﻿using Moq;
-using Restaurante.Domain.Usuarios.Factories.Clientes;
-using Restaurante.Domain.Usuarios.Modelos;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Restaurante.Domain.Usuarios.Factories.Clientes;
 
 namespace Restaurante.Test.ClienteTests.Mock
 {

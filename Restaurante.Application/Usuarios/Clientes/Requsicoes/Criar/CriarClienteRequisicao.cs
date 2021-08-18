@@ -16,7 +16,7 @@ namespace Restaurante.Application.Usuarios.Clientes.Requsicoes.Criar
         public CriarClienteRequisicao(Cliente cliente) : base(cliente)
         {
         }
-        public class CriarClienteRequisicaoHandler : IRequestHandler<CriarClienteRequisicao, CriarClienteResposta>
+        internal class CriarClienteRequisicaoHandler : IRequestHandler<CriarClienteRequisicao, CriarClienteResposta>
         {
             private readonly IClienteFactory _clienteFactory;
             private readonly IClienteDomainRepositorio _clienteRepositorio;

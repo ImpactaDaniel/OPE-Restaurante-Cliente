@@ -13,21 +13,17 @@ namespace Restaurante.Test.ClienteTests.Mock
            Task.FromResult(new Cliente("Daniel", null, EnderecoMock.GetEnderecoPadrao()));
     }
 
-    public class CenariosClienteTestes : IEnumerable<object[]>
+    public class CenariosClientesInvalidosTestes : IEnumerable<object[]>
     {
-        private readonly List<object[]> lista = new List<object[]>()
+        private readonly List<object[]> _dados = new List<object[]>(2)
         {
             new object[] { EnderecoMock.GetEnderecoPadrao(), "Daniel", null, "Telefone é obrigatório!" },
             new object[] { null, "Daniel", TelefoneMock.GetTelefonePadrao(), "Endereço é obrigatório!" }
         };
-        public IEnumerator<object[]> GetEnumerator()
-        {
-            return lista.GetEnumerator();
-        }
+        public IEnumerator<object[]> GetEnumerator() =>
+            _dados.GetEnumerator();
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() =>  
+            GetEnumerator();
     }
 }

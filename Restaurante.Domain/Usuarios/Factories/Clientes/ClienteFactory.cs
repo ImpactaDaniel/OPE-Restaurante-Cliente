@@ -3,7 +3,7 @@ using System;
 
 namespace Restaurante.Domain.Usuarios.Factories.Clientes
 {
-    public class ClienteFactory : IClienteFactory
+    internal class ClienteFactory : IClienteFactory
     {
         private Telefone _telefone = default;
         private Endereco _endereco = default;

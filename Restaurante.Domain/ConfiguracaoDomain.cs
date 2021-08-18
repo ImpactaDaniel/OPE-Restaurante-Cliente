@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Restaurante.Domain.Comum;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("Restaurante.Test")]
 namespace Restaurante.Domain
 {
     public static class ConfiguracaoDomain

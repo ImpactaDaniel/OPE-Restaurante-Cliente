@@ -12,7 +12,7 @@ namespace Restaurante.Domain.Usuarios.Modelos
         public string Numero { get; private set; }
         public string Complemento { get; private set; }
 
-        public Endereco()
+        private Endereco()
         {
         }
 
@@ -76,9 +76,10 @@ namespace Restaurante.Domain.Usuarios.Modelos
         private void ValidarCEP(string cep)
         {
             ValidarStringNullOrEmpty(cep, "CEP");
-            if (cep.Length == 8 && cep.All(char.IsDigit))
-                return;
-            throw new ArgumentException("CEP deve conter somente números!");
+            if (!cep.All(char.IsDigit))
+                throw new ArgumentException("CEP deve conter somente dígitos!");
+            if (cep.Length != 8)
+                throw new ArgumentException("CEP deve conter 8 dígitos!");
         }
 
 
