@@ -6,15 +6,20 @@ namespace Restaurante.Domain.Usuarios.Modelos
     {
         public string Nome { get; private set; }
         public Telefone Telefone { get; private set; }
+        public string Email { get; private set; }
+        public string Senha { get; private set; }
         public Endereco Endereco { get; private set; }
-
         public Cliente()
         {
         }
 
-        public Cliente(string nome, Telefone telefone, Endereco endereco)
+        public Cliente(string nome, string email, string senha, Telefone telefone, Endereco endereco)
         {
             ValidarStringNullOrEmpty(nome, "Nome");
+            ValidarStringNullOrEmpty(email, "E-mail");
+            ValidarStringNullOrEmpty(senha, "Senha");
+            Email = email;
+            Senha = senha;
             Nome = nome;
             Telefone = telefone;
             Endereco = endereco;

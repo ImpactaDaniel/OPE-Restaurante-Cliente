@@ -33,8 +33,12 @@ namespace Restaurante.Application.Usuarios.Clientes.Requsicoes.Criar
                     .ComEndereco(request.Endereco)
                     .ComNome(request.Nome)
                     .ComTelefone(request.Telefone)
+                    .ComEmail(request.Email)
+                    .ComSenha(request.Senha)
                     .Build();
                 var resposta = await _clienteRepositorio.Salvar(cliente, cancellationToken);
+                if (!resposta.Sucesso)
+                    return new RespostaRequisicao<int>(resposta);
                 return new RespostaRequisicao<int>(resposta, resposta.Resposta.Id);
             }
         }

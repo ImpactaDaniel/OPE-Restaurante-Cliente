@@ -8,16 +8,27 @@ namespace Restaurante.Domain.Usuarios.Factories.Clientes
         private Telefone _telefone = default;
         private Endereco _endereco = default;
         private string _nome = default;
+        private string _senha = default;
+        private string _email = default;
 
         private bool _telefoneTemValor = false;
         private bool _enderecoTemValor = false;
         private bool _nomeTemValor = false;
+        private bool _senhaTemValor = false;
+        private bool _emailTemValor = false;
         public Cliente Build()
         {
-            if (!_telefoneTemValor || !_nomeTemValor || !_enderecoTemValor)
-                throw new ArgumentException("Nome, telefone e endereço precisam ter valor!");
+            if (!_telefoneTemValor || !_nomeTemValor || !_enderecoTemValor || !_senhaTemValor || !_emailTemValor)
+                throw new ArgumentException("Nome, e-mail, senha, telefone e endereço precisam ter valor!");
             return
-                new Cliente(_nome, _telefone, _endereco);
+                new Cliente(_nome, _email, _senha, _telefone, _endereco);
+        }
+
+        public IClienteFactory ComEmail(string email)
+        {
+            _email = string.IsNullOrEmpty(email) ? throw new ArgumentException("E-mail é obrigatório!") : email;
+            _emailTemValor = !string.IsNullOrEmpty(email);
+            return this;
         }
 
         public IClienteFactory ComEndereco(Endereco endereco)
@@ -29,8 +40,15 @@ namespace Restaurante.Domain.Usuarios.Factories.Clientes
 
         public IClienteFactory ComNome(string nome)
         {
-            _nome = nome;
+            _nome = string.IsNullOrEmpty(nome) ? throw new ArgumentException("Nome é obrigatório!") : nome;
             _nomeTemValor = !string.IsNullOrEmpty(_nome);
+            return this;
+        }
+
+        public IClienteFactory ComSenha(string senha)
+        {
+            _senha = string.IsNullOrEmpty(senha) ? throw new ArgumentException("Senha é obrigatório!") : senha;
+            _senhaTemValor = !string.IsNullOrEmpty(_nome);
             return this;
         }
 
