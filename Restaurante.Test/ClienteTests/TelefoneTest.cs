@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Restaurante.Test.ClienteTests
 {
-    public class TelefoneCtor
+    public class TelefoneTest
     {
 
         //Dado um ddd ou telefone inválido

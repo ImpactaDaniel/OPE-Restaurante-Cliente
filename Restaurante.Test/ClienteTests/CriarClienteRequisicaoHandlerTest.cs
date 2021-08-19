@@ -6,19 +6,31 @@ using static Restaurante.Application.Usuarios.Clientes.Requsicoes.Criar.CriarCli
 using Restaurante.Infra.Usuarios.Clientes;
 using System;
 using System.Linq;
+using Restaurante.Domain.Comum.Modelos.Intefaces;
+using NSubstitute;
+using Restaurante.Domain.Comum.Modelos;
+using System.Collections.Generic;
 
 namespace Restaurante.Test.ClienteTests
 {
-    public class CriarClienteRequisicaoHandlerHandle
+    public class CriarClienteRequisicaoHandlerTest
     {
+        private readonly IClienteValidator _clienteValidator;
+        public CriarClienteRequisicaoHandlerTest()
+        {
+            _clienteValidator = Substitute.For<IClienteValidator>();
+        }
+
         [Fact]
         public async Task DadoUmClienteValidoDeveSerCriadoNoBd()
         {
 
             //Arrange
+            _clienteValidator.Validar(default).ReturnsForAnyArgs(new Resposta());
+
             var factory = FactoryMock.GetClienteFactory();
 
-            var repositorio = new ClienteRepositorio(ClienteRepositorioMock.GetDbContextPadraoUsingMemoryDatabase(Guid.NewGuid().ToString()), ClienteValidatorMock.ClienteValidatorMockPadrao());
+            var repositorio = new ClienteRepositorio(ClienteRepositorioMock.GetDbContextPadraoUsingMemoryDatabase(Guid.NewGuid().ToString()), _clienteValidator);
 
             var handler = new CriarClienteRequisicaoHandler(factory, repositorio);
 
@@ -31,19 +43,18 @@ namespace Restaurante.Test.ClienteTests
             Assert.True(client.Sucesso);
         }
 
-        [Theory]
-        [InlineData("danielcity1@gmail.com", "123456", "Senha Inválida!")]
-        [InlineData("daniel.com", "Daniel@123456", "E-mail Inválido!")]
-        public async Task DadoUmClienteInformacoesInvalidasNaoDeveSerCriadoNoBd(string email, string senha, string mensagemEsperada)
+        [Fact]
+        public async Task DadoUmClienteInformacoesInvalidasNaoDeveSerCriadoNoBd()
         {
             //Arrange
             var factory = FactoryMock.GetClienteFactory();
+            _clienteValidator.Validar(default).ReturnsForAnyArgs(new Resposta(false, new List<string>() { "Erro" }));
 
-            var repositorio = new ClienteRepositorio(ClienteRepositorioMock.GetDbContextPadraoUsingMemoryDatabase(Guid.NewGuid().ToString()), ClienteValidatorMock.ClienteValidatorPadrao());
+            var repositorio = new ClienteRepositorio(ClienteRepositorioMock.GetDbContextPadraoUsingMemoryDatabase(Guid.NewGuid().ToString()), _clienteValidator);
 
             var handler = new CriarClienteRequisicaoHandler(factory, repositorio);
 
-            var comando = new CriarClienteRequisicao(ClienteMock.GetClienteComEmailESenha(email, senha));
+            var comando = new CriarClienteRequisicao(await ClienteMock.GetClientePadrao());
 
             //act
             var client = await handler.Handle(comando, new System.Threading.CancellationToken());
@@ -51,7 +62,6 @@ namespace Restaurante.Test.ClienteTests
             //assert
             Assert.False(client.Sucesso);
             Assert.True(client.Erros?.Count() > 0);
-            Assert.Contains(client.Erros, e => e == mensagemEsperada);
         }
     }
 }

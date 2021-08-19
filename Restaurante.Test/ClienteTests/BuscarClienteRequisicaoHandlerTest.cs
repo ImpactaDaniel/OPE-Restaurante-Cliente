@@ -1,4 +1,7 @@
-﻿using Restaurante.Application.Usuarios.Clientes.Requsicoes.Buscar;
+﻿using NSubstitute;
+using Restaurante.Application.Usuarios.Clientes.Requsicoes.Buscar;
+using Restaurante.Domain.Comum.Modelos;
+using Restaurante.Domain.Comum.Modelos.Intefaces;
 using Restaurante.Infra.Usuarios.Clientes;
 using Restaurante.Test.ClienteTests.Mock;
 using System;
@@ -8,15 +11,25 @@ using static Restaurante.Application.Usuarios.Clientes.Requsicoes.Buscar.BuscarC
 
 namespace Restaurante.Test.ClienteTests
 {
-    public class BuscarClienteRequisicaoHandlerHandle
+    public class BuscarClienteRequisicaoHandlerTest
     {
+
+        private readonly IClienteValidator _clienteValidator;
+
+        public BuscarClienteRequisicaoHandlerTest()
+        {
+            _clienteValidator = Substitute.For<IClienteValidator>();
+
+            _clienteValidator.Validar(default).ReturnsForAnyArgs(new Resposta());
+        }
+
         [Fact]
         public async Task DeveRetornarUmClienteCriadoNoBd()
         {
             //Arrange
             var cliente = await ClienteMock.GetClientePadrao();
 
-            var repositorio = await ClienteRepositorioMock.GetContextUsingInMemoryDBComClienteInserido(cliente);
+            var repositorio = await ClienteRepositorioMock.GetContextUsingInMemoryDBComClienteInserido(cliente, _clienteValidator);
 
             var comandoBusca = new BuscarClientePorIdRequisicao() { Id = cliente.Id};
 
@@ -36,7 +49,7 @@ namespace Restaurante.Test.ClienteTests
             //Arrange
             var clientePadrao = ClienteMock.GetClientePadrao();
 
-            var repositorio = new ClienteRepositorio(ClienteRepositorioMock.GetDbContextPadraoUsingMemoryDatabase(Guid.NewGuid().ToString()), ClienteValidatorMock.ClienteValidatorMockPadrao());
+            var repositorio = new ClienteRepositorio(ClienteRepositorioMock.GetDbContextPadraoUsingMemoryDatabase(Guid.NewGuid().ToString()), _clienteValidator);
 
             var comandoBusca = new BuscarClientePorIdRequisicao() { Id = clientePadrao.Id };
 

@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Restaurante.Test.ClienteTests
 {
-    public class EnderecoCtor
+    public class EnderecoTest
     {
         //Dado cenários com endereços inválidos
         [Theory, ClassData(typeof(CenariosEnderecosInvalidos))]

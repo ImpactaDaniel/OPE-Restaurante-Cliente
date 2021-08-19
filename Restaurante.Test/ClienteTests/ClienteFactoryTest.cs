@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Restaurante.Test.ClienteTests
 {
-    public class ClienteFactoryBuild
+    public class ClienteFactoryTest
     {
         [Theory, ClassData(typeof(CenariosClientesInvalidosTestes))]
         public void DeveLancarExcecaoQuandoAlgumParametroDoClienteForInvalido(Endereco endereco, string nome, string email, string senha, Telefone telefone, string mensagemEsperada)

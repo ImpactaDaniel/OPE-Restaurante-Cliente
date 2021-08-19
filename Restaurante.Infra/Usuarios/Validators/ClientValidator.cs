@@ -14,9 +14,7 @@ namespace Restaurante.Infra.Usuarios.Validators
             var erros = new List<string>();
             var emailValido = ValidarEmail(entidade.Email, erros);
             var senhaValida = ValidarSenha(entidade.Senha, erros);
-            if (emailValido && senhaValida)
-                return new Resposta();
-            return new Resposta(false, erros);
+            return new Resposta(emailValido && senhaValida, erros);
         }
 
         public bool ValidarEmail(string email, IList<string> erros)
