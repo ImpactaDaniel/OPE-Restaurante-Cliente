@@ -4,7 +4,6 @@ using Restaurante.Application.Usuarios.Clientes.Requsicoes.Comum;
 using Restaurante.Domain.Usuarios.Factories.Clientes;
 using Restaurante.Domain.Usuarios.Modelos;
 using Restaurante.Domain.Usuarios.Repositorios;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
