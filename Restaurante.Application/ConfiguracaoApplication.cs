@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("Restaurante.Test")]
+[assembly: InternalsVisibleTo("Restaurante.Clientes.Test")]
 namespace Restaurante.Application
 {
     public static class ConfiguracaoApplication

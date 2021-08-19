@@ -35,8 +35,10 @@ namespace Restaurante.Infra.Comum.Persistencia
 
         protected RespostaConsulta<T> RetornaErro<T>(string erro)
         {
-            var erros = new List<string>(1);
-            erros.Add(erro);
+            var erros = new List<string>(1)
+            {
+                erro
+            };
             return new RespostaConsulta<T>(erros);
         }
         public async Task<RespostaConsulta<TEntidade>> Buscar(Func<TEntidade, bool> condicao, CancellationToken cancellationToken = default)

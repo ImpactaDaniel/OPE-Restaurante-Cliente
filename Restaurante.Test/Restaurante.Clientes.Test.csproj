@@ -23,9 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Restaurante.Application\Restaurante.Application.csproj" />
-    <ProjectReference Include="..\Restaurante.Domain\Restaurante.Domain.csproj" />
-    <ProjectReference Include="..\Restaurante.Infra\Restaurante.Infra.csproj" />
+    <ProjectReference Include="..\Restaurante.Application\Restaurante.Clientes.Application.csproj" />
+    <ProjectReference Include="..\Restaurante.Domain\Restaurante.Clientes.Domain.csproj" />
+    <ProjectReference Include="..\Restaurante.Infra\Restaurante.Clientes.Infra.csproj" />
   </ItemGroup>
 
 </Project>

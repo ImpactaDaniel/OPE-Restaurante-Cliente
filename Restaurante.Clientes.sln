@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Restaurante.Domain", "Restaurante.Domain\Restaurante.Domain.csproj", "{62360C6E-3704-4F8D-9B91-9BD153014847}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Restaurante.Clientes.Domain", "Restaurante.Domain\Restaurante.Clientes.Domain.csproj", "{62360C6E-3704-4F8D-9B91-9BD153014847}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Restaurante.Test", "Restaurante.Test\Restaurante.Test.csproj", "{E05D1F75-6365-48AF-B80E-7A9930DFCFA3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Restaurante.Clientes.Test", "Restaurante.Test\Restaurante.Clientes.Test.csproj", "{E05D1F75-6365-48AF-B80E-7A9930DFCFA3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Restaurante.Application", "Restaurante.Application\Restaurante.Application.csproj", "{54A6858F-B5D1-4772-BD5C-BF5E5E1AFA57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Restaurante.Clientes.Application", "Restaurante.Application\Restaurante.Clientes.Application.csproj", "{54A6858F-B5D1-4772-BD5C-BF5E5E1AFA57}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Restaurante.Infra", "Restaurante.Infra\Restaurante.Infra.csproj", "{A8C32B58-5955-4114-A289-C15262A2D151}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Restaurante.Clientes.Infra", "Restaurante.Infra\Restaurante.Clientes.Infra.csproj", "{A8C32B58-5955-4114-A289-C15262A2D151}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -2,7 +2,7 @@
 using Restaurante.Domain.Comum;
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("Restaurante.Test")]
+[assembly: InternalsVisibleTo("Restaurante.Clientes.Test")]
 namespace Restaurante.Domain
 {
     public static class ConfiguracaoDomain
