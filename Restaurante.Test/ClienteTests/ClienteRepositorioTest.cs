@@ -1,4 +1,5 @@
 ﻿using NSubstitute;
+using Restaurante.Domain.Comum.Modelos;
 using Restaurante.Domain.Comum.Modelos.Intefaces;
 using Restaurante.Infra.Usuarios.Clientes;
 using Restaurante.Test.ClienteTests.Mock;
@@ -15,7 +16,7 @@ namespace Restaurante.Clientes.Test.ClienteTests
         public ClienteRepositorioTest()
         {
             _clienteValidator = Substitute.For<IClienteValidator>();
-            _clienteValidator.Validar(default).ReturnsForAnyArgs(new Domain.Comum.Modelos.Resposta());
+            _clienteValidator.Validar(default).ReturnsForAnyArgs(new Resposta());
         }
 
         [Fact]
