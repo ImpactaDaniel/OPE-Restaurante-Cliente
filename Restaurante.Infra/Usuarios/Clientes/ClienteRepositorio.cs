@@ -15,7 +15,7 @@ namespace Restaurante.Infra.Usuarios.Clientes
         IClienteDomainRepositorio
     {
         private readonly IClienteValidator _clienteValidator;
-        public ClienteRepositorio(IRestauranteDbContext clientesRepositorio, IClienteValidator clienteValidator) : base(clientesRepositorio)
+        public ClienteRepositorio(IRestauranteDbContext dbContext, IClienteValidator clienteValidator) : base(dbContext)
         {
             _clienteValidator = clienteValidator;
         }
