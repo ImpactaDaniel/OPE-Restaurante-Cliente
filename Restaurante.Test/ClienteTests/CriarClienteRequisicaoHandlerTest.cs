@@ -3,22 +3,24 @@ using System.Threading.Tasks;
 using Restaurante.Test.ClienteTests.Mock;
 using Restaurante.Application.Usuarios.Clientes.Requsicoes.Criar;
 using static Restaurante.Application.Usuarios.Clientes.Requsicoes.Criar.CriarClienteRequisicao;
-using Restaurante.Infra.Usuarios.Clientes;
-using System;
 using System.Linq;
 using Restaurante.Domain.Comum.Modelos.Intefaces;
 using NSubstitute;
 using Restaurante.Domain.Comum.Modelos;
 using System.Collections.Generic;
+using Restaurante.Domain.Usuarios.Repositorios;
+using Restaurante.Domain.Usuarios.Modelos;
 
 namespace Restaurante.Test.ClienteTests
 {
     public class CriarClienteRequisicaoHandlerTest
     {
         private readonly IClienteValidator _clienteValidator;
+        private readonly IClienteDomainRepositorio _repositorio;
         public CriarClienteRequisicaoHandlerTest()
         {
             _clienteValidator = Substitute.For<IClienteValidator>();
+            _repositorio = Substitute.For<IClienteDomainRepositorio>();
         }
 
         [Fact]
@@ -30,9 +32,9 @@ namespace Restaurante.Test.ClienteTests
 
             var factory = FactoryMock.GetClienteFactory();
 
-            var repositorio = new ClienteRepositorio(ClienteRepositorioMock.GetDbContextPadraoUsingMemoryDatabase(Guid.NewGuid().ToString()), _clienteValidator);
+            _repositorio.Salvar(default).ReturnsForAnyArgs(new RespostaConsulta<Cliente>(await ClienteMock.GetClientePadrao()));
 
-            var handler = new CriarClienteRequisicaoHandler(factory, repositorio);
+            var handler = new CriarClienteRequisicaoHandler(factory, _repositorio);
 
             var comando = new CriarClienteRequisicao(await ClienteMock.GetClientePadrao());
 
@@ -41,6 +43,7 @@ namespace Restaurante.Test.ClienteTests
 
             //assert
             Assert.True(client.Sucesso);
+            Assert.Null(client.Erros);
         }
 
         [Fact]
@@ -48,11 +51,13 @@ namespace Restaurante.Test.ClienteTests
         {
             //Arrange
             var factory = FactoryMock.GetClienteFactory();
-            _clienteValidator.Validar(default).ReturnsForAnyArgs(new Resposta(false, new List<string>() { "Erro" }));
+            var erros = new List<string>() { "Erro" };
 
-            var repositorio = new ClienteRepositorio(ClienteRepositorioMock.GetDbContextPadraoUsingMemoryDatabase(Guid.NewGuid().ToString()), _clienteValidator);
+            _clienteValidator.Validar(default).ReturnsForAnyArgs(new Resposta(false, erros));
 
-            var handler = new CriarClienteRequisicaoHandler(factory, repositorio);
+            _repositorio.Salvar(default).ReturnsForAnyArgs(new RespostaConsulta<Cliente>(erros));
+
+            var handler = new CriarClienteRequisicaoHandler(factory, _repositorio);
 
             var comando = new CriarClienteRequisicao(await ClienteMock.GetClientePadrao());
 
