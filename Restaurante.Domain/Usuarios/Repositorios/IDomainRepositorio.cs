@@ -8,6 +8,6 @@ namespace Restaurante.Domain.Usuarios.Repositorios
     public interface IDomainRepositorio<TEntidade> where TEntidade : IEntidade
     {
         Task<RespostaConsulta<TEntidade>> Salvar(TEntidade entidade, CancellationToken cancellationToken = default);
-        Task<RespostaConsulta<TEntidade>> Buscar(Func<TEntidade, bool> condicao, CancellationToken cancellationToken = default);
+        RespostaConsulta<TEntidade> Buscar(Func<TEntidade, bool> condicao);
     }
 }

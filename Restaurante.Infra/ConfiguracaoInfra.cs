@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Restaurante.Clientes.Infra.Usuarios.Encryptacao;
 using Restaurante.Domain.Usuarios.Modelos.Intefaces;
 using Restaurante.Domain.Usuarios.Repositorios;
 using Restaurante.Infra.Comum.Persistencia;
@@ -16,6 +17,7 @@ namespace Restaurante.Infra
             services
                 .AddDatabase(configuration)
                 .AddValidators()
+                .AddEncoders()
                 .AddRepositorios();
 
         private static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration) =>
@@ -40,6 +42,14 @@ namespace Restaurante.Infra
                         .FromCallingAssembly()
                         .AddClasses(classes => classes
                                 .AssignableTo(typeof(IDomainRepositorio<>)))
+                        .AsImplementedInterfaces()
+                        .WithTransientLifetime());
+        internal static IServiceCollection AddEncoders(this IServiceCollection services) =>
+            services.
+                Scan(scan => scan
+                        .FromCallingAssembly()
+                        .AddClasses(classes => classes
+                                .AssignableTo(typeof(IEncoder)))
                         .AsImplementedInterfaces()
                         .WithTransientLifetime());
     }

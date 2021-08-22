@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Restaurante.Clientes.Infra.Usuarios.Encoder;
 using Restaurante.Domain.Comum.Modelos;
 using Restaurante.Domain.Comum.Modelos.Intefaces;
 using Restaurante.Domain.Usuarios.Modelos;
@@ -15,16 +16,20 @@ namespace Restaurante.Infra.Usuarios.Clientes
         IClienteDomainRepositorio
     {
         private readonly IClienteValidator _clienteValidator;
-        public ClienteRepositorio(IRestauranteDbContext dbContext, IClienteValidator clienteValidator) : base(dbContext)
+        private readonly IPasswordEncoder _encoder;
+        public ClienteRepositorio(IRestauranteDbContext dbContext, IClienteValidator clienteValidator, IPasswordEncoder encoder) : base(dbContext)
         {
+            _encoder = encoder;
             _clienteValidator = clienteValidator;
         }
 
         public override async Task<RespostaConsulta<Cliente>> Salvar(Cliente entidade, CancellationToken cancellationToken = default)
-        {
+        { 
             var respostaValidator = _clienteValidator.Validar(entidade);
             if (!respostaValidator.Sucesso)
                 return new RespostaConsulta<Cliente>(respostaValidator.Erros);
+
+            entidade.AtualizarSenha(_encoder.Encode(entidade.Senha));
             return await base.Salvar(entidade, cancellationToken);
         }
 
@@ -82,12 +87,18 @@ namespace Restaurante.Infra.Usuarios.Clientes
 
         public async Task<RespostaConsulta<Cliente>> Logar(string email, string password, CancellationToken cancellationToken = default)
         {
-            return new RespostaConsulta<Cliente>(new Cliente());
-        }
+            var cliente = await Data.Clientes.FirstAsync(t => t.Email == email);
 
-        //await All()
-        //    .Include(c => c.Endereco)
-        //    .Include(c => c.Telefone)
-        //    .FirstOrDefaultAsync(c => c.Email == email && c.Password == password);
+            if (cliente != null)
+            {
+                if (_encoder.VerficarSenha(cliente.Senha, password))
+                    return RetornaErro<Cliente>("Cliente email e senha incorretos.");
+
+                return new RespostaConsulta<Cliente>(cliente);
+            } else
+            {
+                return RetornaErro<Cliente>("Cliente não encontrado.");
+            }      
+        }
     }
 }
