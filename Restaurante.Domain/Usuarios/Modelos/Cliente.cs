@@ -50,5 +50,13 @@ namespace Restaurante.Domain.Usuarios.Modelos
             Endereco = endereco;
             return this;
         }
+
+        public Cliente AtualizarSenha(string senha)
+        {
+            ValidarStringNullOrEmpty(senha, "Senha");
+            if (Senha != senha)
+                Senha = senha;
+            return this;
+        }
     }
 }

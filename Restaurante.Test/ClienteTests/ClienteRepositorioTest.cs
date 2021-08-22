@@ -1,4 +1,5 @@
 ﻿using NSubstitute;
+using Restaurante.Clientes.Infra.Usuarios.Encoder;
 using Restaurante.Domain.Comum.Modelos;
 using Restaurante.Domain.Comum.Modelos.Intefaces;
 using Restaurante.Infra.Usuarios.Clientes;
@@ -12,9 +13,13 @@ namespace Restaurante.Clientes.Test.ClienteTests
     public class ClienteRepositorioTest
     {
         private readonly IClienteValidator _clienteValidator;
+        private readonly IPasswordEncoder _encoder;
 
         public ClienteRepositorioTest()
         {
+            _encoder = Substitute.For<IPasswordEncoder>();
+            _encoder.Encode(default).ReturnsForAnyArgs("senha");
+            _encoder.VerficarSenha(default, default).ReturnsForAnyArgs(true);
             _clienteValidator = Substitute.For<IClienteValidator>();
             _clienteValidator.Validar(default).ReturnsForAnyArgs(new Resposta());
         }
@@ -23,7 +28,7 @@ namespace Restaurante.Clientes.Test.ClienteTests
         public async Task DadoClienteValidoDeveSerInseridoNoBD()
         {
             //arrange
-            var repositorio = new ClienteRepositorio(ClienteRepositorioMock.GetDbContextPadraoUsingMemoryDatabase(Guid.NewGuid().ToString()), _clienteValidator);
+            var repositorio = new ClienteRepositorio(ClienteRepositorioMock.GetDbContextPadraoUsingMemoryDatabase(Guid.NewGuid().ToString()), _clienteValidator, _encoder);
             var cliente = await ClienteMock.GetClientePadrao();
 
             //act
@@ -40,7 +45,7 @@ namespace Restaurante.Clientes.Test.ClienteTests
             //arrange
             var cliente = await ClienteMock.GetClientePadrao();
 
-            var repositorio = await ClienteRepositorioMock.GetContextUsingInMemoryDBComClienteInserido(cliente, _clienteValidator);
+            var repositorio = await ClienteRepositorioMock.GetContextUsingInMemoryDBComClienteInserido(cliente, _clienteValidator, _encoder);
 
             //act
             var resposta = await repositorio.Buscar(cliente.Id);
@@ -57,7 +62,7 @@ namespace Restaurante.Clientes.Test.ClienteTests
             //arrange
             var cliente = await ClienteMock.GetClientePadrao();
 
-            var repositorio = new ClienteRepositorio(ClienteRepositorioMock.GetDbContextPadraoUsingMemoryDatabase(Guid.NewGuid().ToString()), _clienteValidator);
+            var repositorio = new ClienteRepositorio(ClienteRepositorioMock.GetDbContextPadraoUsingMemoryDatabase(Guid.NewGuid().ToString()), _clienteValidator, _encoder);
 
             //act
             var resposta = await repositorio.Buscar(cliente.Id);

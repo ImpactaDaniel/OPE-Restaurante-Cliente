@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Restaurante.Clientes.Infra.Usuarios.Encoder;
 using Restaurante.Domain.Comum.Modelos.Intefaces;
 using Restaurante.Domain.Usuarios.Modelos;
 using Restaurante.Domain.Usuarios.Repositorios;
@@ -23,9 +24,9 @@ namespace Restaurante.Test.ClienteTests.Mock
             return dbContext;
         }
 
-        public async static Task<IClienteDomainRepositorio> GetContextUsingInMemoryDBComClienteInserido(Cliente cliente, IClienteValidator clienteValidator)
+        public async static Task<IClienteDomainRepositorio> GetContextUsingInMemoryDBComClienteInserido(Cliente cliente, IClienteValidator clienteValidator, IPasswordEncoder _encoder)
         {
-            var repositorio = new ClienteRepositorio(GetDbContextPadraoUsingMemoryDatabase(Guid.NewGuid().ToString()), clienteValidator);
+            var repositorio = new ClienteRepositorio(GetDbContextPadraoUsingMemoryDatabase(Guid.NewGuid().ToString()), clienteValidator, _encoder);
 
             await repositorio.Salvar(cliente);
 

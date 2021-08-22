@@ -41,7 +41,7 @@ namespace Restaurante.Infra.Comum.Persistencia
             };
             return new RespostaConsulta<T>(erros);
         }
-        public async Task<RespostaConsulta<TEntidade>> Buscar(Func<TEntidade, bool> condicao, CancellationToken cancellationToken = default)
+        public RespostaConsulta<TEntidade> Buscar(Func<TEntidade, bool> condicao)
         {
             var entidade = All().FirstOrDefault(condicao);
             if (entidade is null)
