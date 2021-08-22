@@ -1,9 +1,10 @@
 ﻿using Restaurante.Domain.Comum.Modelos;
+using Restaurante.Domain.Comum.Modelos.Intefaces;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Restaurante.Domain.Usuarios.Repositorios
+namespace Restaurante.Domain.Usuarios.Repositorios.Interfaces
 {
     public interface IDomainRepositorio<TEntidade> where TEntidade : IEntidade
     {

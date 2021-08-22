@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Restaurante.Domain.Comum.Modelos.Intefaces;
+using System;
 
 namespace Restaurante.Domain.Comum.Modelos
 {
@@ -13,7 +14,7 @@ namespace Restaurante.Domain.Comum.Modelos
         }
         public override bool Equals(object obj)
         {
-            if (!(obj is Entidade<TId> other))
+            if (obj is not Entidade<TId> other)
             {
                 return false;
             }

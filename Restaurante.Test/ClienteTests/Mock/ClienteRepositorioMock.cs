@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Restaurante.Clientes.Infra.Usuarios.Encoder;
+using Restaurante.Clientes.Infra.Usuarios.Encoder.Interfaces;
 using Restaurante.Domain.Comum.Modelos.Intefaces;
 using Restaurante.Domain.Usuarios.Modelos;
-using Restaurante.Domain.Usuarios.Repositorios;
+using Restaurante.Domain.Usuarios.Repositorios.Interfaces;
 using Restaurante.Infra.Comum.Persistencia;
 using Restaurante.Infra.Usuarios.Clientes;
 using System;

@@ -1,5 +1,5 @@
 ﻿using NSubstitute;
-using Restaurante.Clientes.Infra.Usuarios.Encoder;
+using Restaurante.Clientes.Infra.Usuarios.Encoder.Interfaces;
 using Restaurante.Domain.Comum.Modelos;
 using Restaurante.Domain.Comum.Modelos.Intefaces;
 using Restaurante.Infra.Usuarios.Clientes;

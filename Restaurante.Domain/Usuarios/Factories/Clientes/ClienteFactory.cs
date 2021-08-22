@@ -1,4 +1,5 @@
-﻿using Restaurante.Domain.Usuarios.Modelos;
+﻿using Restaurante.Domain.Usuarios.Factories.Clientes.Interfaces;
+using Restaurante.Domain.Usuarios.Modelos;
 using System;
 
 namespace Restaurante.Domain.Usuarios.Factories.Clientes

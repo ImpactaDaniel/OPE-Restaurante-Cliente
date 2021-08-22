@@ -3,7 +3,7 @@ using Restaurante.Application.Usuarios.Clientes.Requsicoes.Buscar;
 using Restaurante.Domain.Comum.Modelos;
 using Restaurante.Domain.Comum.Modelos.Intefaces;
 using Restaurante.Domain.Usuarios.Modelos;
-using Restaurante.Domain.Usuarios.Repositorios;
+using Restaurante.Domain.Usuarios.Repositorios.Interfaces;
 using Restaurante.Test.ClienteTests.Mock;
 using System.Collections.Generic;
 using System.Linq;

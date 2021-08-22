@@ -8,8 +8,8 @@ using Restaurante.Domain.Comum.Modelos.Intefaces;
 using NSubstitute;
 using Restaurante.Domain.Comum.Modelos;
 using System.Collections.Generic;
-using Restaurante.Domain.Usuarios.Repositorios;
 using Restaurante.Domain.Usuarios.Modelos;
+using Restaurante.Domain.Usuarios.Repositorios.Interfaces;
 
 namespace Restaurante.Test.ClienteTests
 {
