@@ -58,5 +58,13 @@ namespace Restaurante.Domain.Usuarios.Modelos
                 Senha = senha;
             return this;
         }
+
+        public Cliente AtualizarEmail(string email)
+        {
+            ValidarStringNullOrEmpty(email, "Email");
+            if (Email!= email)
+                Email = email;
+            return this;
+        }
     }
 }
