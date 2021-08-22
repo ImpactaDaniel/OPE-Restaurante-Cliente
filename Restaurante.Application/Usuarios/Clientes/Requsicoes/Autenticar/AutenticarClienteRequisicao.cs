@@ -15,6 +15,10 @@ namespace Restaurante.Clientes.Application.Usuarios.Clientes.Requsicoes.Autentic
 {
     public class AutenticarClienteRequisicao : RequisicaoCliente<AutenticarClienteRequisicao>, IRequest<RespostaRequisicao<OutToken>>
     {
+        public AutenticarClienteRequisicao()
+        {
+        }
+
         internal class AutenticarClienteRequisicaoHandler : IRequestHandler<AutenticarClienteRequisicao, RespostaRequisicao<OutToken>>
         {
             private readonly IClienteDomainRepositorio _clientRepository;
