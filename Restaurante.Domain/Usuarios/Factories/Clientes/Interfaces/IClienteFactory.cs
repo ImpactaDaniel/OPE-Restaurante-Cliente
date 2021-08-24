@@ -1,7 +1,7 @@
 ﻿using Restaurante.Domain.Comum;
 using Restaurante.Domain.Usuarios.Modelos;
 
-namespace Restaurante.Domain.Usuarios.Factories.Clientes
+namespace Restaurante.Domain.Usuarios.Factories.Clientes.Interfaces
 {
     public interface IClienteFactory : IFactory<Cliente>
     {

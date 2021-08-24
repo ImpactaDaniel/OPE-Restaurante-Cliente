@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Restaurante.Clientes.Infra.Usuarios.Encryptacao;
+using Restaurante.Clientes.Infra.Usuarios.Encoder.Interfaces;
 using Restaurante.Domain.Usuarios.Modelos.Intefaces;
-using Restaurante.Domain.Usuarios.Repositorios;
+using Restaurante.Domain.Usuarios.Repositorios.Interfaces;
 using Restaurante.Infra.Comum.Persistencia;
 using Restaurante.Infra.Usuarios.Clientes;
 using System.Runtime.CompilerServices;

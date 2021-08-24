@@ -3,11 +3,7 @@ using Restaurante.Application.Comum;
 using Restaurante.Application.Usuarios.Clientes.Requsicoes.Comum;
 using Restaurante.Clientes.Application.Comum;
 using Restaurante.Clientes.Domain.Comum.Modelos.Intefaces;
-using Restaurante.Domain.Usuarios.Repositorios;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Restaurante.Domain.Usuarios.Repositorios.Interfaces;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -30,7 +26,7 @@ namespace Restaurante.Clientes.Application.Usuarios.Clientes.Requsicoes.Autentic
             }
             public async Task<RespostaRequisicao<OutToken>> Handle(AutenticarClienteRequisicao request, CancellationToken cancellationToken)
             {
-                var respostaConsulta = await _clientRepository.Logar(request.Email, request.Senha);
+                var respostaConsulta = await _clientRepository.Logar(request.Email, request.Senha, cancellationToken);
 
                 if (!respostaConsulta.Sucesso)
                     return new RespostaRequisicao<OutToken>(respostaConsulta);

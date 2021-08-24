@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Restaurante.Domain.Comum.Modelos;
-using Restaurante.Domain.Usuarios.Repositorios;
+﻿using Restaurante.Domain.Comum.Modelos;
+using Restaurante.Domain.Comum.Modelos.Intefaces;
+using Restaurante.Domain.Usuarios.Repositorios.Interfaces;
+using Restaurante.Infra.Comum.Persistencia.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,11 +27,11 @@ namespace Restaurante.Infra.Comum.Persistencia
                 await Data.SaveChangesAsync(cancellationToken);
                 return new RespostaConsulta<TEntidade>(entidade);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return RetornaErro<TEntidade>(e.Message);
             }
-            
+
         }
 
         protected RespostaConsulta<T> RetornaErro<T>(string erro)

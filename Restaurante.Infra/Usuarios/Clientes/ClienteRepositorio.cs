@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Restaurante.Clientes.Infra.Usuarios.Encoder;
+using Restaurante.Clientes.Infra.Usuarios.Encoder.Interfaces;
 using Restaurante.Domain.Comum.Modelos;
 using Restaurante.Domain.Comum.Modelos.Intefaces;
 using Restaurante.Domain.Usuarios.Modelos;
-using Restaurante.Domain.Usuarios.Repositorios;
+using Restaurante.Domain.Usuarios.Repositorios.Interfaces;
 using Restaurante.Infra.Comum.Persistencia;
 using System.Collections.Generic;
 using System.Threading;
@@ -24,7 +24,7 @@ namespace Restaurante.Infra.Usuarios.Clientes
         }
 
         public override async Task<RespostaConsulta<Cliente>> Salvar(Cliente entidade, CancellationToken cancellationToken = default)
-        { 
+        {
             var respostaValidator = _clienteValidator.Validar(entidade);
             if (!respostaValidator.Sucesso)
                 return new RespostaConsulta<Cliente>(respostaValidator.Erros);
@@ -35,7 +35,7 @@ namespace Restaurante.Infra.Usuarios.Clientes
 
         public async Task<RespostaConsulta<Cliente>> Buscar(int id, CancellationToken cancellationToken = default)
         {
-            var cliente = await 
+            var cliente = await
                 All()
                 .Include(c => c.Endereco)
                 .Include(c => c.Telefone)
@@ -52,7 +52,7 @@ namespace Restaurante.Infra.Usuarios.Clientes
                 .Enderecos
                 .FirstOrDefaultAsync(e => e.Id == id);
 
-            if(endereco is null)
+            if (endereco is null)
                 return RetornaErro<Endereco>("Endereço não encontrado!");
 
             return new RespostaConsulta<Endereco>(endereco);
@@ -95,10 +95,9 @@ namespace Restaurante.Infra.Usuarios.Clientes
                     return RetornaErro<Cliente>("Cliente email e senha incorretos.");
 
                 return new RespostaConsulta<Cliente>(cliente);
-            } else
-            {
-                return RetornaErro<Cliente>("Cliente não encontrado.");
-            }      
+            }
+
+            return RetornaErro<Cliente>("Cliente não encontrado.");
         }
     }
 }

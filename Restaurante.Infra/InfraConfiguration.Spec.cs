@@ -4,7 +4,7 @@ using Restaurante.Infra.Usuarios.Clientes;
 using System;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
-using Restaurante.Domain.Usuarios.Repositorios;
+using Restaurante.Domain.Usuarios.Repositorios.Interfaces;
 
 namespace Restaurante.Infra
 {

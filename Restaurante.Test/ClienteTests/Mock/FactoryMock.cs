@@ -1,4 +1,5 @@
 ﻿using Restaurante.Domain.Usuarios.Factories.Clientes;
+using Restaurante.Domain.Usuarios.Factories.Clientes.Interfaces;
 
 namespace Restaurante.Test.ClienteTests.Mock
 {

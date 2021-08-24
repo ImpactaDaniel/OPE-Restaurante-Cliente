@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Restaurante.Domain.Usuarios.Modelos;
-using Restaurante.Infra.Comum.Persistencia;
+using Restaurante.Infra.Comum.Persistencia.Interfaces;
 
 namespace Restaurante.Infra.Usuarios.Clientes
 {

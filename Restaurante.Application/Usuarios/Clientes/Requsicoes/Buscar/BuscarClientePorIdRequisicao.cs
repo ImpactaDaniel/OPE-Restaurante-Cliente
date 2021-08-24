@@ -2,9 +2,7 @@
 using Restaurante.Application.Comum;
 using Restaurante.Application.Usuarios.Clientes.Requsicoes.Comum;
 using Restaurante.Domain.Usuarios.Modelos;
-using Restaurante.Domain.Usuarios.Repositorios;
-using System;
-using System.Linq;
+using Restaurante.Domain.Usuarios.Repositorios.Interfaces;
 using System.Threading;
 using System.Threading.Tasks;
 

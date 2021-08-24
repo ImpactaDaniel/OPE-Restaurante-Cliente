@@ -1,9 +1,9 @@
 ﻿using MediatR;
 using Restaurante.Application.Comum;
 using Restaurante.Application.Usuarios.Clientes.Requsicoes.Comum;
-using Restaurante.Domain.Usuarios.Factories.Clientes;
+using Restaurante.Domain.Usuarios.Factories.Clientes.Interfaces;
 using Restaurante.Domain.Usuarios.Modelos;
-using Restaurante.Domain.Usuarios.Repositorios;
+using Restaurante.Domain.Usuarios.Repositorios.Interfaces;
 using System.Threading;
 using System.Threading.Tasks;
 

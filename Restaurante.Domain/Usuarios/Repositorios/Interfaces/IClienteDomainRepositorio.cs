@@ -3,7 +3,7 @@ using Restaurante.Domain.Usuarios.Modelos;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Restaurante.Domain.Usuarios.Repositorios
+namespace Restaurante.Domain.Usuarios.Repositorios.Interfaces
 {
     public interface IClienteDomainRepositorio : IDomainRepositorio<Cliente>
     {

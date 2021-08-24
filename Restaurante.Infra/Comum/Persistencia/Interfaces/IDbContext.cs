@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Restaurante.Infra.Comum.Persistencia
+namespace Restaurante.Infra.Comum.Persistencia.Interfaces
 {
     public interface IDbContext
     {

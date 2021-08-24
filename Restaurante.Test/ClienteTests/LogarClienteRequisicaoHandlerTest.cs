@@ -2,14 +2,10 @@
 using Restaurante.Clientes.Application.Usuarios.Clientes.Requsicoes.Autenticar;
 using Restaurante.Clientes.Domain.Comum.Modelos.Intefaces;
 using Restaurante.Domain.Comum.Modelos;
-using Restaurante.Domain.Comum.Modelos.Intefaces;
 using Restaurante.Domain.Usuarios.Modelos;
-using Restaurante.Domain.Usuarios.Repositorios;
+using Restaurante.Domain.Usuarios.Repositorios.Interfaces;
 using Restaurante.Test.ClienteTests.Mock;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 using static Restaurante.Clientes.Application.Usuarios.Clientes.Requsicoes.Autenticar.AutenticarClienteRequisicao;

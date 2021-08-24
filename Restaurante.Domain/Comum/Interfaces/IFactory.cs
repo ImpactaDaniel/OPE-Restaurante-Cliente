@@ -1,4 +1,4 @@
-﻿using Restaurante.Domain.Comum.Modelos;
+﻿using Restaurante.Domain.Comum.Modelos.Intefaces;
 
 namespace Restaurante.Domain.Comum
 {
