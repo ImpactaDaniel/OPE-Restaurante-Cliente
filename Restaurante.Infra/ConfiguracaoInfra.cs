@@ -23,7 +23,7 @@ namespace Restaurante.Infra
         private static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration) =>
             services
                 .AddDbContext<RestauranteDbContext>(options =>
-                    options.UseSqlServer(configuration.GetConnectionString("Default"),
+                    options.UseSqlite(configuration.GetConnectionString("Default"),
                                             sqlServer => sqlServer
                                                         .MigrationsAssembly(typeof(RestauranteDbContext).Assembly.FullName)))
                 .AddScoped<IRestauranteDbContext>(provider => provider.GetService<RestauranteDbContext>());
