@@ -1,0 +1,65 @@
+
+<div class="container-fluid">
+  <div class="row col-sm login_page">
+    <div class="col row-md-6 box_logo d-flex justify-content-center align-items-center">
+      <div class="row-4 justify-content-center col-sm-auto">
+        <img id='img_logo' src='../../assets/images/logo.PNG'>
+      </div>
+      <div class="row-2 text_logo col-sm-8">
+        <div class="col">
+          <div class="row justify-content-center">Restaurante</div>
+          <div class="row justify-content-center">Mata Burro</div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-5 row-md-auto box_login d-flex justify-content-center">
+      <div class="row col-sm-auto justify-content-center">
+        <div class="text_login">
+          <div class="row justify-content-center">
+            Mata-Burro
+          </div>
+          <div class="row justify-content-center">
+            Um restaurante de comida típicamente brasileira.
+          </div>
+          <div class="row justify-content-center">
+            Onde você vai experimentar os melhores pratos nordestinos.
+          </div>
+          <div class="row justify-content-center">
+            Bom Apetite!
+          </div>
+        </div>
+        <div class="box_btn_login">
+          <form [formGroup]="loginForm" (ngSubmit)="LogIn()">
+            <div class="form-group">
+              <input formControlName="username" type="text" class="form-control" id="user" placeholder="Usuário">
+              <div *ngIf="loginForm.controls['username'].invalid && (loginForm.controls['username'].dirty || loginForm.controls['username'].touched)">
+                <small *ngIf="loginForm.controls['username'].errors?.required"
+                       class="text-danger d-block mt-2">
+                  Username é obrigatório!
+                </small>
+              </div>
+
+            </div>
+            <div class="form-group">
+              <input formControlName="password" type="password" class="form-control" id="password" placeholder="Senha">
+              <div *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)">
+                <small *ngIf="loginForm.controls['password'].errors?.required"
+                       class="text-danger d-block mt-2">
+                  Password é obrigatório!
+                </small>
+              </div>
+            </div>
+            <div class="form-group">
+              <a id="text_remember" href="/#password-remember">Esqueceu sua senha? Clique aqui</a>
+            </div>
+            <div class="form-group ">
+              <button [disabled]="loginForm.invalid" id="btn_login" type="submit" class="btn btn-primary">Entrar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

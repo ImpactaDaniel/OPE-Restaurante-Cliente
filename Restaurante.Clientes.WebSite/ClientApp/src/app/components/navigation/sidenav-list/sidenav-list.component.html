@@ -1,0 +1,20 @@
+<mat-nav-list>
+  <a mat-list-item routerlink="/" (click)="onSidenavClose()">
+    <mat-icon>Home</mat-icon><span class="nav-caption">Painel Principal</span>
+  </a>
+  <a mat-list-item routerlink="/" (click)="onSidenavClose()">
+    <mat-icon>account_box</mat-icon><span class="nav-caption">Meu Perfil</span>
+  </a>
+  <a mat-list-item (click)="toHistory()">
+    <mat-icon>history</mat-icon><span class="nav-caption">Histórico de Entregas</span>
+  </a>
+  <a mat-list-item (click)="onSidenavClose()">
+    <mat-icon>motorcycle</mat-icon><span class="nav-caption">Entrega Ativa</span>
+  </a>
+  <a mat-list-item (click)="toPasswordChange()">
+    <mat-icon>security</mat-icon><span class="nav-caption">Alterar Senha</span>
+  </a>
+  <a mat-list-item class="menu-logout" routerLink="history" (click)="onSidenavClose()">
+    <mat-icon>logout</mat-icon>
+  </a>
+</mat-nav-list>

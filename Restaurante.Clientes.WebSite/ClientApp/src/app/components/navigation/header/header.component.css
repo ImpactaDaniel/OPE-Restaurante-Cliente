@@ -1,0 +1,28 @@
+.header {
+  background-color: #FFBA5C;
+  border-bottom: solid;
+}
+
+.btn-delivery-activate {
+  flex: 4;
+}
+
+.modal-change-status {
+  flex: 1;
+}
+
+.menu-user-name {
+  flex: 1;
+  font-size: 16px;
+}
+
+@media (max-width: 525px) {
+  #btn-logout, #btn-delivery-activate {
+    display: none;
+  }
+
+  .menu-user-name {
+    flex: 1;
+    font-size: 12px;
+  }
+}
