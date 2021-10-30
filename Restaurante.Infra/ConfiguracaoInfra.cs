@@ -13,7 +13,7 @@ namespace Restaurante.Infra
 {
     public static class ConfiguracaoInfra
     {
-        public static IServiceCollection AddInfra(this IServiceCollection services, IConfiguration configuration) =>        
+        public static IServiceCollection AddInfra(this IServiceCollection services, IConfiguration configuration) =>
             services
                 .AddDatabase(configuration)
                 .AddValidators()
@@ -23,8 +23,8 @@ namespace Restaurante.Infra
         private static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration) =>
             services
                 .AddDbContext<RestauranteDbContext>(options =>
-                    options.UseSqlServer(configuration.GetConnectionString("Default"),
-                                            sqlServer => sqlServer
+                    options.UseSqlite(configuration.GetConnectionString("Default"),
+                                            Sqlite => Sqlite
                                                         .MigrationsAssembly(typeof(RestauranteDbContext).Assembly.FullName)))
                 .AddScoped<IRestauranteDbContext>(provider => provider.GetService<RestauranteDbContext>());
 

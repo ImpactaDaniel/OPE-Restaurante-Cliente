@@ -7,13 +7,23 @@ body {
 .login_page {
   height: 100vh;
   overflow-x: hidden;
-  overflow-y: hidden;
+  overflow-y: auto;
 }
 
 .box_logo {
   background-color: #FFBA5C;
   display: flex;
   flex-direction: column;
+}
+
+.campos-form {
+  margin-top: 20px;
+}
+
+.button-form {
+  margin-top: 15px;
+  text-align: center;
+  min-width: -webkit-fill-available;
 }
 
 .text_logo {
@@ -29,20 +39,9 @@ body {
 }
 
 .box_btn_login {
-  margin-top: 100px;
-  display: flex;
-  justify-content: center;
+  margin-top: 175px;
 }
 
-.form-group {
-  width: 200px;
-  margin: 10px;
-}
-
-.box_login {
-  display: flex;
-  justify-content: center;
-}
 
 #btn_login {
   background-color: #FFBA5C;
@@ -59,15 +58,11 @@ body {
   margin-top: 30px;
 }
 
-#text_remember {
-  font-size: 12px;
-}
-
 img {
   max-width: 200px;
 }
 
-@media(max-width: 650px) {
+@media(max-width: 575px) {
 
   img {
     max-width: 130px;
@@ -82,12 +77,6 @@ img {
     margin-top: 0px;
   }
 
-  .box_logo {
-    height: 30vh;
-    width: 100vh;
-    flex-direction: row;
-  }
-
   .text_logo {
     font-size: 20px;
   }
@@ -96,13 +85,6 @@ img {
     font-size: 16px;
     width: 350px;
     margin-top: 0px;
-  }
-
-  .box_login {
-    height: auto;
-    width: 100vh;
-    flex: 1;
-    flex-direction: column;
   }
 
   #btn_login {

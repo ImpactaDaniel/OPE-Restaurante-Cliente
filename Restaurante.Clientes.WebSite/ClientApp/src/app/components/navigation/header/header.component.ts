@@ -1,40 +1,42 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from '../../../pages/cliente/services/auth-service';
+import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+import { Router } from "@angular/router";
+import { TokenService } from "src/app/services/token.service";
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  selector: "app-header",
+  templateUrl: "./header.component.html",
+  styleUrls: ["./header.component.scss"],
 })
 export class HeaderComponent implements OnInit {
 
-  userNameLogged: string;
-
   @Output() public sidenavToggle = new EventEmitter();
 
-  constructor(private authService: AuthService, public router: Router) {
+  userNameLogged = "";
 
+  constructor(
+    private authService: TokenService,
+    private router: Router
+  ) { }
+
+  ngOnInit() {
+    this.getUserName();
+    this.authService.userChanged.subscribe(() => {
+      this.getUserName();
+    });
   }
 
-  ngOnInit(): void {
-    this.getUserNameLogged()
+  private getUserName() {
+    this.userNameLogged = "";
+    if (this.authService.isAuthenticated())
+      this.userNameLogged = this.authService.getTokenData().name;
   }
 
   public onToggleSidenav = () => {
-    this.sidenavToggle.emit()
-  }
-
-  getUserNameLogged() {
-    let localstorage = localStorage.getItem('cliente')
-    if (localstorage) {
-      let userData = JSON.parse(localstorage)
-      this.userNameLogged = userData.username
-    }
-  }
+    this.sidenavToggle.emit();
+  };
 
   logOut() {
-    this.authService.logout()
+    this.authService.logout();
+    this.router.navigate(["/cliente/login"]);
   }
-
 }

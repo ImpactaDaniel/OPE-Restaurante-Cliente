@@ -1,15 +1,34 @@
+import { AuthenticateGuardService } from './authenticate-guard.service';
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-//import { AuthGuardService } from 'src/app/guards/auth.guard';
+import { CreateClienteComponent } from './create-cliente/create-cliente.component';
+//import { EditClienteComponent } from './edit-cliente/edit-cliente.component';
+import { ClienteGuard } from './cliente.guard';
+import { LoginClienteComponent } from './login-cliente/login-cliente';
 
 const routes: Routes = [
   {
-    //path: 'history', component: DeliveryHistoryComponent, canActivate: [AuthGuardService]
+    path: 'create',
+    component: CreateClienteComponent
+  },
+  //{
+  //  path: 'edit',
+  //  component: EditClienteComponent
+  //},
+  {
+    path: 'login',
+    component: LoginClienteComponent,
+    canActivate: [AuthenticateGuardService]
   }
 ];
 
+
 @NgModule({
+  declarations: [],
   imports: [
-    RouterModule.forChild(routes)],
+    CommonModule,
+    RouterModule.forChild(routes)
+  ]
 })
 export class ClienteRoutingModule { }
