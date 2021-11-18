@@ -1,4 +1,5 @@
 ﻿using Restaurante.Domain.Comum.Modelos;
+using System;
 
 namespace Restaurante.Domain.Usuarios.Modelos
 {
@@ -9,6 +10,8 @@ namespace Restaurante.Domain.Usuarios.Modelos
         public string Email { get; private set; }
         public string Senha { get; private set; }
         public Endereco Endereco { get; private set; }
+        public DateTime DataNascimento { get; set; }
+        public string CPF { get; set; }
         public Cliente()
         {
         }

@@ -21,4 +21,8 @@
     <None Include="OpenAPIs\swagger.json" ClassName="Restaurante" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Restaurante.Infra\Restaurante.Clientes.Infra.csproj" />
+  </ItemGroup>
+
 </Project>
