@@ -11,6 +11,8 @@ namespace Restaurante.Domain.Usuarios.Modelos
         public string Bairro { get; private set; }
         public string Numero { get; private set; }
         public string Complemento { get; private set; }
+        public string Cidade { get; set; }
+        public string Estado { get; set; }
 
         private Endereco()
         {
