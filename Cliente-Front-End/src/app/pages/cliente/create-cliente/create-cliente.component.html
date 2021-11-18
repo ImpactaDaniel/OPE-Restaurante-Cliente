@@ -1,0 +1,135 @@
+<div class="container-fluid">
+  <div class="row login_page">
+    <div class="col-md-6 box_logo d-flex justify-content-center align-items-center">
+      <div class="row-4 justify-content-center">
+        <figure class="figure-img">
+          <img class="img-fluid" alt="logo restaurante" src='../../../../assets/images/logo.png'>
+        </figure>
+      </div>
+      <div class="text_logo col-xs-12 col-sm-8">
+        <div class="col">
+          <div class="row justify-content-center">Restaurante</div>
+          <div class="row justify-content-center">Mata Burro</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 row-md-auto box_login justify-content-center">
+      <div class="row col-sm-auto justify-content-center">
+        <div class="row justify-content-center text_login mb-3">
+          Preencha os dados abaixo.
+        </div>
+        <form [formGroup]="form" (ngSubmit)="cadastrarCliente()">
+          <mat-error *ngIf="error" class="text-center my-2">{{ erroMsg }}</mat-error>
+          <div class="row">
+            <div class="col-sm-6">
+              <mat-form-field>
+                <mat-label>Nome</mat-label>
+                <input tabindex="1" type="text" matInput name="name" formControlName="name">
+                <mat-error>Nome é obrigatório</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-6">
+              <mat-form-field>
+                <mat-label>Sobrenome</mat-label>
+                <input tabindex="2" type="text" matInput name="lastName" formControlName="lastname">
+                <mat-error>Sobrenome é obrigatório</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-6">
+              <mat-form-field>
+                <mat-label>Data de Nascimento</mat-label>
+                <input tabindex="4" type="date" matInput formControlName="birthDate" name="birthDate">
+                <mat-error>Data de Nascimento inválida</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-6" formGroupName="phones">
+              <mat-form-field>
+                <mat-label>Telefone</mat-label>
+                <input tabindex="10" mask="00 00000-0000" type="text" formControlName="phoneNumber" name="phoneNumber"
+                        matInput>
+                <mat-error>Telefone é obrigatório</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div formGroupName="addresses">
+            <div class="row">
+              <div class="col-sm-6">
+                <mat-form-field>
+                  <mat-label>CEP</mat-label>
+                  <input tabindex="5" mask="00000-000" type="text" matInput (blur)="consultarCep()"
+                         placeholder="000000-000" formControlName="cep" name="cep">
+                  <mat-error>CEP inválido</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-6">
+                <mat-form-field>
+                  <mat-label>Estado</mat-label>
+                  <input type="text" readonly matInput formControlName="state" name="state">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <mat-form-field>
+                  <mat-label>Cidade</mat-label>
+                  <input type="text" readonly formControlName="city" name="city" matInput>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-6">
+                <mat-form-field>
+                  <mat-label>Bairro</mat-label>
+                  <input type="text" formControlName="neighbourhood" name="neighbourhood" matInput readonly>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-4">
+                <mat-form-field>
+                  <mat-label>Logradouro</mat-label>
+                  <input type="text" readonly matInput formControlName="public_place" name="public_place">
+                </mat-form-field>
+              </div>
+              <div class="col-sm-4">
+                <mat-form-field>
+                  <mat-label>Número</mat-label>
+                  <input tabindex="6" type="text" matInput formControlName="number" name="number">
+                  <mat-error>Número é obrigatório</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-4">
+                <mat-form-field>
+                  <mat-label>Complemento</mat-label>
+                  <input tabindex="6" type="text" matInput formControlName="complement" name="complement">
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input tabindex="7" placeholder="Ex. test@example.com" type="text" matInput name="email"
+                       formControlName="email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}">
+                <mat-error>E-mail inválido</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-6">
+              <mat-form-field>
+                <mat-label>Senha</mat-label>
+                <input tabindex="8" type="password" matInput name="password" formControlName="password">
+                <mat-error>Senha inválida</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="button-form">
+            <button id="btn_logar" type="submit" class="btn btn-primary button-form">Criar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

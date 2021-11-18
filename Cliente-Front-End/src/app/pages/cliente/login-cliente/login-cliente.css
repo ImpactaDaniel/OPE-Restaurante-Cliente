@@ -1,0 +1,36 @@
+.bgdefault {
+  background-color: #FFBA5C;
+  font-family: Arial, Helvetica, sans-serif;
+  height: 100vh;
+}
+
+.fullscreen {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+h1 {
+  text-align: center;
+}
+
+.button-form {
+  margin-top: 15px;
+  width: 120px;
+  text-align: center;
+  min-width: -webkit-fill-available;
+}
+
+.div-img {
+  margin-top: 20px;
+}
+
+.campos-login {
+  margin-top: 15px;
+  border-radius: 5px;
+}
+
+.mat-form-field-infix {
+  color: white !important;
+}

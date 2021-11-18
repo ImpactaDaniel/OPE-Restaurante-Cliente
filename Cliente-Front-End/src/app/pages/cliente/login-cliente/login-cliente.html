@@ -1,0 +1,43 @@
+<div class="bgdefault">
+  <div class="container">
+    <div class="row justify-content-end">
+      <div class="col-sm-2">
+        <label for="btn-create">Novo por aqui?</label>
+        <button (click)="toClienteCreate()" id="btn-create" class="btn btn-primary button-form">Cadastre-se</button>
+      </div>
+    </div>
+    <div class="row justify-content-center" style="text-align: center;">
+      <div class="col-12 div-img">
+        <figure class="figure-img">
+          <img class="img-fluid" alt="logo restaurante" src='../../../../assets/images/logo.png'>
+        </figure>
+        <h1>Restaurante Mata Burro</h1>
+      </div>
+    </div>
+    <div class="row justify-content-center text-center">
+      <div class="col-lg-4 col-md-6 col-sm-8 col-xs-10 h-100">
+        <form [formGroup]="form" (ngSubmit)="authentication()">
+          <div class="">
+            <div class="campos-login bg-white p-3">
+              <mat-form-field class="w-100">
+                <input matInput formControlName="email" name="email" type="text" placeholder="E-mail">
+                <mat-error>E-mail inválido</mat-error>
+              </mat-form-field>
+              <mat-form-field class="w-100">
+                <input matInput formControlName="password" name="password" type="password" placeholder="Senha">
+                <mat-error>Senha inválida!</mat-error>
+              </mat-form-field>
+              <br>
+            </div>
+            <div class="button-form">
+              <button type="submit" id="btn-login" class="btn btn-primary button-form">Login</button>
+            </div>
+            <div style="margin-top: 15px;">
+              <a href="">Esqueceu sua senha? Clique aqui!</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

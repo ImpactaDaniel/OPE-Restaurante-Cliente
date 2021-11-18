@@ -1,0 +1,11 @@
+<mat-toolbar class="header">
+  <button mat-icon-button (click)="onToggleSidenav()">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <span class="menu-user-name">Seja bem-vindo(a) {{ userNameLogged }}</span>
+
+  <button mat-icon-button id="btn-logout" (click)="logOut()">
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>

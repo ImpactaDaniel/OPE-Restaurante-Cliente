@@ -1,0 +1,16 @@
+.header {
+  background-color: #FFBA5C;
+  border-bottom: solid;
+}
+
+.menu-user-name {
+  flex: 1;
+  font-size: 16px;
+}
+
+@media (max-width: 525px) {
+  .menu-user-name {
+    flex: 1;
+    font-size: 12px;
+  }
+}
