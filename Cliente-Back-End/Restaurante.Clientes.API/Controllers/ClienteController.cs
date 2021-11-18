@@ -6,7 +6,7 @@ namespace Restaurante.Clientes.API.Controllers
     [Route("[controller]")]
     public class ClienteController : ControllerBase
     {
-        [("ItWorks")]
+        [HttpGet("ItWorks")]
         public IActionResult Index()
         {
             return Ok("ItWorks");
