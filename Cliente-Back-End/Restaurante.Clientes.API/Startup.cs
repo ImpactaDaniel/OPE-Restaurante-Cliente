@@ -7,6 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Restaurante.Application;
+using Restaurante.Domain;
+using Restaurante.Infra;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +31,9 @@ namespace Restaurante.Clientes.API
         {
 
             services.AddControllers();
+            services.AddInfra(Configuration);
+            services.AddApplication(Configuration);
+            services.AddDomain();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Restaurante.Clientes.API", Version = "v1" });
