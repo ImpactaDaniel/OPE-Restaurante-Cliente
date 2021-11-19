@@ -1,7 +1,12 @@
-.mat-sidenav {
-  min-height: 1000px;
+mat-sidenav-container, mat-sidenav-content, mat-sidenav {
+  height: 100%;
+  overflow-x: hidden;
+}
+mat-sidenav {
+  width: 250px;
+  background-color: #91592C;
 }
 
-main {
-  min-height: 90vh;
+.height {
+  height: calc(100% - 64px);
 }
