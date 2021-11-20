@@ -1,24 +1,18 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Restaurante.Application;
 using Restaurante.Domain;
 using Restaurante.Infra;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Restaurante.Clientes.API
 {
     public class Startup
     {
+        private readonly static string CORS_NAME = "Default";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -34,6 +28,14 @@ namespace Restaurante.Clientes.API
             services.AddInfra(Configuration);
             services.AddApplication(Configuration);
             services.AddDomain();
+            services
+                .AddCors(cors => cors
+                                        .AddPolicy(CORS_NAME, policy => policy
+                                                                        .WithOrigins("http://localhost:4200")
+                                                                        .AllowAnyMethod()
+                                                                        .AllowCredentials()
+                                                                        .AllowAnyHeader()));
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Restaurante.Clientes.API", Version = "v1" });
@@ -49,6 +51,8 @@ namespace Restaurante.Clientes.API
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Restaurante.Clientes.API v1"));
             }
+
+            app.UseCors();
 
             app.UseHttpsRedirection();
 
