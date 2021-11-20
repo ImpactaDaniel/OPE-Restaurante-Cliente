@@ -16,37 +16,46 @@
               <div class="col-sm-6">
                 <mat-form-field>
                   <mat-label>Nome</mat-label>
-                  <input tabindex="1" type="text" matInput name="name" formControlName="name">
+                  <input tabindex="1" type="text" matInput name="nome" formControlName="nome">
                   <mat-error>Nome é obrigatório</mat-error>
                 </mat-form-field>
               </div>
               <div class="col-sm-6">
                 <mat-form-field>
-                  <mat-label>Sobrenome</mat-label>
-                  <input tabindex="2" type="text" matInput name="lastName" formControlName="lastname">
-                  <mat-error>Sobrenome é obrigatório</mat-error>
-                </mat-form-field>
-              </div>
-            </div>
-  
-            <div class="row">
-              <div class="col-sm-6">
-                <mat-form-field>
                   <mat-label>Data de Nascimento</mat-label>
-                  <input tabindex="4" type="date" matInput formControlName="birthDate" name="birthDate">
+                  <input tabindex="4" type="date" matInput formControlName="dataNascimento" name="dataNascimento">
                   <mat-error>Data de Nascimento inválida</mat-error>
                 </mat-form-field>
               </div>
-              <div class="col-sm-6" formGroupName="phones">
+              
+            </div>
+            <div class="row">
+              <div class="col-sm-4">
+                <mat-form-field>
+                  <mat-label>CPF</mat-label>
+                  <input tabindex="10" mask="000.000.000-00" type="text" formControlName="cpf" name="cpf"
+                          matInput>
+                  <mat-error>CPF é obrigatório</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-4" formGroupName="telefone">
+                <mat-form-field>
+                  <mat-label>DDD</mat-label>
+                  <input tabindex="10" mask="00" type="text" formControlName="ddd" name="ddd"
+                          matInput>
+                  <mat-error>DDD é obrigatório</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-4" formGroupName="telefone">
                 <mat-form-field>
                   <mat-label>Telefone</mat-label>
-                  <input tabindex="10" mask="00 00000-0000" type="text" formControlName="phoneNumber" name="phoneNumber"
+                  <input tabindex="10" mask="00000-0000" type="text" formControlName="telefone" name="telefone"
                           matInput>
                   <mat-error>Telefone é obrigatório</mat-error>
                 </mat-form-field>
               </div>
             </div>
-            <div formGroupName="addresses">
+            <div formGroupName="endereco">
               <div class="row">
                 <div class="col-sm-6">
                   <mat-form-field>
@@ -59,7 +68,7 @@
                 <div class="col-sm-6">
                   <mat-form-field>
                     <mat-label>Estado</mat-label>
-                    <input type="text" readonly matInput formControlName="state" name="state">
+                    <input type="text" readonly matInput formControlName="estado" name="estado">
                   </mat-form-field>
                 </div>
               </div>
@@ -67,13 +76,13 @@
                 <div class="col-sm-6">
                   <mat-form-field>
                     <mat-label>Cidade</mat-label>
-                    <input type="text" readonly formControlName="city" name="city" matInput>
+                    <input type="text" readonly formControlName="cidade" name="cidade" matInput>
                   </mat-form-field>
                 </div>
                 <div class="col-sm-6">
                   <mat-form-field>
                     <mat-label>Bairro</mat-label>
-                    <input type="text" formControlName="neighbourhood" name="neighbourhood" matInput readonly>
+                    <input type="text" formControlName="bairro" name="bairro" matInput readonly>
                   </mat-form-field>
                 </div>
               </div>
@@ -81,20 +90,20 @@
                 <div class="col-sm-4">
                   <mat-form-field>
                     <mat-label>Logradouro</mat-label>
-                    <input type="text" readonly matInput formControlName="public_place" name="public_place">
+                    <input type="text" readonly matInput formControlName="logradouro" name="logradouro">
                   </mat-form-field>
                 </div>
                 <div class="col-sm-4">
                   <mat-form-field>
                     <mat-label>Número</mat-label>
-                    <input tabindex="6" type="text" matInput formControlName="number" name="number">
+                    <input tabindex="6" type="text" matInput formControlName="numero" name="numero">
                     <mat-error>Número é obrigatório</mat-error>
                   </mat-form-field>
                 </div>
                 <div class="col-sm-4">
                   <mat-form-field>
                     <mat-label>Complemento</mat-label>
-                    <input tabindex="6" type="text" matInput formControlName="complement" name="complement">
+                    <input tabindex="6" type="text" matInput formControlName="complemento" name="complemento">
                   </mat-form-field>
                 </div>
               </div>
@@ -111,7 +120,7 @@
               <div class="col-sm-6">
                 <mat-form-field>
                   <mat-label>Senha</mat-label>
-                  <input tabindex="8" type="password" matInput name="password" formControlName="password">
+                  <input tabindex="8" type="password" matInput name="senha" formControlName="senha">
                   <mat-error>Senha inválida</mat-error>
                 </mat-form-field>
               </div>

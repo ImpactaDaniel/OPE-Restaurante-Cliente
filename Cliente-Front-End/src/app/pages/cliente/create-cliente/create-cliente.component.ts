@@ -25,20 +25,19 @@ export class CreateClienteComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formbuilder.group({
-      name: ["", Validators.required],
-      lastname: ["", Validators.required],
+      nome: ["", Validators.required],
       email: ["", [Validators.required, Validators.email]],
-      password: [
+      senha: [
         "",
         [
           Validators.required,
           Validators.pattern(/(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])/),
         ],
       ],
-      addresses: this.formbuilder.group({
-        street: [""],
-        number: ["", Validators.required],
-        neighbourhood: [""],
+      endereco: this.formbuilder.group({
+        logradouro: [""],
+        numero: ["", Validators.required],
+        bairro: [""],
         cep: [
           "",
           [
@@ -47,30 +46,29 @@ export class CreateClienteComponent implements OnInit {
             Validators.required,
           ],
         ],
-        city: [""],
-        state: [""],
-        complement: [""]
+        cidade: [""],
+        estado: [""],
+        complemento: [""]
       }),
-      phones: this.formbuilder.group({
-        phoneNumber: [
+      telefone: this.formbuilder.group({
+        ddd: [
+          "", 
+          [ Validators.required,
+            Validators.pattern(/\d+/g),
+            Validators.maxLength(2),
+          ],
+        ],
+        telefone: [
           "",
           [
             Validators.required,
             Validators.pattern(/\d+/g),
-            Validators.maxLength(10),
+            Validators.maxLength(11),
           ],
         ],
       }),
-      account: this.formbuilder.group({
-        bank: this.formbuilder.group({
-          bankId: ["", Validators.required],
-        }),
-        branch: ["", Validators.required],
-        accountNumber: ["", [Validators.required, Validators.pattern(/\d+/g)]],
-        digit: ["", [Validators.required, Validators.pattern(/\d+/g)]],
-      }),
-      document: ["", [Validators.required, Validators.pattern(/\d+/g)]],
-      birthDate: ["", Validators.required],
+      cpf: ["", [Validators.required, Validators.pattern(/\d+/g)]],
+      dataNascimento: ["", Validators.required],
     });
   }
 
@@ -87,6 +85,7 @@ export class CreateClienteComponent implements OnInit {
   }
 
   async cadastrarCliente() {
+    console.log(this.form)
     if (!this.form.valid) return;
     this.cliente = this.getCliente();
 
