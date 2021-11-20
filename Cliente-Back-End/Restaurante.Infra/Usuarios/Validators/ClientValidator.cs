@@ -1,7 +1,7 @@
 ﻿using Restaurante.Domain.Comum.Modelos;
 using Restaurante.Domain.Comum.Modelos.Intefaces;
+using Restaurante.Domain.Helpers;
 using Restaurante.Domain.Usuarios.Modelos;
-using Restaurante.Infra.Comum.Helpers;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -17,9 +17,16 @@ namespace Restaurante.Infra.Usuarios.Validators
             return new Resposta(emailValido && senhaValida, erros);
         }
 
+        public bool ValidarCPF(string cpf, IList<string> erros)
+        {
+            if (!cpf.ValidCPF())
+                erros.Add("CPF Inválido!");
+            return cpf.ValidCPF();
+        }
+
         public bool ValidarEmail(string email, IList<string> erros)
         {
-            var regex = new Regex(RegexHelpers.REGEX_EMAIL);
+            var regex = new Regex(RegexHelpers.RegexEmail);
             if (!regex.Match(email).Success)
                 erros.Add("E-mail Inválido!");
             return regex.Match(email).Success;
@@ -27,7 +34,7 @@ namespace Restaurante.Infra.Usuarios.Validators
 
         public bool ValidarSenha(string senha, IList<string> erros)
         {
-            var regex = new Regex(RegexHelpers.REGEX_STRONG_PASSWORD);
+            var regex = new Regex(RegexHelpers.RegexStrongPassword);
             if (!regex.Match(senha).Success)
                 erros.Add("Senha Inválida!");
             return regex.Match(senha).Success;

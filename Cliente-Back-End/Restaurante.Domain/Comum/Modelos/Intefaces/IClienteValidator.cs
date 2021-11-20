@@ -8,5 +8,6 @@ namespace Restaurante.Domain.Comum.Modelos.Intefaces
     {
         bool ValidarEmail(string email, IList<string> erros);
         bool ValidarSenha(string senha, IList<string> erros);
+        bool ValidarCPF(string cpf, IList<string> erros);
     }
 }
