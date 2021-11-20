@@ -24,17 +24,17 @@ namespace Restaurante.Clientes.API
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
             services.AddInfra(Configuration);
             services.AddApplication(Configuration);
             services.AddDomain();
             services
                 .AddCors(cors => cors
                                         .AddPolicy(CORS_NAME, policy => policy
-                                                                        .WithOrigins("http://localhost:4200")
+                                                                        .AllowAnyOrigin()
                                                                         .AllowAnyMethod()
-                                                                        .AllowCredentials()
-                                                                        .AllowAnyHeader()));
+                                                                        .AllowAnyHeader()
+                                                                        .Build()));
+            services.AddControllers();
 
             services.AddSwaggerGen(c =>
             {
@@ -52,7 +52,7 @@ namespace Restaurante.Clientes.API
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Restaurante.Clientes.API v1"));
             }
 
-            app.UseCors();
+            app.UseCors(CORS_NAME);
 
             app.UseHttpsRedirection();
 
