@@ -1,4 +1,5 @@
 ﻿using Restaurante.Application.Comum;
+using System;
 
 namespace Restaurante.Application.Usuarios.Clientes.Requsicoes.Comum
 {
@@ -11,6 +12,7 @@ namespace Restaurante.Application.Usuarios.Clientes.Requsicoes.Comum
         public string Email { get; set; }
         public string Senha { get; set; }
         public string CPF { get; set; }
+        public DateTime DataNascimento { get; set; }
     }
 
     public class TelefoneRequest
