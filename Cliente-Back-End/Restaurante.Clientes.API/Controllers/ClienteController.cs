@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Restaurante.Application.Usuarios.Clientes.Requsicoes.Criar;
 using System.Threading;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Restaurante.Clientes.API.Controllers
 {
-    [Route("[controller]")]
+    [ApiController, Route("[controller]")]
     public class ClienteController : ControllerBase
     {
         private readonly IMediator _mediator;

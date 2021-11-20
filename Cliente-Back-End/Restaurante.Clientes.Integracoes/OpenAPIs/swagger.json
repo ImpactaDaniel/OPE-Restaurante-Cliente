@@ -250,17 +250,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/BooleanResponse"
+                  "$ref": "#/components/schemas/StringResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BooleanResponse"
+                  "$ref": "#/components/schemas/StringResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BooleanResponse"
+                  "$ref": "#/components/schemas/StringResponse"
                 }
               }
             }
@@ -1127,18 +1127,6 @@
         },
         "additionalProperties": false
       },
-      "BooleanResponse": {
-        "type": "object",
-        "properties": {
-          "success": {
-            "type": "boolean"
-          },
-          "result": {
-            "type": "boolean"
-          }
-        },
-        "additionalProperties": false
-      },
       "ChangePasswordModel": {
         "type": "object",
         "properties": {
@@ -1205,9 +1193,6 @@
           "birthDate": {
             "type": "string",
             "format": "date-time"
-          },
-          "account": {
-            "$ref": "#/components/schemas/AccountRequest"
           },
           "address": {
             "$ref": "#/components/schemas/AddressRequest"
@@ -1454,6 +1439,10 @@
           },
           "type": {
             "$ref": "#/components/schemas/EmployeesType"
+          },
+          "document": {
+            "type": "string",
+            "nullable": true
           },
           "addresses": {
             "type": "array",
@@ -1977,6 +1966,19 @@
           },
           "result": {
             "$ref": "#/components/schemas/ProductResponseDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "StringResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

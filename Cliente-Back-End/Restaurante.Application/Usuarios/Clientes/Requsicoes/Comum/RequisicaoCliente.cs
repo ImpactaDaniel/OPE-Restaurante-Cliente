@@ -1,5 +1,4 @@
 ﻿using Restaurante.Application.Comum;
-using Restaurante.Domain.Usuarios.Modelos;
 
 namespace Restaurante.Application.Usuarios.Clientes.Requsicoes.Comum
 {
@@ -11,6 +10,7 @@ namespace Restaurante.Application.Usuarios.Clientes.Requsicoes.Comum
         public EnderecoRequest Endereco { get; set; }
         public string Email { get; set; }
         public string Senha { get; set; }
+        public string CPF { get; set; }
     }
 
     public class TelefoneRequest
