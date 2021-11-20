@@ -10,9 +10,11 @@ import { APIResponse } from '../../../models/common/apiResponse';
 
 export class ClienteService {
 
+  private urlRestaurante: string = 'https://localhost:44318/'
   constructor(@Inject('BASE_URL') private url: string, private httpClient: HttpClient) { }
 
   createCliente(cliente: Cliente): Observable<APIResponse<boolean>> {
-    return this.httpClient.post<APIResponse<boolean>>(this.url + 'Cliente/Create', cliente)
+    console.log(this.url)
+    return this.httpClient.post<APIResponse<boolean>>(this.urlRestaurante + '/Cliente/CreateCustomer', cliente)
   }
 }
