@@ -33,6 +33,7 @@ namespace Restaurante.Application.Usuarios.Clientes.Requsicoes.Criar
                     .ComEmail(request.Email)
                     .ComSenha(request.Senha)
                     .Build();
+                cliente.CPF = request.CPF;
                 var resposta = await _clienteRepositorio.Salvar(cliente, cancellationToken);
                 if (!resposta.Sucesso)
                     return new RespostaRequisicao<bool>(resposta);

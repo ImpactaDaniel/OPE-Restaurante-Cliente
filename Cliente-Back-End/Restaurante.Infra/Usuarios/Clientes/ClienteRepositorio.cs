@@ -15,11 +15,9 @@ namespace Restaurante.Infra.Usuarios.Clientes
         IClienteDomainRepositorio
     {
         private readonly IClienteValidator _clienteValidator;
-        private readonly IPasswordEncoder _encoder;
         private readonly RestauranteService _restauranteService;
-        public ClienteRepositorio(IClienteValidator clienteValidator, IPasswordEncoder encoder, RestauranteService restauranteService)
+        public ClienteRepositorio(IClienteValidator clienteValidator, RestauranteService restauranteService)
         {
-            _encoder = encoder;
             _clienteValidator = clienteValidator;
             _restauranteService = restauranteService;
         }
@@ -56,6 +54,10 @@ namespace Restaurante.Infra.Usuarios.Clientes
 
         public async Task<RespostaConsulta<Cliente>> Salvar(Cliente entidade, CancellationToken cancellationToken = default)
         {
+            var validation = _clienteValidator.Validar(entidade);
+            if (!validation.Sucesso)
+                return new RespostaConsulta<Cliente>(validation.Erros);
+
             var response = await _restauranteService.CreateCustomerAsync(new CreateCustomerRequest
             {
                 Address = new AddressRequest
@@ -82,8 +84,10 @@ namespace Restaurante.Infra.Usuarios.Clientes
                 }
             }, cancellationToken);
 
-            return new RespostaConsulta<Cliente>(entidade);
+            if (!response.Success)
+                return new RespostaConsulta<Cliente>(new List<string> { response.Result });
 
+            return new RespostaConsulta<Cliente>(entidade);
         }
     }
 }
