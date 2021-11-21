@@ -40,10 +40,10 @@ export class LoginClienteComponent {
   authentication() {
     let loginmodel = this.getInfoLogin();
     this.tokenservice.authenticate(loginmodel).then((response) => {
-      if (!response.success) {
+      if (!response.sucesso) {
         var message = '';
-        response.notifications.map(not => {
-          message += not.message;
+        response.erros.map(not => {
+          message += not;
         });
         this.alertService.showError(null, message);
         return;
@@ -53,8 +53,8 @@ export class LoginClienteComponent {
       this.router.navigate(['/']);
     }).catch(e => {
       var message = '';
-      e.error.notifications.map(not => {
-        message += not.message;
+      e.error.erros.map(not => {
+        message += not;
       });
       this.alertService.showError(null, message);
     });

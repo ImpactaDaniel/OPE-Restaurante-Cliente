@@ -28,7 +28,7 @@ export class TokenService {
   public async updatePassowrd(changePassword: ChangePasswordModel): Promise<APIResponse<any>> {
     let response = await this.httpClient.post<APIResponse<any>>(this.url + 'Auth/ChangePassowrd', changePassword).toPromise();
 
-    if (response.success) {
+    if (response.sucesso) {
       this.saveToken(response.response.result);
       this.userChanged.emit();
     }
@@ -43,15 +43,15 @@ export class TokenService {
 
   public async renewToken(): Promise<boolean> {
     let response = await this.httpClient.get<APIResponse<any>>(this.url + 'Auth/RenewToken').toPromise();
-    if (response.success)
+    if (response.sucesso)
       this.saveToken(response.response.result);
-    return response.success;
+    return response.sucesso;
   }
 
   public async authenticate(login: LoginModel): Promise<APIResponse<any>> {
     let response = await this.httpClient.post<APIResponse<any>>(this.url + 'Auth/Authenticate', login).toPromise();
 
-    if (response.success) {
+    if (response.sucesso) {
       this.saveToken(response.response.result);
       this.userChanged.emit();
     }

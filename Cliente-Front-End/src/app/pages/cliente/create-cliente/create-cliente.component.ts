@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AlertService } from "src/app/services/alert.service";
 import { ConsultaCepService } from "src/app/services/consulta-cep.service";
-import { Cliente, Phone } from "../../../models/cliente/cliente";
+import { Cliente } from "../../../models/cliente/cliente";
 import { ClienteService } from "../services/cliente.service";
 
 @Component({
@@ -73,46 +73,45 @@ export class CreateClienteComponent implements OnInit {
   }
 
   async consultarCep() {
-    let cep = this.form.get("addresses").get("cep");
+    let cep = this.form.get("endereco").get("cep");
     if (cep.invalid) return;
     var endereco = await this.consultaCepService
       .consultaCep(cep.value)
       .toPromise();
-    this.form.get("addresses").get("street").setValue(endereco.logradouro);
-    this.form.get("addresses").get("state").setValue(endereco.uf);
-    this.form.get("addresses").get("city").setValue(endereco.localidade);
-    this.form.get("addresses").get("neighbourhood").setValue(endereco.bairro);
+    this.form.get("endereco").get("logradouro").setValue(endereco.logradouro);
+    this.form.get("endereco").get("estado").setValue(endereco.uf);
+    this.form.get("endereco").get("cidade").setValue(endereco.localidade);
+    this.form.get("endereco").get("bairro").setValue(endereco.bairro);
   }
 
   async cadastrarCliente() {
-    console.log(this.form)
     if (!this.form.valid) return;
     this.cliente = this.getCliente();
 
     this.error = false;
     this.erroMsg = "";
-
+    console.log(this.cliente)
     let retorno = await this.clienteService
       .createCliente(this.cliente)
       .toPromise();
 
-    this.error = !retorno.success;
+    console.log(retorno)
+    this.error = !retorno.sucesso;
 
-    if (!retorno.success) {
-      for (let notification of retorno.notifications) {
-        this.erroMsg += `\n${notification.message}`;
+    if (!retorno.sucesso) {
+      for (let notification of retorno.erros) {
+        this.erroMsg += `\n${notification}`;
       }
       return;
     }
-
     this.alertService.showSuccess("Sucesso", "Você foi cadastrado com sucesso!")
   }
 
   private getCliente(): Cliente {
     let cliente = new Cliente(this.form.value);
-    var phone = new Phone();
-    phone.phoneNumber = this.form.get("phones").get("phoneNumber").value;
-    cliente.phones.push(phone);
+    if(!cliente){
+      this.alertService.showError("Erro", "Houve um problema ao pegar os dados do cadastro.")
+    }
     return cliente;
   }
 }
