@@ -268,6 +268,59 @@
         }
       }
     },
+    "/Customer/LoginCustomer": {
+      "post": {
+        "tags": [
+          "Customer"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetUserAuthenticateRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetUserAuthenticateRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetUserAuthenticateRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetUserAuthenticateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/Deliverymans/Create": {
       "post": {
         "tags": [
@@ -1197,12 +1250,8 @@
           "address": {
             "$ref": "#/components/schemas/AddressRequest"
           },
-          "phones": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PhoneRequest"
-            },
-            "nullable": true
+          "phone": {
+            "$ref": "#/components/schemas/PhoneRequest"
           }
         },
         "additionalProperties": false
@@ -1444,12 +1493,19 @@
             "type": "string",
             "nullable": true
           },
+          "birthDate": {
+            "type": "string",
+            "format": "date-time"
+          },
           "addresses": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CustomerAddress"
             },
             "nullable": true
+          },
+          "phone": {
+            "$ref": "#/components/schemas/CustomerPhone"
           }
         },
         "additionalProperties": false
@@ -1489,6 +1545,37 @@
         },
         "additionalProperties": false
       },
+      "CustomerPhone": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "ddd": {
+            "type": "string",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CustomerResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "result": {
+            "$ref": "#/components/schemas/Customer"
+          }
+        },
+        "additionalProperties": false
+      },
       "EmployeesType": {
         "enum": [
           0,
@@ -1497,6 +1584,42 @@
         ],
         "type": "integer",
         "format": "int32"
+      },
+      "GetUserAuthenticateRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "document": {
+            "type": "string",
+            "nullable": true
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "address": {
+            "$ref": "#/components/schemas/AddressRequest"
+          },
+          "phone": {
+            "$ref": "#/components/schemas/PhoneRequest"
+          }
+        },
+        "additionalProperties": false
       },
       "Invoice": {
         "type": "object",

@@ -1,4 +1,5 @@
-﻿using Restaurante.Clientes.Infra.Usuarios.Encoder.Interfaces;
+﻿using Newtonsoft.Json;
+using Restaurante.Clientes.Infra.Usuarios.Encoder.Interfaces;
 using Restaurante.Domain.Comum.Modelos;
 using Restaurante.Domain.Comum.Modelos.Intefaces;
 using Restaurante.Domain.Usuarios.Modelos;
@@ -6,6 +7,7 @@ using Restaurante.Domain.Usuarios.Repositorios.Interfaces;
 using Restaurante.Integrations;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -47,9 +49,45 @@ namespace Restaurante.Infra.Usuarios.Clientes
             throw new NotImplementedException();
         }
 
-        public Task<RespostaConsulta<Cliente>> Logar(string email, string password, CancellationToken cancellationToken = default)
+        public async Task<RespostaConsulta<Cliente>> Logar(string email, string password, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var erros = new List<string>();
+
+            erros.Add("E-mail ou senha inválidos!");
+
+            try
+            {
+                var valid = _clienteValidator.ValidarEmail(email, erros) && _clienteValidator.ValidarSenha(password, erros);
+
+                if (!valid)
+                    return new RespostaConsulta<Cliente>(erros);
+
+                var response = await _restauranteService.LoginCustomerAsync(new GetUserAuthenticateRequest
+                {
+                    Email = email,
+                    Password = password
+                }, cancellationToken);
+
+                if (!response.Success)
+                    return new RespostaConsulta<Cliente>(erros);
+
+                var enderecos = GetAddresses(response.Result.Addresses);
+
+                return new RespostaConsulta<Cliente>(new Cliente(response.Result.Name, response.Result.Email, response.Result.Password, new Telefone(response.Result.Phone.Ddd, response.Result.Phone.PhoneNumber))
+                {
+                    Enderecos = enderecos.ToList()
+                });
+            }
+            catch (ApiException)
+            {
+                return new RespostaConsulta<Cliente>(erros);
+            }
+        }
+
+        private static IEnumerable<Endereco> GetAddresses(IEnumerable<CustomerAddress> customerAddress)
+        {
+            foreach (var address in customerAddress)
+                yield return new Endereco(address.Cep, address.Street, address.District, address.Number, String.Empty);
         }
 
         public async Task<RespostaConsulta<Cliente>> Salvar(Cliente entidade, CancellationToken cancellationToken = default)
@@ -62,25 +100,22 @@ namespace Restaurante.Infra.Usuarios.Clientes
             {
                 Address = new AddressRequest
                 {
-                    Cep = entidade.Endereco.CEP,
-                    City = entidade.Endereco.Cidade,
-                    State = entidade.Endereco.Estado,
-                    District = entidade.Endereco.Bairro,
-                    Number = entidade.Endereco.Numero,
-                    Street = entidade.Endereco.Logradouro
+                    Cep = entidade.Enderecos.First().CEP,
+                    City = entidade.Enderecos.First().Cidade,
+                    State = entidade.Enderecos.First().Estado,
+                    District = entidade.Enderecos.First().Bairro,
+                    Number = entidade.Enderecos.First().Numero,
+                    Street = entidade.Enderecos.First().Logradouro
                 },
                 BirthDate = entidade.DataNascimento,
                 Document = entidade.CPF,
                 Email = entidade.Email,
                 Name = entidade.Nome,
                 Password = entidade.Senha,
-                Phones = new List<PhoneRequest>
+                Phone = new PhoneRequest
                 {
-                    new PhoneRequest
-                    {
-                        Ddd = entidade.Telefone.DDD,
-                        PhoneNumber = entidade.Telefone.Numero
-                    }
+                    Ddd = entidade.Telefone.DDD,
+                    PhoneNumber = entidade.Telefone.Numero
                 }
             }, cancellationToken);
 

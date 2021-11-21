@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Restaurante.Application.Usuarios.Clientes.Requsicoes.Criar;
+using Restaurante.Clientes.Application.Usuarios.Clientes.Requsicoes.Autenticar;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -22,6 +23,12 @@ namespace Restaurante.Clientes.API.Controllers
         {
             var response = await _mediator.Send(request, cancellationToken);
             return Ok(response);
+        }
+
+        [HttpPost("LoginCustomer")]
+        public async Task<IActionResult> LoginCustomer([FromBody] AutenticarClienteRequisicao request, CancellationToken cancellationToken = default)
+        {
+            return Ok(await _mediator.Send(request, cancellationToken));
         }
     }
 }

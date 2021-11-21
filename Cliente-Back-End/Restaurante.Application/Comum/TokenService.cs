@@ -25,6 +25,7 @@ namespace Restaurante.Clientes.Application.Comum
             {
                 Subject = new ClaimsIdentity(new Claim[] {
                     new Claim(ClaimTypes.Sid, cliente.Id.ToString()),
+                    new Claim(ClaimTypes.Name, cliente.Nome)
                 }),
                 Expires = DateTime.Now.AddHours(_tokenConfiguration.ValidTime),
                 NotBefore = DateTime.Now,

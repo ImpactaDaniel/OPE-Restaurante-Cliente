@@ -34,7 +34,8 @@ namespace Restaurante.Clientes.API
                                                                         .AllowAnyMethod()
                                                                         .AllowAnyHeader()
                                                                         .Build()));
-            services.AddControllers();
+            services.AddControllers()
+                    .AddNewtonsoftJson(o => o.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddSwaggerGen(c =>
             {
