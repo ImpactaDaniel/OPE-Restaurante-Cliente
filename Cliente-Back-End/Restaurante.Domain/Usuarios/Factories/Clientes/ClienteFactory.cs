@@ -1,6 +1,7 @@
 ﻿using Restaurante.Domain.Usuarios.Factories.Clientes.Interfaces;
 using Restaurante.Domain.Usuarios.Modelos;
 using System;
+using System.Collections.Generic;
 
 namespace Restaurante.Domain.Usuarios.Factories.Clientes
 {
@@ -22,7 +23,10 @@ namespace Restaurante.Domain.Usuarios.Factories.Clientes
             if (!_telefoneTemValor || !_nomeTemValor || !_enderecoTemValor || !_senhaTemValor || !_emailTemValor)
                 throw new ArgumentException("Nome, e-mail, senha, telefone e endereço precisam ter valor!");
             return
-                new Cliente(_nome, _email, _senha, _telefone, _endereco);
+                new Cliente(_nome, _email, _senha, _telefone)
+                {
+                    Enderecos = new List<Endereco> { _endereco }
+                };
         }
 
         public IClienteFactory ComEmail(string email)
