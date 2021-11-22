@@ -8,6 +8,7 @@ import { ClienteRoutingModule } from './cliente-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginClienteComponent } from './login-cliente/login-cliente';
 import { NgxMaskModule } from 'ngx-mask';
+import { LogoModule } from 'src/app/components/logo/logo.module';
 
 @NgModule({
   declarations: [CreateClienteComponent,
@@ -20,7 +21,8 @@ import { NgxMaskModule } from 'ngx-mask';
     ReactiveFormsModule,
     MatSelectModule,
     NgxMaskModule.forRoot(),
-    MatInputModule
+    MatInputModule,
+    LogoModule
   ]
 })
 export class ClienteModule { }

@@ -1,29 +1,26 @@
 import { Model } from "../common/model";
 
 export class Cliente extends Model {
-  name: string;
-  lastName: string;
-  statusDescription: string;
-  status: Boolean;
-  username: string;
+  nome: string;
   email: string;
-  phones: Phone[] = [];
-  addresses: Address[] = [];
-  password: string;
-  current_password: string;
-  new_password: string;
+  cpf: string;
+  dataNascimento: string;
+  telefone: Telefone;
+  endereco: Endereco;
+  senha: string;
 }
 
-export class Phone extends Model {
-  phoneNumber: string;
+export class Telefone extends Model {
+  ddd: string;
+  telefone: string;
 }
 
-export class Address extends Model {
+export class Endereco extends Model {
   cep: string;
-  state: string;
-  city: string;
-  neighbourhood: string;
-  public_place: string;
-  number: string;
-  complement: string;
+  estado: string;
+  cidade: string;
+  bairro: string;
+  logradouro: string;
+  numero: string;
+  complemento: string;
 }

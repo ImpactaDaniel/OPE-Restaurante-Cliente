@@ -1,10 +1,6 @@
 export interface APIResponse<T> {
   response: T;
-  success: boolean;
-  notifications: Notification[];
+  sucesso: boolean;
+  erros: string[];
 }
 
-export interface Notification {
-  code: number;
-  message: string;
-}

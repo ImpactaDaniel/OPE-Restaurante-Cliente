@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AlertService } from "src/app/services/alert.service";
 import { ConsultaCepService } from "src/app/services/consulta-cep.service";
-import { Cliente, Phone } from "../../../models/cliente/cliente";
+import { Cliente } from "../../../models/cliente/cliente";
 import { ClienteService } from "../services/cliente.service";
 
 @Component({
@@ -25,20 +25,19 @@ export class CreateClienteComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formbuilder.group({
-      name: ["", Validators.required],
-      lastname: ["", Validators.required],
+      nome: ["", Validators.required],
       email: ["", [Validators.required, Validators.email]],
-      password: [
+      senha: [
         "",
         [
           Validators.required,
           Validators.pattern(/(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])/),
         ],
       ],
-      addresses: this.formbuilder.group({
-        street: [""],
-        number: ["", Validators.required],
-        neighbourhood: [""],
+      endereco: this.formbuilder.group({
+        logradouro: [""],
+        numero: ["", Validators.required],
+        bairro: [""],
         cep: [
           "",
           [
@@ -47,43 +46,42 @@ export class CreateClienteComponent implements OnInit {
             Validators.required,
           ],
         ],
-        city: [""],
-        state: [""],
-        complement: [""]
+        cidade: [""],
+        estado: [""],
+        complemento: [""]
       }),
-      phones: this.formbuilder.group({
-        phoneNumber: [
+      telefone: this.formbuilder.group({
+        ddd: [
+          "", 
+          [ Validators.required,
+            Validators.pattern(/\d+/g),
+            Validators.maxLength(2),
+          ],
+        ],
+        telefone: [
           "",
           [
             Validators.required,
             Validators.pattern(/\d+/g),
-            Validators.maxLength(10),
+            Validators.maxLength(11),
           ],
         ],
       }),
-      account: this.formbuilder.group({
-        bank: this.formbuilder.group({
-          bankId: ["", Validators.required],
-        }),
-        branch: ["", Validators.required],
-        accountNumber: ["", [Validators.required, Validators.pattern(/\d+/g)]],
-        digit: ["", [Validators.required, Validators.pattern(/\d+/g)]],
-      }),
-      document: ["", [Validators.required, Validators.pattern(/\d+/g)]],
-      birthDate: ["", Validators.required],
+      cpf: ["", [Validators.required, Validators.pattern(/\d+/g)]],
+      dataNascimento: ["", Validators.required],
     });
   }
 
   async consultarCep() {
-    let cep = this.form.get("addresses").get("cep");
+    let cep = this.form.get("endereco").get("cep");
     if (cep.invalid) return;
     var endereco = await this.consultaCepService
       .consultaCep(cep.value)
       .toPromise();
-    this.form.get("addresses").get("street").setValue(endereco.logradouro);
-    this.form.get("addresses").get("state").setValue(endereco.uf);
-    this.form.get("addresses").get("city").setValue(endereco.localidade);
-    this.form.get("addresses").get("neighbourhood").setValue(endereco.bairro);
+    this.form.get("endereco").get("logradouro").setValue(endereco.logradouro);
+    this.form.get("endereco").get("estado").setValue(endereco.uf);
+    this.form.get("endereco").get("cidade").setValue(endereco.localidade);
+    this.form.get("endereco").get("bairro").setValue(endereco.bairro);
   }
 
   async cadastrarCliente() {
@@ -92,28 +90,28 @@ export class CreateClienteComponent implements OnInit {
 
     this.error = false;
     this.erroMsg = "";
-
+    console.log(this.cliente)
     let retorno = await this.clienteService
       .createCliente(this.cliente)
       .toPromise();
 
-    this.error = !retorno.success;
+    console.log(retorno)
+    this.error = !retorno.sucesso;
 
-    if (!retorno.success) {
-      for (let notification of retorno.notifications) {
-        this.erroMsg += `\n${notification.message}`;
+    if (!retorno.sucesso) {
+      for (let notification of retorno.erros) {
+        this.erroMsg += `\n${notification}`;
       }
       return;
     }
-
     this.alertService.showSuccess("Sucesso", "Você foi cadastrado com sucesso!")
   }
 
   private getCliente(): Cliente {
     let cliente = new Cliente(this.form.value);
-    var phone = new Phone();
-    phone.phoneNumber = this.form.get("phones").get("phoneNumber").value;
-    cliente.phones.push(phone);
+    if(!cliente){
+      this.alertService.showError("Erro", "Houve um problema ao pegar os dados do cadastro.")
+    }
     return cliente;
   }
 }
