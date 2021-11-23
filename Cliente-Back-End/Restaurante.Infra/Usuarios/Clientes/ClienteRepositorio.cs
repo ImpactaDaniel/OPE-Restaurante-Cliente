@@ -78,7 +78,7 @@ namespace Restaurante.Infra.Usuarios.Clientes
                     Enderecos = enderecos.ToList()
                 });
             }
-            catch (ApiException)
+            catch (ApiException e)
             {
                 return new RespostaConsulta<Cliente>(erros);
             }

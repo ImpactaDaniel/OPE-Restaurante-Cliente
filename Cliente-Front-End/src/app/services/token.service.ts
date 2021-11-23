@@ -18,41 +18,43 @@ export class TokenService {
 
   public isAuthenticated(): boolean {
     let token = this.getToken();
-    return token && token !== null;
+    if(token && token !== null){
+      return true;
+    }
+    return false;
   }
 
   public getTokenData(): TokenData {
     return new TokenData(jwt_decode(this.getToken().token));
   }
 
-  public async updatePassowrd(changePassword: ChangePasswordModel): Promise<APIResponse<any>> {
-    let response = await this.httpClient.post<APIResponse<any>>(this.url + 'Auth/ChangePassowrd', changePassword).toPromise();
+  // public async updatePassowrd(changePassword: ChangePasswordModel): Promise<APIResponse<any>> {
+  //   let response = await this.httpClient.post<APIResponse<any>>(this.url + 'Auth/ChangePassowrd', changePassword).toPromise();
 
-    if (response.sucesso) {
-      this.saveToken(response.response.result);
-      this.userChanged.emit();
-    }
+  //   if (response.sucesso) {
+  //     this.saveToken(response.response.result);
+  //     this.userChanged.emit();
+  //   }
 
-    return response;
-  }
+  //   return response;
+  // }
 
-  private saveToken(token: TokenRespose): void {
+  private saveToken(token: any): void {
     let json = JSON.stringify(token);
     localStorage.setItem(this.chaveToken, btoa(json));
   }
 
-  public async renewToken(): Promise<boolean> {
-    let response = await this.httpClient.get<APIResponse<any>>(this.url + 'Auth/RenewToken').toPromise();
-    if (response.sucesso)
-      this.saveToken(response.response.result);
-    return response.sucesso;
-  }
+  // public async renewToken(): Promise<boolean> {
+  //   let response = await this.httpClient.get<APIResponse<any>>(this.url + 'Auth/RenewToken').toPromise();
+  //   if (response.sucesso)
+  //     this.saveToken(response.entidade.token);
+  //   return response.sucesso;
+  // }
 
   public async authenticate(login: LoginModel): Promise<APIResponse<any>> {
-    let response = await this.httpClient.post<APIResponse<any>>(this.url + 'Auth/Authenticate', login).toPromise();
-
+    let response = await this.httpClient.post<APIResponse<any>>(this.url + 'Cliente/LoginCustomer', login).toPromise();
     if (response.sucesso) {
-      this.saveToken(response.response.result);
+      this.saveToken(response.entidade);
       this.userChanged.emit();
     }
 
@@ -64,7 +66,7 @@ export class TokenService {
     this.userChanged.emit();
   }
 
-  public getToken(): TokenRespose {
+  public getToken(): any {
     let json = this.returnFromLocalStorage(this.chaveToken);
     if (json === '' || !json)
       return null;

@@ -13,7 +13,6 @@ export class RequestInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     let newReq = req;
-
     if (this.tokenService.isAuthenticated() && !req.url.includes('viacep.com.br/ws/')) {
       let tokenResponse = this.tokenService.getToken();
       newReq = this.addToken(req, tokenResponse.token);
@@ -32,12 +31,16 @@ export class RequestInterceptor implements HttpInterceptor {
 
   private async refreshToken(req: HttpRequest<any>, next: HttpHandler): Promise<any> {
     return new Promise(async (s, _) => {
-      let refreshed = await this.tokenService.renewToken();
-      if (refreshed) {
-        let tokenResponse = this.tokenService.getToken();
+      console.log('refresh')
+      // let refreshed = await this.tokenService.renewToken();
+      // if (refreshed) {
+      //   let tokenResponse = this.tokenService.getToken();
+      //   req = this.addToken(req, tokenResponse.token);
+      //   s(next.handle(req));
+      // }
+      let tokenResponse = this.tokenService.getToken();
         req = this.addToken(req, tokenResponse.token);
         s(next.handle(req));
-      }
     });
   }
 
