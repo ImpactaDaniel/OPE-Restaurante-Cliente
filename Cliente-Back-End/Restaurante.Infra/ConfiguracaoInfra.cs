@@ -8,6 +8,9 @@ using Restaurante.Domain.Usuarios.Repositorios.Interfaces;
 using Restaurante.Integrations;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
+using AutoMapper;
+using Restaurante.Clientes.Infra.Comum.Mapper;
+using Restaurante.Clientes.Domain.Usuarios.Repositorios.Interfaces;
 
 [assembly: InternalsVisibleTo("Restaurante.Clientes.Test")]
 namespace Restaurante.Infra
@@ -17,6 +20,7 @@ namespace Restaurante.Infra
         public static IServiceCollection AddInfra(this IServiceCollection services, IConfiguration configuration) =>
             services
                 .AddValidators()
+                .AddAutoMapper(typeof(MapperProfile))
                 .AddIntegrations(configuration)
                 .AddEncoders()
                 .AddRepositorios();
@@ -33,6 +37,8 @@ namespace Restaurante.Infra
         {
             var integrationSettings = config.GetSection(nameof(IntegrationSettings)).Get<IntegrationSettings>();
 
+            services.AddSingleton(integrationSettings);
+
             var restauranteService = new RestauranteService(integrationSettings.UrlRestauranteService, new HttpClient());
 
             services.AddSingleton(restauranteService);
@@ -45,7 +51,7 @@ namespace Restaurante.Infra
                 Scan(scan => scan
                         .FromCallingAssembly()
                         .AddClasses(classes => classes
-                                .AssignableTo(typeof(IDomainRepositorio<>)))
+                                .AssignableTo(typeof(IRepository)))
                         .AsImplementedInterfaces()
                         .WithTransientLifetime());
         internal static IServiceCollection AddEncoders(this IServiceCollection services) =>

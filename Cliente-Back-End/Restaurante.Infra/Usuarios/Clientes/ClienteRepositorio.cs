@@ -51,9 +51,10 @@ namespace Restaurante.Infra.Usuarios.Clientes
 
         public async Task<RespostaConsulta<Cliente>> Logar(string email, string password, CancellationToken cancellationToken = default)
         {
-            var erros = new List<string>();
-
-            erros.Add("E-mail ou senha inválidos!");
+            var erros = new List<string>
+            {
+                "E-mail ou senha inválidos!"
+            };
 
             try
             {
