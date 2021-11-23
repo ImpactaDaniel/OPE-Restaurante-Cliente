@@ -1,5 +1,6 @@
 export class TokenResponse {
-  access_token: string;
+  
+  // access_token: string;
   // validTo: Date;
   // validFrom: Date;
 }

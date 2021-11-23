@@ -1,5 +1,5 @@
 export interface APIResponse<T> {
-  response: T;
+  entidade: T;
   sucesso: boolean;
   erros: string[];
 }

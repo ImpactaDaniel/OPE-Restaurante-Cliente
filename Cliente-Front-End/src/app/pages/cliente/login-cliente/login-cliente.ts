@@ -22,15 +22,15 @@ export class LoginClienteComponent {
   ngOnInit(): void {
     this.form = this.formbuilder.group({
       email: [""],
-      password: [""]
+      senha: [""]
     })
   }
 
   getInfoLogin(): LoginModel {
-    let loginmodel = new LoginModel();
-    loginmodel.email = this.form.get('email').value;
-    loginmodel.password = this.form.get('password').value;
-    return loginmodel;
+    let login = new LoginModel();
+    login.email = this.form.get('email').value;
+    login.senha = this.form.get('senha').value;
+    return login;
   }
 
   toClienteCreate(): void {
@@ -38,24 +38,21 @@ export class LoginClienteComponent {
   }
 
   authentication() {
-    let loginmodel = this.getInfoLogin();
-    this.tokenservice.authenticate(loginmodel).then((response) => {
+    let login = this.getInfoLogin();
+    this.tokenservice.authenticate(login).then((response) => {
       if (!response.sucesso) {
         var message = '';
+        if (response.erros)
         response.erros.map(not => {
           message += not;
         });
         this.alertService.showError(null, message);
         return;
       }
-      if (this.tokenservice.getTokenData().firstAccess === 'True')
-        console.log('haa');
       this.router.navigate(['/']);
     }).catch(e => {
       var message = '';
-      e.error.erros.map(not => {
-        message += not;
-      });
+      message += e.message;
       this.alertService.showError(null, message);
     });
   }

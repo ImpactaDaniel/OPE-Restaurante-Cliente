@@ -8,7 +8,8 @@ import { TokenService } from 'src/app/services/token.service';
 export class AuthenticateGuardService implements CanActivate {
 
   constructor(private tokenService: TokenService) { }
-  canActivate(): boolean {
-    return !this.tokenService.isAuthenticated();
+    canActivate(): boolean {
+      let auth = this.tokenService.isAuthenticated();
+      return auth;
+    }
   }
-}
