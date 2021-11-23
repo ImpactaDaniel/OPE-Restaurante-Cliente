@@ -2,6 +2,7 @@
 using Restaurante.Clientes.Domain.Produtos.Modelos;
 using Restaurante.Clientes.Domain.Usuarios.Repositorios.Interfaces;
 using Restaurante.Domain.Usuarios.Repositorios.Interfaces;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,5 +12,6 @@ namespace Restaurante.Clientes.Domain.Produtos.Interfaces
     {
         Task<PaginationInfo<Produto>> GetProducts(int size, int page, CancellationToken cancellationToken = default);
         Task<PaginationInfo<Produto>> SearchProducts(int size, int page, string field, string value, CancellationToken cancellationToken = default);
+        Task<IEnumerable<ProductCategory>> GetProductsGroupByCategories(CancellationToken cancellationToken = default);
     }
 }
