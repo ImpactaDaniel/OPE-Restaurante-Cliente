@@ -1079,6 +1079,35 @@
         }
       }
     },
+    "/Products/GetGroupByCategories": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductCategoryResponseDTOIEnumerableResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductCategoryResponseDTOIEnumerableResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductCategoryResponseDTOIEnumerableResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/Products/{fileName}": {
       "get": {
         "tags": [
@@ -1947,6 +1976,13 @@
           "name": {
             "type": "string",
             "nullable": true
+          },
+          "products": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Product"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1970,6 +2006,29 @@
           },
           "name": {
             "type": "string",
+            "nullable": true
+          },
+          "products": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductResponseDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProductCategoryResponseDTOIEnumerableResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductCategoryResponseDTO"
+            },
             "nullable": true
           }
         },

@@ -18,9 +18,9 @@ namespace Restaurante.Clientes.API.Controllers
         }
 
         [HttpGet("GetAllProducts")]
-        public async Task<IActionResult> GetAllProducts([FromQuery] GetAllProductsRequest request, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> GetAllProducts(CancellationToken cancellationToken = default)
         {
-            return Ok(await _mediator.Send(request, cancellationToken));
+            return Ok(await _mediator.Send(new GetAllProductsRequest(), cancellationToken));
         }
     }
 }
