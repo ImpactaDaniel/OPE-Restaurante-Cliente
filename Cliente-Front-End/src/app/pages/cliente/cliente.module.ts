@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginClienteComponent } from './login-cliente/login-cliente';
 import { NgxMaskModule } from 'ngx-mask';
 import { LogoModule } from 'src/app/components/logo/logo.module';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [CreateClienteComponent,
@@ -22,7 +23,8 @@ import { LogoModule } from 'src/app/components/logo/logo.module';
     MatSelectModule,
     NgxMaskModule.forRoot(),
     MatInputModule,
-    LogoModule
+    LogoModule,
+    MatCheckboxModule
   ]
 })
 export class ClienteModule { }
