@@ -52,7 +52,7 @@ export class CreateClienteComponent implements OnInit {
       }),
       telefone: this.formbuilder.group({
         ddd: [
-          "", 
+          "",
           [ Validators.required,
             Validators.pattern(/\d+/g),
             Validators.maxLength(2),
@@ -90,12 +90,10 @@ export class CreateClienteComponent implements OnInit {
 
     this.error = false;
     this.erroMsg = "";
-    console.log(this.cliente)
     let retorno = await this.clienteService
       .createCliente(this.cliente)
       .toPromise();
 
-    console.log(retorno)
     this.error = !retorno.sucesso;
 
     if (!retorno.sucesso) {

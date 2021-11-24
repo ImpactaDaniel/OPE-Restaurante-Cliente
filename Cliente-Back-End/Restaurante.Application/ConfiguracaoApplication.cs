@@ -8,6 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Restaurante.Clientes.Application.Comum;
 using System.Text;
 using Restaurante.Clientes.Domain.Comum.Modelos.Intefaces;
+using Restaurante.Clientes.Application.Hubs.Services;
+using Restaurante.Clientes.Application.Hubs.Services.Intefaces;
 
 [assembly: InternalsVisibleTo("Restaurante.Clientes.Test")]
 namespace Restaurante.Application
@@ -17,8 +19,12 @@ namespace Restaurante.Application
         public static IServiceCollection AddApplication(this IServiceCollection services, IConfiguration configuration) =>
             services
                 .AddMediatR(Assembly.GetExecutingAssembly())
+                .AddHubService()
                 .AddTokenService(configuration);
 
+
+        internal static IServiceCollection AddHubService(this IServiceCollection services) =>
+            services.AddSingleton<IInvoiceHubService, InvoiceHubService>();
 
         internal static IServiceCollection AddTokenService(this IServiceCollection services, IConfiguration configuration)
         {

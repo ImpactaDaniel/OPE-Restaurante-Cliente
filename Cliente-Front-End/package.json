@@ -25,6 +25,7 @@
     "@angular/platform-server": "9.1.13",
     "@angular/router": "^12.2.9",
     "@material/form-field": "^13.0.0",
+    "@microsoft/signalr": "^6.0.0",
     "@ng-bootstrap/ng-bootstrap": "^10.0.0",
     "@nguniversal/module-map-ngfactory-loader": "8.1.1",
     "aspnet-prerendering": "^3.0.1",

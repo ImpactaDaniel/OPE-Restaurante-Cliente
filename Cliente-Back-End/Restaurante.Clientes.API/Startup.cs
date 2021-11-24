@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Restaurante.Application;
 using Restaurante.Clientes.API.HostedServices;
+using Restaurante.Clientes.Application.Hubs;
 using Restaurante.Domain;
 using Restaurante.Infra;
 
@@ -31,9 +32,10 @@ namespace Restaurante.Clientes.API
             services
                 .AddCors(cors => cors
                                         .AddPolicy(CORS_NAME, policy => policy
-                                                                        .AllowAnyOrigin()
+                                                                        .WithOrigins("http://localhost:4200")
                                                                         .AllowAnyMethod()
                                                                         .AllowAnyHeader()
+                                                                        .AllowCredentials()
                                                                         .Build()));
             services.AddControllers()
                     .AddNewtonsoftJson(o => o.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
@@ -41,6 +43,11 @@ namespace Restaurante.Clientes.API
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Restaurante.Clientes.API", Version = "v1" });
+            });
+
+            services.AddSignalR(o =>
+            {
+                o.EnableDetailedErrors = true;
             });
 
             services.AddHostedService<EventBusHostedService>();
@@ -67,6 +74,7 @@ namespace Restaurante.Clientes.API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<InvoiceHub>("/invoice-hub");
             });
         }
     }

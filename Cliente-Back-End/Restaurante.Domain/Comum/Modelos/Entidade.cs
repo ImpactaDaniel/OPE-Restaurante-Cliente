@@ -7,6 +7,15 @@ namespace Restaurante.Domain.Comum.Modelos
     {
         public TId Id { get; private set; } = default;
 
+        protected Entidade(TId id)
+        {
+            Id = id;
+        }
+
+        protected Entidade()
+        {
+
+        }
         protected void ValidarStringNullOrEmpty(string valor, string nomeArgumento)
         {
             if (string.IsNullOrEmpty(valor))

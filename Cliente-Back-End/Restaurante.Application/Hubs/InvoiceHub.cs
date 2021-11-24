@@ -14,10 +14,9 @@ namespace Restaurante.Clientes.Application.Hubs
         {
             _invoiceHubService = invoiceHubService;
         }
-
-        public Task Connect(int customerId)
+        public Task Connect(string customerId)
         {
-            return _invoiceHubService.AddNewConnection(Context.ConnectionId, customerId);
+            return _invoiceHubService.AddNewConnection(Context.ConnectionId, int.Parse(customerId));
         }
 
         public override Task OnDisconnectedAsync(Exception exception)

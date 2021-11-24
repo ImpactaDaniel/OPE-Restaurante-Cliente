@@ -29,6 +29,18 @@ namespace Restaurante.Domain.Usuarios.Modelos
             Telefone = telefone;
         }
 
+        public Cliente(int id, string nome, string email, string senha, Telefone telefone)
+            : base(id)
+        {
+            ValidarStringNullOrEmpty(nome, "Nome");
+            ValidarStringNullOrEmpty(email, "E-mail");
+            ValidarStringNullOrEmpty(senha, "Senha");
+            Email = email;
+            Senha = senha;
+            Nome = nome;
+            Telefone = telefone;
+        }
+
         public Cliente AtualizarNome(string nome)
         {
             ValidarStringNullOrEmpty(nome, "Nome");
