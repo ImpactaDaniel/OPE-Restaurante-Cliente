@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Restaurante.Application;
+using Restaurante.Clientes.API.HostedServices;
 using Restaurante.Domain;
 using Restaurante.Infra;
 
@@ -41,6 +42,8 @@ namespace Restaurante.Clientes.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Restaurante.Clientes.API", Version = "v1" });
             });
+
+            services.AddHostedService<EventBusHostedService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
