@@ -4,6 +4,7 @@ using Restaurante.Clientes.Integracoes.EventBus.Interfaces;
 using Restaurante.Clientes.Integracoes.EventBus.Models;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -25,7 +26,7 @@ namespace Restaurante.Clientes.Integracoes.EventBus.Implementations
 
         public async Task StartAsync(CancellationToken cancellationToken = default)
         {
-            foreach (var processor in _processors.Values)
+            foreach (var processor in _processors.Values.Where(p => p.IsClosed))
                 await processor.StartProcessingAsync(cancellationToken);
         }
 
@@ -35,7 +36,7 @@ namespace Restaurante.Clientes.Integracoes.EventBus.Implementations
                 await processor.StopProcessingAsync(cancellationToken);
         }
 
-        public void Subscribe<T>(IIntegrationEventHandler<T> handler)
+        public async Task Subscribe<T>(IIntegrationEventHandler<T> handler)
             where T : IntegrationEvent
         {
             var eventName = typeof(T).Name;
@@ -51,6 +52,8 @@ namespace Restaurante.Clientes.Integracoes.EventBus.Implementations
             processor.ProcessErrorAsync += (args) => handler.HandleError(args.Exception);
 
             _processors.Add(eventName, processor);
+
+            await processor.StartProcessingAsync();
         }
 
         public async Task UnsubscribeAsync<T>() where T : IntegrationEvent

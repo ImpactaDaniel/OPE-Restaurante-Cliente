@@ -8,7 +8,7 @@ namespace Restaurante.Clientes.Integracoes.EventBus.Interfaces
     {
         Task PublishAsync(IntegrationEvent @event);
 
-        void Subscribe<T>(IIntegrationEventHandler<T> handler)
+        Task Subscribe<T>(IIntegrationEventHandler<T> handler)
             where T : IntegrationEvent;
 
         Task UnsubscribeAsync<T>()

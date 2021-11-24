@@ -50,7 +50,8 @@ export class InvoiceHubServiceService {
   }
 
   private registerOnServerEvents() {
-    this.hubConnection.on('invoiceUpdatedNotification', (invoice, status) => {
+    console.log("registered");
+    this.hubConnection.on('InvoiceUpdated', (invoice, status) => {
       console.log(invoice, status);//this.emmiter.emit('invoiceUpdated', invoice, type);
     });
   }

@@ -14,14 +14,16 @@ namespace Restaurante.Clientes.Application.Hubs
         {
             _invoiceHubService = invoiceHubService;
         }
-        public Task Connect(string customerId)
+        public async Task Connect(string customerId)
         {
-            return _invoiceHubService.AddNewConnection(Context.ConnectionId, int.Parse(customerId));
+            await base.OnConnectedAsync();
+            await _invoiceHubService.AddNewConnection(Context.ConnectionId, int.Parse(customerId));
         }
 
-        public override Task OnDisconnectedAsync(Exception exception)
+        public override async Task OnDisconnectedAsync(Exception exception)
         {
-            return _invoiceHubService.RemoveConnection(Context.ConnectionId);
+            await base.OnDisconnectedAsync(exception);
+            await _invoiceHubService.RemoveConnection(Context.ConnectionId);
         }
     }
 }
