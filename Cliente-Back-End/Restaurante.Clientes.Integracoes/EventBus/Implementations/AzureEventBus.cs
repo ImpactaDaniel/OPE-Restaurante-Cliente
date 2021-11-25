@@ -19,11 +19,6 @@ namespace Restaurante.Clientes.Integracoes.EventBus.Implementations
             _client = new ServiceBusClient(settings.EventBusConnectionString);
         }
 
-        public Task PublishAsync(IntegrationEvent @event)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public async Task StartAsync(CancellationToken cancellationToken = default)
         {
             foreach (var processor in _processors.Values.Where(p => p.IsClosed))

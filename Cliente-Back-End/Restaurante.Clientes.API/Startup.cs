@@ -37,7 +37,7 @@ namespace Restaurante.Clientes.API
             services
                 .AddCors(cors => cors
                                         .AddPolicy(CORS_NAME, policy => policy
-                                                                        .WithOrigins("http://localhost:4200")
+                                                                        .WithOrigins("http://localhost:4200", "http://localhost:8080")
                                                                         .AllowAnyMethod()
                                                                         .AllowAnyHeader()
                                                                         .AllowCredentials()
