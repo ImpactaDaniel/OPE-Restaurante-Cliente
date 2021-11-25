@@ -11,6 +11,11 @@ using System.Runtime.CompilerServices;
 using AutoMapper;
 using Restaurante.Clientes.Infra.Comum.Mapper;
 using Restaurante.Clientes.Domain.Usuarios.Repositorios.Interfaces;
+using Restaurante.Clientes.Integracoes.EventBus.Interfaces;
+using Restaurante.Clientes.Integracoes.EventBus.Implementations;
+using Restaurante.Clientes.Infra.EventBus;
+using Restaurante.Clientes.Application.Hubs.Services.Intefaces;
+using Microsoft.AspNetCore.Builder;
 
 [assembly: InternalsVisibleTo("Restaurante.Clientes.Test")]
 namespace Restaurante.Infra
@@ -43,7 +48,17 @@ namespace Restaurante.Infra
 
             services.AddSingleton(restauranteService);
 
+            services.AddSingleton<IEventBus, AzureEventBus>();
+
             return services;
+        }
+
+        public static void ConfigureEventBus(this IApplicationBuilder app)
+        {            
+            var eventBus = app.ApplicationServices.GetRequiredService<IEventBus>();
+            var invoiceHubService = app.ApplicationServices.GetRequiredService<IInvoiceHubService>();
+
+            eventBus.Subscribe(new InvoiceQueueHandler(invoiceHubService));
         }
 
         internal static IServiceCollection AddRepositorios(this IServiceCollection services) =>
