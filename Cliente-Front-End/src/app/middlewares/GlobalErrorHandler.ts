@@ -7,16 +7,13 @@ export class GlobalErrorHandler implements ErrorHandler {
   constructor(private alertService: AlertService) { }
 
   handleError(error: any): void {
-    console.log('GlobalToken error')
-    console.error(error);
     try {
+      console.error(error);
       if (error.status !== 400 && error.status !== 401) {
         this.alertService.showError();
         return;
       }
-      console.error(error);
     } catch (err) {
-      console.log('GlobalToken error')
       console.error(err);
     }
   }

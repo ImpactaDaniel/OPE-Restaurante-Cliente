@@ -16,8 +16,9 @@
             
             <ng-container matColumnDef="mainDishPhoto">
                 <th mat-header-cell class="text-center col-2" *matHeaderCellDef> Foto </th>
-                <td mat-cell class="p-2 d-md-block d-none" *matCellDef="let mainDish"> <img
-                    class="img-thumbnail mx-auto col-12" src="{{ url + '' }}"> </td>
+                <td mat-cell class="p-2 d-md-block d-none" *matCellDef="let mainDish">
+                  <img class="img-thumbnail mx-auto col-12" src="{{ url + mainDish.photo?.path }}">
+                </td>
             </ng-container>
             <ng-container matColumnDef="mainDishName">
                 <th mat-header-cell *matHeaderCellDef> Prato </th>
@@ -30,6 +31,10 @@
             <ng-container matColumnDef="mainDishPrice">
                 <th mat-header-cell *matHeaderCellDef> Preço </th>
                 <td mat-cell *matCellDef="let mainDish">  </td>
+            </ng-container>
+            <ng-container matColumnDef="mainDishDetails">
+              <th mat-header-cell *matHeaderCellDef> Detalhes </th>
+              <td mat-cell *matCellDef="let mainDish"><a (click)="details(mainDish?.id)" href="javascript:void(0);"><mat-icon>more</mat-icon></a><td>
             </ng-container>
       
             <tr mat-header-row *matHeaderRowDef="columnsToDisplayMainDishes"></tr>
@@ -45,31 +50,7 @@
             <h3>Acompanhamentos</h3>
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <table mat-table [dataSource]="sideDishesProducts" multiTemplateDataRows class="w-100 mat-elevation-z8 my-3">
-  
-            <ng-container matColumnDef="sideDishPhoto">
-                <th mat-header-cell class="text-center col-2" *matHeaderCellDef> Foto </th>
-                <td mat-cell class="p-2 d-md-block d-none" *matCellDef="let sideDish"> <img
-                    class="img-thumbnail mx-auto col-12" src="{{ url + '' }}"> </td>
-            </ng-container>
-            <ng-container matColumnDef="sideDishName">
-                <th mat-header-cell *matHeaderCellDef> Prato </th>
-                <td mat-cell *matCellDef="let sideDish">  </td>
-            </ng-container>
-            <ng-container matColumnDef="sideDishDescription">
-                <th mat-header-cell *matHeaderCellDef> Acompanhamentos </th>
-                <td mat-cell *matCellDef="let sideDish">  </td>
-            </ng-container>
-            <ng-container matColumnDef="sideDishPrice">
-                <th mat-header-cell *matHeaderCellDef> Preço </th>
-                <td mat-cell *matCellDef="let sideDish">  </td>
-            </ng-container>
-    
-          <tr mat-header-row *matHeaderRowDef="columnsToDisplaySideDishes"></tr>
-          <tr class="hover" mat-row *matRowDef="let row; columns: columnsToDisplaySideDishes;"
-            (click)="expandedElement = expandedElement === row ? null : row">
-          </tr>
-        </table>
+        teste
       </mat-expansion-panel>
       <br/>
       <mat-expansion-panel hideToggle>
@@ -78,32 +59,7 @@
             <h3>Bebidas</h3>
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <div class="logs-table">
-            <table mat-table [dataSource]="beveragesProducts" multiTemplateDataRows class="mat-elevation-z8 my-3">
-
-                <ng-container matColumnDef="beveragePhoto">
-                    <th mat-header-cell class="text-center col-2" *matHeaderCellDef> Foto </th>
-                    <td mat-cell class="p-2 d-md-block d-none" *matCellDef="let beverage"> <img
-                        class="img-thumbnail mx-auto col-12" src="{{ url + '' }}"> </td>
-                </ng-container>
-                <ng-container matColumnDef="beverageName">
-                    <th mat-header-cell *matHeaderCellDef> Bebida </th>
-                    <td mat-cell *matCellDef="let beverage">  </td>
-                </ng-container>
-                <ng-container matColumnDef="beverageDescription">
-                    <th mat-header-cell *matHeaderCellDef> Acompanhamentos </th>
-                    <td mat-cell *matCellDef="let beverage">  </td>
-                </ng-container>
-                <ng-container matColumnDef="beveragePrice">
-                    <th mat-header-cell *matHeaderCellDef> Preço </th>
-                    <td mat-cell *matCellDef="let beverage">  </td>
-                </ng-container>
-        
-              <tr mat-header-row *matHeaderRowDef="columnsToDisplayBeverages"></tr>
-              <tr class="hover" mat-row *matRowDef="let row; columns: columnsToDisplayBeverages;">
-              </tr>
-            </table>
-        </div>
+        teste
       </mat-expansion-panel>
       <br>
       <mat-expansion-panel hideToggle>
@@ -113,24 +69,29 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
         <div class="logs-table">
-            <table mat-table [dataSource]="dessertsProducts" multiTemplateDataRows class="mat-elevation-z8 my-3">
+            <table mat-table [dataSource]="dessertsProducts" multiTemplateDataRows class="col-md-12 mat-elevation-z8 my-3">
 
                 <ng-container matColumnDef="dessertPhoto">
                     <th mat-header-cell class="text-center col-2" *matHeaderCellDef> Foto </th>
-                    <td mat-cell class="p-2 d-md-block d-none" *matCellDef="let dessert"> <img
-                        class="img-thumbnail mx-auto col-12" src="{{ url + '' }}"> </td>
+                    <td mat-cell class="p-2 d-md-block d-none" *matCellDef="let dessert">
+                      <img class="img-thumbnail mx-auto col-12" src="{{ url + dessert.photo?.path }}"> 
+                    </td>
                 </ng-container>
                 <ng-container matColumnDef="dessertName">
                     <th mat-header-cell *matHeaderCellDef> Sobremesa </th>
-                    <td mat-cell *matCellDef="let dessert">  </td>
+                    <td mat-cell *matCellDef="let dessert"> {{ dessert?.name }} </td>
                 </ng-container>
                 <ng-container matColumnDef="dessertDescription">
                     <th mat-header-cell *matHeaderCellDef> Acompanhamentos </th>
-                    <td mat-cell *matCellDef="let dessert">  </td>
+                    <td mat-cell *matCellDef="let dessert"> {{ dessert?.accompaniments }} </td>
                 </ng-container>
                 <ng-container matColumnDef="dessertPrice">
                     <th mat-header-cell *matHeaderCellDef> Preço </th>
-                    <td mat-cell *matCellDef="let dessert">  </td>
+                    <td mat-cell *matCellDef="let dessert"> {{ dessert?.price }} </td>
+                </ng-container>
+                <ng-container matColumnDef="dessertDetails">
+                  <th mat-header-cell *matHeaderCellDef> Detalhes </th>
+                  <td mat-cell *matCellDef="let dessert"><a (click)="details(dessert?.id)" href="javascript:void(0);"><mat-icon>more</mat-icon></a><td>
                 </ng-container>
         
               <tr mat-header-row *matHeaderRowDef="columnsToDisplayDesserts"></tr>
