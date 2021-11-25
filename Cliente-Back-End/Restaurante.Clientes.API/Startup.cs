@@ -5,6 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Restaurante.Application;
+using Restaurante.Clientes.API.HostedServices;
+using Restaurante.Clientes.Application.Hubs;
 using Restaurante.Domain;
 using Restaurante.Infra;
 
@@ -23,16 +25,22 @@ namespace Restaurante.Clientes.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSignalR(o =>
+            {
+                o.EnableDetailedErrors = true;
+            });
 
-            services.AddInfra(Configuration);
             services.AddApplication(Configuration);
+            services.AddInfra(Configuration);
             services.AddDomain();
+
             services
                 .AddCors(cors => cors
                                         .AddPolicy(CORS_NAME, policy => policy
-                                                                        .AllowAnyOrigin()
+                                                                        .WithOrigins("http://localhost:4200", "http://localhost:8080")
                                                                         .AllowAnyMethod()
                                                                         .AllowAnyHeader()
+                                                                        .AllowCredentials()
                                                                         .Build()));
             services.AddControllers()
                     .AddNewtonsoftJson(o => o.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
@@ -41,6 +49,7 @@ namespace Restaurante.Clientes.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Restaurante.Clientes.API", Version = "v1" });
             });
+            services.AddHostedService<EventBusHostedService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -64,7 +73,10 @@ namespace Restaurante.Clientes.API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<InvoiceHub>("/invoice-hub");
             });
+
+            app.ConfigureEventBus();
         }
     }
 }

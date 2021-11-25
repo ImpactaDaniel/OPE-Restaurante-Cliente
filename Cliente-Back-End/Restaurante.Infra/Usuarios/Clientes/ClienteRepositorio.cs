@@ -74,12 +74,12 @@ namespace Restaurante.Infra.Usuarios.Clientes
 
                 var enderecos = GetAddresses(response.Result.Addresses);
 
-                return new RespostaConsulta<Cliente>(new Cliente(response.Result.Name, response.Result.Email, response.Result.Password, new Telefone(response.Result.Phone.Ddd, response.Result.Phone.PhoneNumber))
+                return new RespostaConsulta<Cliente>(new Cliente(response.Result.Id, response.Result.Name, response.Result.Email, response.Result.Password, new Telefone(response.Result.Phone.Ddd, response.Result.Phone.PhoneNumber))
                 {
                     Enderecos = enderecos.ToList()
                 });
             }
-            catch (ApiException e)
+            catch (ApiException)
             {
                 return new RespostaConsulta<Cliente>(erros);
             }

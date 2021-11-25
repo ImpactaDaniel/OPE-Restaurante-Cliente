@@ -23,9 +23,9 @@ namespace Restaurante.Clientes.Application.Comum
 
             var tokenDescriptor = new SecurityTokenDescriptor()
             {
-                Subject = new ClaimsIdentity(new Claim[] {
-                    new Claim(ClaimTypes.Sid, cliente.Id.ToString()),
-                    new Claim(ClaimTypes.Name, cliente.Nome)
+                Subject = new ClaimsIdentity(new Claim[] {                    
+                    new Claim(ClaimTypes.Name, cliente.Nome),
+                    new Claim("id", cliente.Id.ToString())
                 }),
                 Expires = DateTime.Now.AddHours(_tokenConfiguration.ValidTime),
                 NotBefore = DateTime.Now,

@@ -9,8 +9,10 @@ using System.Threading.Tasks;
 
 namespace Restaurante.Clientes.Application.Usuarios.Clientes.Requsicoes.Autenticar
 {
-    public class AutenticarClienteRequisicao : RequisicaoCliente<AutenticarClienteRequisicao>, IRequest<RespostaRequisicao<OutToken>>
+    public class AutenticarClienteRequisicao : IRequest<RespostaRequisicao<OutToken>>
     {
+        public string Email { get; set; }
+        public string Senha { get; set; }
         public AutenticarClienteRequisicao()
         {
         }
