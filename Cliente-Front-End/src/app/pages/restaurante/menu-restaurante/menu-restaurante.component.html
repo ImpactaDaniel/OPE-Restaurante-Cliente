@@ -13,11 +13,11 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
         <table mat-table [dataSource]="mainDishesProducts" multiTemplateDataRows class="col-md-12 mat-elevation-z8 my-3">
-            
+
             <ng-container matColumnDef="photo">
                 <th mat-header-cell class="text-center col-2" *matHeaderCellDef> Foto </th>
                 <td mat-cell class="p-2 d-md-block d-none" *matCellDef="let mainDish">
-                  <img class="img-thumbnail mx-auto col-12" src="{{ url + mainDish.photo?.path }}">
+                  <img class="img-thumbnail mx-auto col-12" src="{{ mainDish.photo?.path }}">
                 </td>
             </ng-container>
             <ng-container matColumnDef="name">
@@ -40,7 +40,7 @@
               <th mat-header-cell class="text-center" *matHeaderCellDef> Carrinho de Compras </th>
               <td mat-cell class="text-center" *matCellDef="let mainDish"><a (click)="cart(mainDish?.id)" href="javascript:void(0);"><mat-icon>shopping_cart</mat-icon></a><td>
             </ng-container>
-      
+
             <tr mat-header-row *matHeaderRowDef="columnsToDisplayMainDishes"></tr>
             <tr class="hover" mat-row *matRowDef="let row; columns: columnsToDisplayMainDishes;"
               (click)="expandedElement = expandedElement === row ? null : row">
@@ -55,11 +55,11 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
         <table mat-table [dataSource]="sideDishesProducts" multiTemplateDataRows class="col-md-12 mat-elevation-z8 my-3">
-  
+
             <ng-container matColumnDef="photo">
                 <th mat-header-cell class="text-center col-2" *matHeaderCellDef> Foto </th>
                 <td mat-cell class="p-2 d-md-block d-none" *matCellDef="let sideDish"> <img
-                    class="img-thumbnail mx-auto col-12" src="{{ url + sideDish.photo?.path }}"> </td>
+                    class="img-thumbnail mx-auto col-12" src="{{ sideDish.photo?.path }}"> </td>
             </ng-container>
             <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef> Prato </th>
@@ -81,7 +81,7 @@
               <th mat-header-cell class="text-center" *matHeaderCellDef> Carrinho de Compras </th>
               <td mat-cell class="text-center" *matCellDef="let sideDish"><a (click)="cart(sideDish?.id)" href="javascript:void(0);"><mat-icon>shopping_cart</mat-icon></a><td>
             </ng-container>
-    
+
           <tr mat-header-row *matHeaderRowDef="columnsToDisplaySideDishes"></tr>
           <tr class="hover" mat-row *matRowDef="let row; columns: columnsToDisplaySideDishes;"
             (click)="expandedElement = expandedElement === row ? null : row">
@@ -99,8 +99,8 @@
 
                 <ng-container matColumnDef="photo">
                     <th mat-header-cell class="text-center col-2" *matHeaderCellDef> Foto </th>
-                    <td mat-cell class="p-2 d-md-block d-none" *matCellDef="let beverage"> 
-                      <img class="img-thumbnail mx-auto col-12" src="{{ url + beverage.photo?.path }}">
+                    <td mat-cell class="p-2 d-md-block d-none" *matCellDef="let beverage">
+                      <img class="img-thumbnail mx-auto col-12" src="{{ beverage.photo?.path }}">
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="name">
@@ -123,7 +123,7 @@
                   <th mat-header-cell class="text-center" *matHeaderCellDef> Carrinho de Compras </th>
                   <td mat-cell class="text-center" *matCellDef="let beverage"><a (click)="cart(beverage?.id)" href="javascript:void(0);"><mat-icon>shopping_cart</mat-icon></a><td>
                 </ng-container>
-        
+
               <tr mat-header-row *matHeaderRowDef="columnsToDisplayBeverages"></tr>
               <tr class="hover" mat-row *matRowDef="let row; columns: columnsToDisplayBeverages;">
               </tr>
@@ -142,7 +142,7 @@
                 <ng-container matColumnDef="photo">
                     <th mat-header-cell class="text-center col-2" *matHeaderCellDef> Foto </th>
                     <td mat-cell class="p-2 d-md-block d-none" *matCellDef="let dessert">
-                      <img class="img-thumbnail mx-auto col-12" src="{{ url + dessert.photo?.path }}"> 
+                      <img class="img-thumbnail mx-auto col-12" src="{{ dessert.photo?.path }}">
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="name">
@@ -165,7 +165,7 @@
                   <th mat-header-cell class="text-center" *matHeaderCellDef> Carrinho de Compras </th>
                   <td mat-cell class="text-center" *matCellDef="let dessert"><a (click)="cart(dessert?.id)" href="javascript:void(0);"><mat-icon>shopping_cart</mat-icon></a><td>
                 </ng-container>
-        
+
               <tr mat-header-row *matHeaderRowDef="columnsToDisplayDesserts"></tr>
               <tr class="hover" mat-row *matRowDef="let row; columns: columnsToDisplayDesserts;">
               </tr>
@@ -174,5 +174,5 @@
       </mat-expansion-panel>
     </mat-card-content>
   </mat-card>
-  
+
 
