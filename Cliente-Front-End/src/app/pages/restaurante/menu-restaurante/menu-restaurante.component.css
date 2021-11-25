@@ -2,3 +2,8 @@ table {
     border-radius: 3px;
     background-color: #ddd5cb;
 }
+
+.mat-header-cell {
+    font-size: 13px;
+    font-weight: bold;
+}

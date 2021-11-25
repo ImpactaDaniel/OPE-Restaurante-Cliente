@@ -10,6 +10,8 @@ import { MenuRestauranteComponent } from './menu-restaurante/menu-restaurante.co
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
+
 
 
 @NgModule({
@@ -25,7 +27,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     LogoModule,
     MatCardModule,
     MatTableModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatIconModule
   ]
 })
 export class RestauranteModule { }

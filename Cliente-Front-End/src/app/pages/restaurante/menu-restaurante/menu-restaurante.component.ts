@@ -16,10 +16,10 @@ export class MenuRestauranteComponent implements OnInit {
   // public searchField = "employeeName";
   // public searchValue: string;
 
-  public columnsToDisplayMainDishes = ['mainDishphoto', 'mainDishName', 'mainDishDescription', 'mainDishPrice', 'mainDishDetails']
-  public columnsToDisplaySideDishes = ['sideDishphoto', 'sideDishName', 'sideDishDescription', 'sideDishPrice', 'sideDishDetails']
-  public columnsToDisplayBeverages = ['beveragePhoto', 'beverageName', 'beverageDescription', 'beveragePrice', 'beverageDetails']
-  public columnsToDisplayDesserts = ['dessertPhoto', 'dessertName', 'dessertDescription', 'dessertPrice', 'dessertDetails']
+  public columnsToDisplayMainDishes = ['photo', 'name', 'accompaniments', 'price', 'details', 'cart']
+  public columnsToDisplaySideDishes = ['photo', 'name', 'accompaniments', 'price', 'details', 'cart']
+  public columnsToDisplayBeverages = ['photo', 'name', 'accompaniments', 'price', 'details', 'cart']
+  public columnsToDisplayDesserts = ['photo', 'name', 'accompaniments', 'price', 'details', 'cart']
 
   public expandedElement: any;
   public mainDishesProducts = new MatTableDataSource<any>();
@@ -30,7 +30,6 @@ export class MenuRestauranteComponent implements OnInit {
   constructor(@Inject('BASE_URL') public url: string, private restauranteService: RestauranteService) { }
 
   ngOnInit(): void {
-    // this.mainDishesProducts.data = this.data?.invoice?.products;
     this.getProductList();
   }
 
@@ -42,11 +41,11 @@ export class MenuRestauranteComponent implements OnInit {
     //   return;
     // }
     this.restauranteService.getAllProducts().subscribe(res => {
-      console.log(res[0])
+      console.log(res[3])
       this.dessertsProducts.data = res[0].products;
-      // this.sideDishesProducts.data = res[1].products;
+      this.sideDishesProducts.data = res[1].products;
       this.mainDishesProducts.data = res[2].products;
-      // this.beveragesProducts = res[3];
+      this.beveragesProducts.data = res[3].products;
       
       // this.listSize = res.response.result.size;
     })
