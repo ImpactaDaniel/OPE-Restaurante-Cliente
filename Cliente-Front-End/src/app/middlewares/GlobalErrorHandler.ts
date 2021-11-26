@@ -9,13 +9,12 @@ export class GlobalErrorHandler implements ErrorHandler {
   handleError(error: any): void {
     console.error(error);
     try {
+      console.error(error);
       if (error.status !== 400 && error.status !== 401) {
         this.alertService.showError();
         return;
       }
-      console.error(error);
     } catch (err) {
-      console.log('GlobalToken error')
       console.error(err);
     }
   }
