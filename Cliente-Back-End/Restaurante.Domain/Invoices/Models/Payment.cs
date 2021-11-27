@@ -1,12 +1,12 @@
 ﻿using Restaurante.Domain.Comum.Modelos;
-using Restaurante.Domain.Invoices.Models.Enum;
+using Restaurante.Domain.Pedidos.Models.Enum;
 using System;
 
-namespace Restaurante.Domain.Invoices.Models
+namespace Restaurante.Domain.Pedidos.Models
 {
     public class Payment : Entidade<int>
     {
-        public DateTime PaymentTime { get; set; }
+        public DateTimeOffset PaymentTime { get; set; }
         public decimal Amount { get; set; }
         public PaymentType PaymentType { get; set; }
     }

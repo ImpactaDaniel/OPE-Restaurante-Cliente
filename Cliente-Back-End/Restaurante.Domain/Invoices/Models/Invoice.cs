@@ -1,9 +1,7 @@
-﻿using Restaurante.Domain.Comum.Modelos;
-using Restaurante.Domain.Invoices.Models.Enum;
-using Restaurante.Domain.Usuarios.Modelos;
+﻿using Restaurante.Domain.Pedidos.Models.Enum;
 using System.Collections.Generic;
 
-namespace Restaurante.Domain.Invoices.Models
+namespace Restaurante.Domain.Pedidos.Models
 {
     public class Invoice
     {

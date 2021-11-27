@@ -1,7 +1,7 @@
 ﻿using Restaurante.Clientes.Domain.Produtos.Modelos;
 using Restaurante.Domain.Comum.Modelos;
 
-namespace Restaurante.Domain.Invoices.Models
+namespace Restaurante.Domain.Pedidos.Models
 {
     public class InvoiceLine : Entidade<int>
     {

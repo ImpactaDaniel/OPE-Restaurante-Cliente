@@ -1,4 +1,4 @@
-﻿using Restaurante.Clientes.Domain.Pedidos.Enums;
+﻿using Restaurante.Domain.Pedidos.Models.Enum;
 using System.Threading.Tasks;
 
 namespace Restaurante.Clientes.Application.Hubs.Services.Intefaces

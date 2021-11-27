@@ -1,7 +1,7 @@
 ﻿using Restaurante.Domain.Comum.Modelos;
 using System.Linq;
 
-namespace Restaurante.Domain.Invoices.Models
+namespace Restaurante.Domain.Pedidos.Models
 {
     public class InvoiceAddress : Entidade<int>
     {

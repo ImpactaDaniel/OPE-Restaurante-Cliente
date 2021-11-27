@@ -5,12 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <OpenApiReference Include="OpenAPIs\swagger.json" CodeGenerator="NSwagCSharp" Namespace="Restaurante.Integrations" ClassName="RestauranteService">
-      <SourceUri>https://localhost:5001/swagger/v1/swagger.json</SourceUri>
-    </OpenApiReference>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Azure.Messaging.ServiceBus" Version="7.5.0" />
     <PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="3.0.0">
       <PrivateAssets>all</PrivateAssets>
@@ -21,6 +15,12 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <OpenApiReference Include="OpenAPIs\swagger.json" CodeGenerator="NSwagCSharp" Namespace="Restaurante.Integrations" ClassName="RestauranteService">
+      <SourceUri>https://localhost:5001/swagger/v1/swagger.json</SourceUri>
+    </OpenApiReference>
   </ItemGroup>
 
 </Project>
