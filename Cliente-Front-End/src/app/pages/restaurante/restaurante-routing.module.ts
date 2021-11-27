@@ -7,7 +7,7 @@ import { MenuRestauranteComponent } from './menu-restaurante/menu-restaurante.co
 const routes: Routes = [
   {
     path: 'menu',
-    component: MenuRestauranteComponent
+    component: MenuRestauranteComponent, canActivate: [RestauranteGuard]
   },
 ];
 

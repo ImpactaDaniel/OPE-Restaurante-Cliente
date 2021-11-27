@@ -3,7 +3,12 @@
     <mat-icon>menu</mat-icon>
   </button>
 
-  <span class="menu-user-name">Seja bem-vindo(a) {{ userNameLogged }}</span>
+  <span class="menu-user-name">
+    Seja bem-vindo(a), {{ userNameLogged }}
+    <button mat-icon-button id="btn-logout" >
+      <mat-icon>person_pin</mat-icon>
+    </button>
+  </span>
 
   <button mat-icon-button id="btn-logout" (click)="logOut()">
     <mat-icon>logout</mat-icon>

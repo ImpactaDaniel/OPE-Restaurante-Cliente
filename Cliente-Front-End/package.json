@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "dev":"ng serve --port 4400",
+    "dev":"ng serve --port 8080",
     "build": "ng build",
     "build:ssr": "ng run Restaurante.Clientes.WebSite:server:dev",
     "test": "ng test",
