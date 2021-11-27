@@ -629,6 +629,45 @@
         }
       }
     },
+    "/Invoice/GetByCystomer": {
+      "get": {
+        "tags": [
+          "Invoice"
+        ],
+        "parameters": [
+          {
+            "name": "customerId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvoiceIListResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvoiceIListResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvoiceIListResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/Invoice/Get/{id}": {
       "get": {
         "tags": [
@@ -670,7 +709,7 @@
       }
     },
     "/Invoice/UpdateStatus/{id}": {
-      "patch": {
+      "get": {
         "tags": [
           "Invoice"
         ],
@@ -1326,7 +1365,7 @@
             "nullable": true
           },
           "type": {
-            "$ref": "#/components/schemas/EmployeesType"
+            "$ref": "#/components/schemas/UsersType"
           },
           "vehicle": {
             "$ref": "#/components/schemas/VehicleRequest"
@@ -1379,7 +1418,7 @@
             "nullable": true
           },
           "type": {
-            "$ref": "#/components/schemas/EmployeesType"
+            "$ref": "#/components/schemas/UsersType"
           },
           "currentUser": {
             "type": "integer",
@@ -1516,7 +1555,7 @@
             "readOnly": true
           },
           "type": {
-            "$ref": "#/components/schemas/EmployeesType"
+            "$ref": "#/components/schemas/UsersType"
           },
           "document": {
             "type": "string",
@@ -1535,6 +1574,10 @@
           },
           "phone": {
             "$ref": "#/components/schemas/CustomerPhone"
+          },
+          "phoneId": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -1554,6 +1597,10 @@
           "number": {
             "type": "string",
             "nullable": true
+          },
+          "customerId": {
+            "type": "integer",
+            "format": "int32"
           },
           "district": {
             "type": "string",
@@ -1604,15 +1651,6 @@
           }
         },
         "additionalProperties": false
-      },
-      "EmployeesType": {
-        "enum": [
-          0,
-          1,
-          2
-        ],
-        "type": "integer",
-        "format": "int32"
       },
       "GetUserAuthenticateRequest": {
         "type": "object",
@@ -1677,6 +1715,10 @@
           "payment": {
             "$ref": "#/components/schemas/Payment"
           },
+          "customerId": {
+            "type": "integer",
+            "format": "int32"
+          },
           "logs": {
             "type": "array",
             "items": {
@@ -1717,6 +1759,22 @@
           },
           "city": {
             "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "InvoiceIListResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Invoice"
+            },
             "nullable": true
           }
         },
@@ -2207,6 +2265,16 @@
           }
         },
         "additionalProperties": false
+      },
+      "UsersType": {
+        "enum": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
       },
       "VehicleRequest": {
         "type": "object",
