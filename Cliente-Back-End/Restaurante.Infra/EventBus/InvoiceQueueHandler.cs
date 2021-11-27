@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Restaurante.Clientes.Application.Hubs.Services.Intefaces;
 using Restaurante.Clientes.Integracoes.EventBus.Interfaces;
-using Restaurante.Domain.Invoices.Models;
+using Restaurante.Domain.Pedidos.Models;
 using System;
 using System.Threading;
 using System.Threading.Tasks;

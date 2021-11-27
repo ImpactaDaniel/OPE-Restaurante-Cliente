@@ -1,8 +1,8 @@
 ﻿using Restaurante.Domain.Comum.Modelos;
-using Restaurante.Domain.Invoices.Models.Enum;
+using Restaurante.Domain.Pedidos.Models.Enum;
 using System;
 
-namespace Restaurante.Domain.Invoices.Models
+namespace Restaurante.Domain.Pedidos.Models
 {
     public class InvoiceLog : Entidade<int>
     {
