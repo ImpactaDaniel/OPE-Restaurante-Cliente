@@ -24,6 +24,12 @@ namespace Restaurante.Clientes.API.Controllers
             return Ok(await _mediator.Send(new GetInvoicesByCustomerRequest { CustomerId = GetLoggedUserId() }, cancellationToken));
         }
 
+        [HttpGet("InvoiceById/{id}"), Authorize]
+        public async Task<IActionResult> GetInvoiceById(int id, CancellationToken cancellationToken = default)
+        {
+            return Ok(await _mediator.Send(new GetInvoiceByIdRequest { Id = id }, cancellationToken));
+        }
+
         private int GetLoggedUserId()
         {
             var userId = User.Claims.First(c => c.Type == "id").Value;

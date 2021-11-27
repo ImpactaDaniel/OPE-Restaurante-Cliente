@@ -33,7 +33,7 @@ namespace Restaurante.Clientes.Infra.Invoices.Repositories
         public async Task<Restaurante.Domain.Pedidos.Models.Invoice> GetById(int id, CancellationToken cancellationToken = default)
         {
             var invoices = await _restauranteService
-                .Get4Async(id, cancellationToken);
+                .GetByIdAsync(id, cancellationToken);
 
             if (!invoices.Success)
                 return null;
