@@ -10,6 +10,7 @@ using System.Text;
 using Restaurante.Clientes.Domain.Comum.Modelos.Intefaces;
 using Restaurante.Clientes.Application.Hubs.Services;
 using Restaurante.Clientes.Application.Hubs.Services.Intefaces;
+using System;
 
 [assembly: InternalsVisibleTo("Restaurante.Clientes.Test")]
 namespace Restaurante.Application
@@ -48,7 +49,9 @@ namespace Restaurante.Application
                         ValidateIssuerSigningKey = true,
                         IssuerSigningKey = new SymmetricSecurityKey(key),
                         ValidateIssuer = false,
-                        ValidateAudience = false
+                        ValidateAudience = false,
+                        ClockSkew = TimeSpan.Zero,
+                        ValidateLifetime = true
                     };
                 });
 

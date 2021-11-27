@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using Restaurante.Clientes.Application.Hubs.Interfaces;
 using Restaurante.Clientes.Application.Hubs.Services.Intefaces;
-using Restaurante.Clientes.Domain.Pedidos.Enums;
+using Restaurante.Domain.Pedidos.Models.Enum;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;

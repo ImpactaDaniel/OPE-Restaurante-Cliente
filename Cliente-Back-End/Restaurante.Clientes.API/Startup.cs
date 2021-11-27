@@ -9,6 +9,7 @@ using Restaurante.Clientes.API.HostedServices;
 using Restaurante.Clientes.Application.Hubs;
 using Restaurante.Domain;
 using Restaurante.Infra;
+using System;
 
 namespace Restaurante.Clientes.API
 {
@@ -42,13 +43,35 @@ namespace Restaurante.Clientes.API
                                                                         .AllowAnyHeader()
                                                                         .AllowCredentials()
                                                                         .Build()));
-            services.AddControllers()
-                    .AddNewtonsoftJson(o => o.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Restaurante.Clientes.API", Version = "v1" });
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Type = SecuritySchemeType.Http,
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Scheme = "bearer",
+                    Description = "Insert a valid Token"
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                    {
+                        {
+                            new OpenApiSecurityScheme
+                            {
+                                Reference = new OpenApiReference
+                                {
+                                    Type = ReferenceType.SecurityScheme,
+                                    Id = "Bearer"
+                                }
+                            },
+                            Array.Empty<string>()
+                        }
+                    });
             });
+            services.AddControllers()
+                    .AddNewtonsoftJson(o => o.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddHostedService<EventBusHostedService>();
         }
 
@@ -67,6 +90,8 @@ namespace Restaurante.Clientes.API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

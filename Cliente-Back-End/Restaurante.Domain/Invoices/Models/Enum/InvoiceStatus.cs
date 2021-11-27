@@ -1,4 +1,4 @@
-﻿namespace Restaurante.Domain.Invoices.Models.Enum
+﻿namespace Restaurante.Domain.Pedidos.Models.Enum
 {
     public enum InvoiceStatus
     {
