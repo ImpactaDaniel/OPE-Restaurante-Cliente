@@ -27,7 +27,7 @@ namespace Restaurante.Clientes.Infra.Invoices.Repositories
             if (!invoices.Success)
                 return null;
 
-            return _mapper.Map<IEnumerable<Restaurante.Domain.Pedidos.Models.Invoice>>(invoices.Result);
+            return _mapper.Map<ICollection<Restaurante.Domain.Pedidos.Models.Invoice>>(invoices.Result);
         }
 
         public async Task<Restaurante.Domain.Pedidos.Models.Invoice> GetById(int id, CancellationToken cancellationToken = default)

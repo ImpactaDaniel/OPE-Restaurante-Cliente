@@ -6,7 +6,7 @@ namespace Restaurante.Domain.Pedidos.Models
 {
     public class Payment : Entidade<int>
     {
-        public DateTime PaymentTime { get; set; }
+        public DateTimeOffset PaymentTime { get; set; }
         public decimal Amount { get; set; }
         public PaymentType PaymentType { get; set; }
     }
