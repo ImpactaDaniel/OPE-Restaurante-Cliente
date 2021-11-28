@@ -41,6 +41,9 @@ export class HistoricoPedidoComponent implements OnInit {
 
   public details(id: string) {
     console.log(id)
+    this.clienteService.getInvoiceById(id).subscribe(res => {
+      console.log(res)
+    })
   }
 
   public cart(id: string) {
