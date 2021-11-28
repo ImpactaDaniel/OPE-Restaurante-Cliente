@@ -12,7 +12,11 @@ export class ClienteService {
 
   constructor(@Inject('BASE_URL') private url: string, private httpClient: HttpClient) { }
 
-  createCliente(cliente: Cliente): Observable<APIResponse<boolean>> {
+  public createCliente(cliente: Cliente): Observable<APIResponse<boolean>> {
     return this.httpClient.post<APIResponse<boolean>>(this.url + 'Cliente/CreateCustomer', cliente)
+  }
+
+  public getInvoicesByCustomer() {
+    return this.httpClient.get<APIResponse<any>>(this.url + 'Invoice/InvoicesHistory')
   }
 }

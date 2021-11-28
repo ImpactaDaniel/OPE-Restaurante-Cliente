@@ -24,6 +24,10 @@ import { ErrorHandler, NgModule } from '@angular/core';
         loadChildren: () => import('./pages/cliente/cliente.module').then(m => m.ClienteModule)
       },
       {
+        path: 'cliente/pedido',
+        loadChildren: () => import('./pages/cliente/pedido/pedido.module').then(m => m.PedidoModule)
+      },
+      {
         path: 'restaurante',
         loadChildren: () => import('./pages/restaurante/restaurante.module').then(m => m.RestauranteModule)
       },
