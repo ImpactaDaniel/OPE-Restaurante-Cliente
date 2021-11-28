@@ -21,11 +21,11 @@ import { ErrorHandler, NgModule } from '@angular/core';
     RouterModule.forRoot([
       {
         path: 'cliente',
-        loadChildren: () => import('./pages/cliente/cliente.module').then(m => m.ClienteModule)
+        loadChildren: () => import('./pages/cliente/cliente.module').then(m => m.ClienteModule),
       },
       {
         path: 'cliente/pedido',
-        loadChildren: () => import('./pages/cliente/pedido/pedido.module').then(m => m.PedidoModule)
+        loadChildren: () => import('./pages/cliente/pedido/pedido.module').then(m => m.PedidoModule),
       },
       {
         path: 'restaurante',
