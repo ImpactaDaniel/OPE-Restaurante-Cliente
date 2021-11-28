@@ -4,7 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { HeaderComponent } from './header.component';
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatButtonModule } from '@angular/material/button';
-
+import {MatBadgeModule} from '@angular/material/badge';
 
 
 
@@ -16,7 +16,8 @@ import { MatButtonModule } from '@angular/material/button';
     CommonModule,
     MatIconModule,
     MatToolbarModule,
-    MatButtonModule
+    MatButtonModule,
+    MatBadgeModule
   ],
   exports: [
     HeaderComponent

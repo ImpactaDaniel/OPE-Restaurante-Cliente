@@ -9,6 +9,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { HistoricoPedidoComponent } from './historico-pedido.component';
 import { PedidoGuard } from '../pedido.guard';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { CommonModule } from '@angular/common';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 
 const routes: Routes = [
@@ -22,6 +24,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [HistoricoPedidoComponent],
   imports: [
+    CommonModule,
     FormsModule,
     MatSelectModule,
     MatInputModule,
@@ -29,6 +32,7 @@ const routes: Routes = [
     MatTableModule,
     MatExpansionModule,
     MatIconModule,
+    MatProgressBarModule,
     RouterModule.forChild(routes)
   ]
 })

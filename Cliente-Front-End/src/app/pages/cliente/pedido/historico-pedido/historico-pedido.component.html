@@ -8,20 +8,24 @@
     <mat-card-content>
     <div class="row">
         <div class="col-md-12" *ngFor="let pedido of pedidosList">
-            <mat-card>
-            <mat-expansion-panel hideToggle>
+            <mat-card class="my-1">
+            <mat-expansion-panel [expanded]="this.invoiceStatusClosed.indexOf(pedido.status) === -1" hideToggle>
                 <mat-expansion-panel-header class="panel-header">
                     <mat-panel-title>
-                    <h4>#Pedido - {{ pedido.id }}</h4>
+                    <h5>#Pedido - {{ pedido.id }}</h5>
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <div class="row">
                     <div class="col-md-8">
-                        <div class="row justify-content-center">
-                            STATUS
+                        <div class="row status-legend justify-content-center">
+                            Status: {{ statusList[pedido.status].name }}
                         </div>
                         <div class="row justify-content-center">
-                            BARRA
+                            <mat-progress-bar
+                                [ngClass]="barColor"
+                                [value]="statusList[pedido.status].value"
+                            >
+                            </mat-progress-bar>
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -30,7 +34,7 @@
                     </div>
                     <div class="col-md-2">
                         <span>Adicionar no Carrinho</span>
-                        <button mat-icon-button (click)="toCart(pedido.id)" ><mat-icon>shopping_cart</mat-icon></button>
+                        <button mat-icon-button (click)="cart(pedido.id)" ><mat-icon>shopping_cart</mat-icon></button>
                     </div>
                 </div>
             </mat-expansion-panel>

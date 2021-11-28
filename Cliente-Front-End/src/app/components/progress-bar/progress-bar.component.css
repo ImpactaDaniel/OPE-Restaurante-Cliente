@@ -1,0 +1,12 @@
+.progress-bar.primary {
+    background-color: blue;
+}
+.progress-bar.green {
+    background-color: green;
+}
+.progress-bar.yellow {
+    background-color: yellow;
+}
+.progress-bar.red {
+    background-color: red;
+}

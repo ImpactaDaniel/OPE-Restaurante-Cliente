@@ -30,6 +30,11 @@ export class SideNavComponent implements OnInit {
     this.onSidenavClose()
   }
 
+  public toCart(): void {
+    // this.router.navigate(['cliente/pedido/carrinho'])
+    this.onSidenavClose()
+  }
+
   public logout() {
     this.authService.logout();
     this.router.navigate(['/cliente/login']);
