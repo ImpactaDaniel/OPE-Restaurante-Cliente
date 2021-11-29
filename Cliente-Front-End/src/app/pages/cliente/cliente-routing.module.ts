@@ -1,4 +1,3 @@
-import { AuthenticateGuardService } from './authenticate-guard.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
@@ -10,7 +9,7 @@ import { LoginClienteComponent } from './login-cliente/login-cliente';
 const routes: Routes = [
   {
     path: 'create',
-    component: CreateClienteComponent
+    component: CreateClienteComponent, canActivate: [ClienteGuard]
   },
   //{
   //  path: 'edit',

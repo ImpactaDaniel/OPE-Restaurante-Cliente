@@ -1,0 +1,23 @@
+.status-legend {
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.progress-bar.blue {
+    background-color: blue;
+}
+.progress-bar.green {
+    background-color: green;
+}
+.progress-bar.yellow {
+    background-color: yellow;
+}
+.progress-bar.red {
+    background-color: red;
+}
+
+.red {
+    .mat-progress-bar-fill::after {
+        background-color: yellow;
+    }
+}

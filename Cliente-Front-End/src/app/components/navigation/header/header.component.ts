@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit {
   private getUserName() {
     this.userNameLogged = "";
     if (this.authService.isAuthenticated())
-      this.userNameLogged = this.authService.getTokenData().name;
+      this.userNameLogged = this.authService.getTokenData().unique_name;
   }
 
   public onToggleSidenav = () => {

@@ -11,6 +11,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderModule } from './components/navigation/header/header.module';
 import { SideNavModule } from './components/navigation/side-nav/side-nav.module';
 import { ErrorHandler, NgModule } from '@angular/core';
+import { MatDialogModule } from '@angular/material/dialog';
+import { PedidoDialogModule } from './components/dialogs/pedido-dialog/pedido-dialog.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,11 @@ import { ErrorHandler, NgModule } from '@angular/core';
     RouterModule.forRoot([
       {
         path: 'cliente',
-        loadChildren: () => import('./pages/cliente/cliente.module').then(m => m.ClienteModule)
+        loadChildren: () => import('./pages/cliente/cliente.module').then(m => m.ClienteModule),
+      },
+      {
+        path: 'cliente/pedido',
+        loadChildren: () => import('./pages/cliente/pedido/pedido.module').then(m => m.PedidoModule),
       },
       {
         path: 'restaurante',
@@ -36,7 +42,9 @@ import { ErrorHandler, NgModule } from '@angular/core';
     BrowserAnimationsModule,
     SideNavModule,
     HeaderModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatDialogModule,
+    PedidoDialogModule,
   ],
   providers: [
     {

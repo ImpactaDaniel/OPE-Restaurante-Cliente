@@ -3,7 +3,7 @@ import { CanActivate, Router } from "@angular/router";
 import { TokenService } from "src/app/services/token.service";
 
 @Injectable({ providedIn: 'root' })
-export class RestauranteGuard implements CanActivate {
+export class PedidoGuard implements CanActivate {
 
   constructor(private tokenService: TokenService, private router: Router) { }
 
