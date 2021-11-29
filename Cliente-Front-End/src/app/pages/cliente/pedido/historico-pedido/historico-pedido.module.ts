@@ -11,6 +11,7 @@ import { PedidoGuard } from '../pedido.guard';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { CommonModule } from '@angular/common';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatButtonModule } from '@angular/material/button';
 
 
 const routes: Routes = [
@@ -25,14 +26,15 @@ const routes: Routes = [
   declarations: [HistoricoPedidoComponent],
   imports: [
     CommonModule,
+    MatTableModule,
+    MatIconModule,
     FormsModule,
-    MatSelectModule,
     MatInputModule,
     MatCardModule,
-    MatTableModule,
+    MatSelectModule,
     MatExpansionModule,
-    MatIconModule,
     MatProgressBarModule,
+    MatButtonModule,
     RouterModule.forChild(routes)
   ]
 })

@@ -28,13 +28,21 @@
                             </mat-progress-bar>
                         </div>
                     </div>
-                    <div class="col-md-2">
-                        <span>Detalhes</span>
-                        <button mat-icon-button (click)="details(pedido.id)" ><mat-icon>more</mat-icon></button>
+                    <div class="col-md-2 ">
+                        <div class="row justify-content-center">
+                            <span>Detalhes</span>
+                        </div>
+                        <div class="row justify-content-center">
+                            <button mat-icon-button (click)="details(pedido.id)" ><mat-icon>more</mat-icon></button>
+                        </div>
                     </div>
-                    <div class="col-md-2">
-                        <span>Adicionar no Carrinho</span>
-                        <button mat-icon-button (click)="cart(pedido.id)" ><mat-icon>shopping_cart</mat-icon></button>
+                    <div class="col-md-2 justify-content-center">
+                        <div class="row justify-content-center">
+                            <span>Adicionar no Carrinho</span>
+                        </div>
+                        <div class="row justify-content-center">
+                            <button mat-icon-button (click)="cart(pedido.id)" ><mat-icon>shopping_cart</mat-icon></button>
+                        </div>
                     </div>
                 </div>
             </mat-expansion-panel>

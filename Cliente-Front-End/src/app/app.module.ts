@@ -11,6 +11,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderModule } from './components/navigation/header/header.module';
 import { SideNavModule } from './components/navigation/side-nav/side-nav.module';
 import { ErrorHandler, NgModule } from '@angular/core';
+import { MatDialogModule } from '@angular/material/dialog';
+import { PedidoDialogModule } from './components/dialogs/pedido-dialog/pedido-dialog.module';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { ErrorHandler, NgModule } from '@angular/core';
     BrowserAnimationsModule,
     SideNavModule,
     HeaderModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatDialogModule,
+    PedidoDialogModule,
   ],
   providers: [
     {

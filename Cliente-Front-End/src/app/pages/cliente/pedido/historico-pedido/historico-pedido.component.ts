@@ -1,6 +1,8 @@
 import { ViewEncapsulation } from '@angular/compiler/src/core';
 import { Component, Inject, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
+import { MatDialog } from '@angular/material/dialog';
+import { PedidoDialogComponent } from 'src/app/components/dialogs/pedido-dialog/pedido-dialog.component';
 import { InvoiceStatus } from 'src/app/models/common/invoiceStatus';
 import { ClienteService } from '../../services/cliente.service';
 
@@ -25,7 +27,11 @@ export class HistoricoPedidoComponent implements OnInit {
     {status: InvoiceStatus.Closed, name: 'Fechado', value: 0, color: 'gray'}
   ]
 
-  constructor(@Inject('BASE_URL') public url: string, public clienteService: ClienteService) { }
+  constructor(
+    @Inject('BASE_URL') public url: string, 
+    public clienteService: ClienteService, 
+    private dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
     this.getAllInvoices();
@@ -34,16 +40,21 @@ export class HistoricoPedidoComponent implements OnInit {
   private getAllInvoices() {
 
     this.clienteService.getInvoicesByCustomer().subscribe(res => {
-      console.log(res)
       this.pedidosList = res
     })
   }
 
   public details(id: string) {
-    console.log(id)
-    this.clienteService.getInvoiceById(id).subscribe(res => {
-      console.log(res)
-    })
+    this.clienteService.getInvoiceById(id).toPromise().then(result => {
+      let invoice = result
+      this.dialog.open(PedidoDialogComponent, {
+        maxWidth: '100%',
+        data: {
+          invoice
+        }
+      });
+    });
+      
   }
 
   public cart(id: string) {

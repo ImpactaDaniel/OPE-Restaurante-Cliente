@@ -1,0 +1,44 @@
+
+mat-card {
+    width: 100%;
+    background-color: #ddd5cb;
+}
+
+mat-card-title {
+    font-style: bold;
+}
+
+mat-expansion-panel {
+    background-color: #dfc197;
+}
+
+table {
+    border-radius: 3px;
+    background-color: #ddd5cb;
+}
+
+.logs-table {
+    height: 200px;
+    overflow-y: scroll;
+}
+
+.mat-column-logId, .mat-column-date, .mat-column-type, .mat-column-message {
+    font-size: smaller;
+}
+
+.mat-column-logId {
+    width: 70px;
+}
+.mat-column-date {
+    width: 120px;
+}
+.mat-column-type {
+    width: 80px;
+}
+.mat-column-message {
+    width: 250px;
+}
+
+mat-header-cell {
+    height: 10px;
+}

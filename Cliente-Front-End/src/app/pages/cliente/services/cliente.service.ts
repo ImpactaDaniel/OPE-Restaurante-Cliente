@@ -20,7 +20,7 @@ export class ClienteService {
     return this.httpClient.get<APIResponse<any>>(this.url + 'Invoice/InvoicesHistory')
   }
 
-  public getInvoiceById(id: string) {
-    return this.httpClient.get<APIResponse<any>>(this.url + 'Invoice/InvoiceById/' + id)
+  public getInvoiceById(id: string): any {
+    return this.httpClient.get<any>(this.url + 'Invoice/InvoiceById/' + id)
   }
 }
