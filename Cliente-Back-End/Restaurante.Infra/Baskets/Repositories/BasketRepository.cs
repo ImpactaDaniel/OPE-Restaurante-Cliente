@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Restaurante.Clientes.Domain.Baskets.Models;
 using Restaurante.Clientes.Domain.Baskets.Repositories.Interfaces;
+using Restaurante.Clientes.Integracoes.Config;
 using Restaurante.Integrations;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,10 +15,13 @@ namespace Restaurante.Clientes.Infra.Baskets.Repositories
         private readonly RestauranteService _restauranteService;
         private readonly IMapper _mapper;
 
-        public BasketRepository(RestauranteService restauranteService, IMapper mapper)
+        private readonly IntegrationSettings _settings;
+
+        public BasketRepository(RestauranteService restauranteService, IMapper mapper, IntegrationSettings settings)
         {
             _restauranteService = restauranteService;
             _mapper = mapper;
+            _settings = settings;
         }
 
         public async Task AddOrUpdateItem(int customerId, Domain.Baskets.Models.BasketItem item, CancellationToken cancellationToken = default)
@@ -40,8 +45,17 @@ namespace Restaurante.Clientes.Infra.Baskets.Repositories
             if (!response.Success)
                 throw new Exception("Houve um erro ao tentar retornar a cesta!");
 
+            GetPhoto(response.Result.Items);
+
             return _mapper.Map<Domain.Baskets.Models.Basket>(response.Result);
         }
+
+        private void GetPhoto(IEnumerable<Integrations.BasketItem> basketItems)
+        {
+            foreach (var item in basketItems)
+                item.Product.Photo.Path = _settings.UrlRestauranteService + "/Products/" + item.Product.Photo.Path;
+        }
+
         public async Task RemoveItem(int customerId, int productId, CancellationToken cancellationToken = default)
         {
             var response = await _restauranteService.RemoveBasketItemAsync(customerId, productId, cancellationToken);

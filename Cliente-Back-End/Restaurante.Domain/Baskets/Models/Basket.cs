@@ -8,7 +8,7 @@ namespace Restaurante.Clientes.Domain.Baskets.Models
     {
         public Cliente Customer { get; set; }
         public ICollection<BasketItem> Items { get; set; } = new List<BasketItem>();
-        public DateTime CreatedDate { get; set; }
+        public DateTimeOffset CreatedDate { get; set; }
         public bool Active { get; set; }
         public int CustomerId { get; set; }
     }
