@@ -5,12 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Comum\Persistencia\Interfaces\**" />
-    <EmbeddedResource Remove="Comum\Persistencia\Interfaces\**" />
-    <None Remove="Comum\Persistencia\Interfaces\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="BCrypt.Net-Core" Version="1.6.0" />

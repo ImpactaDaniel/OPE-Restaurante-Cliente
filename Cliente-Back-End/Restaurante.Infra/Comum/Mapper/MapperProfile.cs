@@ -20,6 +20,8 @@ namespace Restaurante.Clientes.Infra.Comum.Mapper
             CreateMap<InvoiceAddress, Restaurante.Domain.Pedidos.Models.InvoiceAddress>();
             CreateMap<InvoiceLine, Restaurante.Domain.Pedidos.Models.InvoiceLine>();
             CreateMap<Invoice, Restaurante.Domain.Pedidos.Models.Invoice>();
+            CreateMap<Basket, Domain.Baskets.Models.Basket>();
+            CreateMap<BasketItem, Domain.Baskets.Models.BasketItem>();
         }
     }
 }
