@@ -13,6 +13,8 @@ import { SideNavModule } from './components/navigation/side-nav/side-nav.module'
 import { ErrorHandler, NgModule } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PedidoDialogModule } from './components/dialogs/pedido-dialog/pedido-dialog.module';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 
 @NgModule({
   declarations: [
@@ -44,6 +46,7 @@ import { PedidoDialogModule } from './components/dialogs/pedido-dialog/pedido-di
     HeaderModule,
     MatSidenavModule,
     MatDialogModule,
+    MatSnackBarModule,
     PedidoDialogModule,
   ],
   providers: [

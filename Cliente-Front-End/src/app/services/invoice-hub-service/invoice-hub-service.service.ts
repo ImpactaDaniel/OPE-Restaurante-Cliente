@@ -1,7 +1,6 @@
-import { Inject, Injectable } from '@angular/core';
+import { EventEmitter, Inject, Injectable, Output } from '@angular/core';
 import { TokenService } from '../token.service';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
-import { EventEmitter } from 'events';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +8,7 @@ import { EventEmitter } from 'events';
 export class InvoiceHubServiceService {
 
   private hubConnection: HubConnection;
-  public emmiter = new EventEmitter();
+  @Output() public emmiter = new EventEmitter();
 
   constructor(private tokenService: TokenService, @Inject("BASE_URL") private url: string) { }
 
@@ -26,14 +25,12 @@ export class InvoiceHubServiceService {
   }
 
   public stopConnection() {
-    console.log("Stopped the connection")
     this.hubConnection?.stop().catch(err => {
       console.error(err);
     });
   }
 
   private startConnection() {
-    console.log("Trying to connect");
     this.hubConnection
       .start()
       .then(() => {
@@ -51,7 +48,7 @@ export class InvoiceHubServiceService {
 
   private registerOnServerEvents() {
     this.hubConnection.on('InvoiceUpdated', (invoice, status) => {
-      console.log(invoice, status);//this.emmiter.emit('invoiceUpdated', invoice, type);
+      this.emmiter.emit({ id: invoice, status });
     });
   }
 

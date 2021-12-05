@@ -1,6 +1,5 @@
 import { ViewEncapsulation } from '@angular/compiler/src/core';
 import { Component, Inject, OnInit } from '@angular/core';
-import { ThemePalette } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PedidoDialogComponent } from 'src/app/components/dialogs/pedido-dialog/pedido-dialog.component';
 import { InvoiceStatus } from 'src/app/models/common/invoiceStatus';
@@ -17,19 +16,19 @@ export class HistoricoPedidoComponent implements OnInit {
   public pedidosList: any
   public invoiceStatusClosed = [InvoiceStatus.Rejected, InvoiceStatus.Closed]
   public statusList = [
-    {status: InvoiceStatus.Created, name: 'Criado', value: 20, color: 'orange'}, 
-    {status: InvoiceStatus.Accepted, name: 'Aceito', value: 40, color: 'blue'}, 
+    {status: InvoiceStatus.Created, name: 'Criado', value: 20, color: 'orange'},
+    {status: InvoiceStatus.Accepted, name: 'Aceito', value: 40, color: 'blue'},
     {status: InvoiceStatus.Rejected, name: 'Rejeitado', value: 0, color: 'red'},
-    {status: InvoiceStatus.PaymentPending, name: 'Pagamento Pendente', value: 50, color: 'orange'}, 
+    {status: InvoiceStatus.PaymentPending, name: 'Pagamento Pendente', value: 50, color: 'orange'},
     {status: InvoiceStatus.Payed, name: 'Pago', value: 60, color: 'blue'},
-    {status: InvoiceStatus.Shipped, name: 'Enviado', value: 80, color: 'green'}, 
+    {status: InvoiceStatus.Shipped, name: 'Enviado', value: 80, color: 'green'},
     {status: InvoiceStatus.Delivered, name: 'Entregue', value: 100, color: 'green'},
     {status: InvoiceStatus.Closed, name: 'Fechado', value: 0, color: 'gray'}
   ]
 
   constructor(
-    @Inject('BASE_URL') public url: string, 
-    public clienteService: ClienteService, 
+    @Inject('BASE_URL') public url: string,
+    public clienteService: ClienteService,
     private dialog: MatDialog
   ) { }
 
@@ -54,7 +53,7 @@ export class HistoricoPedidoComponent implements OnInit {
         }
       });
     });
-      
+
   }
 
   public cart(id: string) {
