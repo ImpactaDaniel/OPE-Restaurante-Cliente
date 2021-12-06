@@ -1,6 +1,6 @@
-import { ThrowStmt } from '@angular/compiler';
 import { AfterContentChecked, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { InvoiceHubServiceService } from './services/invoice-hub-service/invoice-hub-service.service';
 import { TokenService } from './services/token.service';
@@ -14,7 +14,7 @@ export class AppComponent implements AfterContentChecked, OnInit {
   title = 'app';
   showMenu: Boolean;
 
-  constructor(private router: Router, private tokenService: TokenService, private invoiceHubService: InvoiceHubServiceService) {}
+  constructor(private router: Router, private tokenService: TokenService, private invoiceHubService: InvoiceHubServiceService, private snackBar: MatSnackBar) {}
 
   async ngAfterContentChecked(){
     this.showMenu = await this.showMenuEvent()
@@ -28,12 +28,24 @@ export class AppComponent implements AfterContentChecked, OnInit {
   }
 
   private subscribeEvent(){
-    console.log('here');
     if(this.tokenService.isAuthenticated()){
       this.invoiceHubService.init();
+      this.subscribeEventNotification();
       return;
     }
     this.invoiceHubService.stopConnection();
+  }
+
+  private subscribeEventNotification() {
+    this.invoiceHubService.emmiter.subscribe(({id, status}) => {
+      this.snackBar.open(`Pedido ${id} atualizado status: ${status}!`, 'verificar', {
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+        duration: 5000
+      }).onAction().subscribe(res => {
+        console.log(res);
+      });
+    })
   }
 
   async showMenuEvent(): Promise<boolean> {
