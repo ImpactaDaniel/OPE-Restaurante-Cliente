@@ -9,7 +9,7 @@ import { LoginClienteComponent } from './login-cliente/login-cliente';
 const routes: Routes = [
   {
     path: 'create',
-    component: CreateClienteComponent, canActivate: [ClienteGuard]
+    component: CreateClienteComponent
   },
   //{
   //  path: 'edit',

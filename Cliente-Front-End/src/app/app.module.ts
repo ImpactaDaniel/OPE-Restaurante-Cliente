@@ -1,3 +1,5 @@
+import { CanActivate } from '@angular/router';
+import { ClienteGuard } from './pages/cliente/cliente.guard';
 import { GlobalErrorHandler } from './middlewares/GlobalErrorHandler';
 import { Error404Component } from './components/errors/error404/error404.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -30,14 +32,17 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
       {
         path: 'cliente/pedido',
         loadChildren: () => import('./pages/cliente/pedido/pedido.module').then(m => m.PedidoModule),
+        canActivate: [ClienteGuard]
       },
       {
         path: 'restaurante',
-        loadChildren: () => import('./pages/restaurante/restaurante.module').then(m => m.RestauranteModule)
+        loadChildren: () => import('./pages/restaurante/restaurante.module').then(m => m.RestauranteModule),
+        canActivate: [ClienteGuard]
       },
       {
         path: '**',
-        component: Error404Component
+        component: Error404Component,
+        canActivate: [ClienteGuard]
       }
     ]),
     HttpClientModule,

@@ -42,11 +42,11 @@ export class MenuRestauranteComponent implements OnInit {
     // }
     this.restauranteService.getAllProducts().subscribe(res => {
       console.log(res[3])
-      this.dessertsProducts.data = res[0].products;
-      this.sideDishesProducts.data = res[1].products;
-      this.mainDishesProducts.data = res[2].products;
-      this.beveragesProducts.data = res[3].products;
-      
+      this.dessertsProducts.data = res[0]?.products;
+      this.sideDishesProducts.data = res[1]?.products;
+      this.mainDishesProducts.data = res[2]?.products;
+      this.beveragesProducts.data = res[3]?.products;
+
       // this.listSize = res.response.result.size;
     })
   }
