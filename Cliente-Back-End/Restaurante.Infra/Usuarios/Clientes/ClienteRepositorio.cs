@@ -24,9 +24,26 @@ namespace Restaurante.Infra.Usuarios.Clientes
             _restauranteService = restauranteService;
         }
 
-        public Task<RespostaConsulta<Cliente>> Buscar(int id, CancellationToken cancellationToken = default)
+        public async Task<RespostaConsulta<Cliente>> Buscar(int id, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var response = await _restauranteService.GetCustomerByIdAsync(id, cancellationToken);
+
+                if (!response.Success)
+                    return new RespostaConsulta<Cliente>(new Cliente());
+
+                var addresses = GetAddresses(response.Result.Addresses);
+
+                return new RespostaConsulta<Cliente>(new Cliente(response.Result.Id, response.Result.Name, response.Result.Email, response.Result.Password, new Telefone(response.Result.Phone.Ddd, response.Result.Phone.PhoneNumber))
+                {
+                    Enderecos = addresses.ToList()
+                });
+            }
+            catch (Exception)
+            {
+                return new RespostaConsulta<Cliente>(new Cliente());
+            }
         }
 
         public RespostaConsulta<Cliente> Buscar(Func<Cliente, bool> condicao)
