@@ -14,6 +14,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatButtonModule } from '@angular/material/button';
 import {MatStepperModule} from '@angular/material/stepper';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatRadioModule} from '@angular/material/radio';
 
 
 const routes: Routes = [
@@ -39,6 +40,7 @@ const routes: Routes = [
     MatButtonModule,
     MatStepperModule,
     MatFormFieldModule,
+    MatRadioModule,
     RouterModule.forChild(routes)
   ]
 })
