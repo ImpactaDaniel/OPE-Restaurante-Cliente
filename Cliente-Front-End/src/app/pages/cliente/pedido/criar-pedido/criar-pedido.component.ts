@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { Router } from '@angular/router';
+import { ClienteService } from '../../services/cliente.service';
 
 @Component({
   selector: 'app-criar-pedido',
@@ -8,19 +10,28 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class CriarPedidoComponent implements OnInit {
 
-  isLinear = false;
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
+  public columnsToDisplay = ['name', 'accompaniments', 'price', 'quantity']
+  public products: any
 
-  constructor(private _formBuilder: FormBuilder) {}
+  constructor(private _formBuilder: FormBuilder, private router: Router, public clienteService: ClienteService) {}
 
   ngOnInit() {
-    this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: ['', Validators.required],
-    });
-    this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required],
-    });
+    this.getCartProducts();
+  }
+
+  private getCartProducts() {
+    this.clienteService.getCartProducts().subscribe(res => {
+      this.products = res.items;
+      console.log(res)
+    })
+  }
+
+  public createInvoice() {
+
+  }
+
+  public toCart(): void {
+    this.router.navigate(['cliente/pedido/carrinho'])
   }
 
 }

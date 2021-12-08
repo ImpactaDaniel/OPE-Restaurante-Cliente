@@ -27,4 +27,8 @@ export class ClienteService {
   public addInvoiceToCart(cart: any): Observable<APIResponse<boolean>> {
     return this.httpClient.post<any>(this.url + 'Baskets/AddBasketItem', cart)
   }
+
+  public getCartProducts() {
+    return this.httpClient.get<any>(this.url + 'Baskets/GetActiveBasket')
+  }
 }
