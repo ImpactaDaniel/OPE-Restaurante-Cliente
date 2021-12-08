@@ -1,3 +1,5 @@
+import { AlertService } from './../../../services/alert.service';
+import { BasketService } from './../../cliente/basket/services/basket.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { ClienteService } from '../../cliente/services/cliente.service';
@@ -33,7 +35,7 @@ export class MenuRestauranteComponent implements OnInit {
   public beverageQuantity: number = 0;
   public dessertsQuantity: number = 0;
 
-  constructor(@Inject('BASE_URL') public url: string, private restauranteService: RestauranteService, private clienteService: ClienteService) { }
+  constructor(@Inject('BASE_URL') public url: string, private restauranteService: RestauranteService, private clienteService: ClienteService, private cartService: BasketService, private alertService: AlertService) { }
 
   ngOnInit(): void {
     this.getProductList();
@@ -41,7 +43,6 @@ export class MenuRestauranteComponent implements OnInit {
 
   private getProductList() {
     this.restauranteService.getAllProducts().subscribe(res => {
-      console.log(res[3])
       this.dessertsProducts.data = res[0]?.products;
       this.sideDishesProducts.data = res[1]?.products;
       this.mainDishesProducts.data = res[2]?.products;
@@ -57,7 +58,7 @@ export class MenuRestauranteComponent implements OnInit {
     this.getProductList();
   }
 
-  public search(event: any){
+  public search(event: any) {
     this.getProductList();
   }
 
@@ -91,13 +92,14 @@ export class MenuRestauranteComponent implements OnInit {
     }
   }
 
-  public async cart(product: any){
-    console.log(product)
-    let retorno = await this.clienteService
-      .addInvoiceToCart({"obs": "", "productId": product.id ,"quantity": product.quantity})
-      .toPromise();
+  public cart(product: any) {
+    this.cartService
+      .addBasketItem(product?.id, product?.quantity, (retorno) => {
 
-      console.log(retorno)
+        let textDecoder = new TextDecoder();
+
+        this.alertService.showSuccess("Adicionado", textDecoder.decode(retorno));
+      })
   }
-  
+
 }

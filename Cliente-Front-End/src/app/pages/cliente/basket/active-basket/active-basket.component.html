@@ -1,9 +1,15 @@
 <mat-card class="main-card">
   <mat-card-header class="justify-content-center">
-    <mat-card-title><span>Carrinho</span></mat-card-title>
+    <mat-card-title>
+      <span>Carrinho</span>
+      <button (click)="toInvoice()" class="btn btn-primary ml-5">Finalizar Pedido</button>
+    </mat-card-title>
   </mat-card-header>
   <mat-card-content class="">
     <div class="row p-5 justify-content-center">
+      <div *ngIf="!basketItems">
+        <span>Não há nada para mostrar aqui!</span>
+      </div>
       <div class="col-md-4 mb-4" *ngFor="let item of basketItems">
         <mat-card class="mx-auto h-100 border">
           <mat-card-header>
@@ -15,6 +21,14 @@
             {{ item?.product?.accompaniments }}
           </mat-card-content>
           <mat-card-footer class="p-2">
+            <div class="row pb-4">
+              <div class="col-6">
+                <span>Preço: R${{ item?.product?.price}}</span>
+              </div>
+              <div class="col-6">
+                <span>Total: R${{ item?.product?.price * item?.quantity }}</span>
+              </div>
+            </div>
             <div class="row">
               <div class="col-4">
                 <input (change)="updateQuantity(item, $event.target.value)" type="number" class="w-100 form-control" [value]="item?.quantity">

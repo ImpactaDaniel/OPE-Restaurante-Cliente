@@ -1,3 +1,4 @@
+import { BasketService } from './../../basket/services/basket.service';
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
@@ -12,13 +13,13 @@ import { ClienteService } from '../../services/cliente.service';
 })
 export class CriarPedidoComponent implements OnInit {
 
-  public columnsToDisplay = ['name', 'accompaniments', 'price', 'quantity']
+  public columnsToDisplay = ['name', 'accompaniments', 'price', 'quantity', 'total']
   public products: any
   form: FormGroup;
   public creditCard: any[] = [];
   public customerData: any;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, public clienteService: ClienteService) {}
+  constructor(private formBuilder: FormBuilder, private router: Router, public clienteService: ClienteService, private cartService: BasketService) {}
 
   ngOnInit() {
     this.getCartProducts();
@@ -45,9 +46,8 @@ export class CriarPedidoComponent implements OnInit {
   }
 
   private getCartProducts() {
-    this.clienteService.getCartProducts().subscribe(res => {
+    this.cartService.getBasketByCustomer().subscribe(res => {
       this.products = res?.items;
-      console.log(res)
     })
   }
 
@@ -56,7 +56,7 @@ export class CriarPedidoComponent implements OnInit {
   }
 
   public toCart(): void {
-    this.router.navigate(['cliente/pedido/carrinho'])
+    this.router.navigate(['cliente/cart'])
   }
 
 }
