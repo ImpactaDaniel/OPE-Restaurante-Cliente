@@ -1,3 +1,4 @@
+import { NgxMaskModule } from 'ngx-mask';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -12,9 +13,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { CommonModule } from '@angular/common';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatButtonModule } from '@angular/material/button';
-import {MatStepperModule} from '@angular/material/stepper';
+import { MatStepperModule } from '@angular/material/stepper';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatRadioModule} from '@angular/material/radio';
+import { MatRadioModule } from '@angular/material/radio';
 
 
 const routes: Routes = [
@@ -40,6 +41,7 @@ const routes: Routes = [
     MatProgressBarModule,
     MatButtonModule,
     MatStepperModule,
+    NgxMaskModule.forRoot(),
     MatFormFieldModule,
     MatRadioModule,
     RouterModule.forChild(routes)

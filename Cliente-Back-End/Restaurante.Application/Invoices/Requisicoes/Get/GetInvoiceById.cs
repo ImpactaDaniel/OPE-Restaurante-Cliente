@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Restaurante.Clientes.Domain.Invoices.Interfaces;
 using Restaurante.Domain.Pedidos.Models;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 

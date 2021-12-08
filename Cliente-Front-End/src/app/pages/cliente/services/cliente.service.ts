@@ -27,4 +27,8 @@ export class ClienteService {
   public getInvoiceById(id: string): any {
     return this.httpClient.get<any>(this.url + 'Invoice/InvoiceById/' + id)
   }
+
+  public createInvoice(createInvoiceRequest: any) {
+    return this.httpClient.post<any>(this.url + "Invoice/CreateInvoice", createInvoiceRequest);
+  }
 }

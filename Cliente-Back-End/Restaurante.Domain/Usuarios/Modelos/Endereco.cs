@@ -18,7 +18,8 @@ namespace Restaurante.Domain.Usuarios.Modelos
         {
         }
 
-        public Endereco(string cep, string logradouro, string bairro, string numero, string complemento)
+        public Endereco(int id, string cep, string logradouro, string bairro, string numero, string complemento)
+            : base(id)
         {
             Validar(cep, logradouro, bairro, numero);
             CEP = cep;
