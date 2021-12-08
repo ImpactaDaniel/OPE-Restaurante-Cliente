@@ -40,6 +40,12 @@
               <th mat-header-cell class="text-center" *matHeaderCellDef> Carrinho de Compras </th>
               <td mat-cell class="text-center" *matCellDef="let mainDish"><a (click)="cart(mainDish?.id)" href="javascript:void(0);"><mat-icon>shopping_cart</mat-icon></a><td>
             </ng-container>
+            <ng-container matColumnDef="quantity">
+              <th mat-header-cell class="text-center" *matHeaderCellDef></th>
+              <td mat-cell class="text-center" *matCellDef="let mainDish">
+                <input matInput [(ngModel)]="mainDishQuantity" name="mainDishQuantity" type="number">
+              <td>
+            </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="columnsToDisplayMainDishes"></tr>
             <tr class="hover" mat-row *matRowDef="let row; columns: columnsToDisplayMainDishes;"
@@ -80,6 +86,12 @@
             <ng-container matColumnDef="cart">
               <th mat-header-cell class="text-center" *matHeaderCellDef> Carrinho de Compras </th>
               <td mat-cell class="text-center" *matCellDef="let sideDish"><a (click)="cart(sideDish?.id)" href="javascript:void(0);"><mat-icon>shopping_cart</mat-icon></a><td>
+            </ng-container>
+            <ng-container matColumnDef="quantity">
+              <th mat-header-cell class="text-center" *matHeaderCellDef></th>
+              <td mat-cell class="text-center" *matCellDef="let sideDish">
+                <input matInput [(ngModel)]="sideDishQuantity" name="sideDishQuantity" type="text">
+              <td>
             </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="columnsToDisplaySideDishes"></tr>
@@ -123,6 +135,12 @@
                   <th mat-header-cell class="text-center" *matHeaderCellDef> Carrinho de Compras </th>
                   <td mat-cell class="text-center" *matCellDef="let beverage"><a (click)="cart(beverage?.id)" href="javascript:void(0);"><mat-icon>shopping_cart</mat-icon></a><td>
                 </ng-container>
+                <ng-container matColumnDef="quantity">
+                  <th mat-header-cell class="text-center" *matHeaderCellDef></th>
+                  <td mat-cell class="text-center" *matCellDef="let beverage">
+                    <input matInput [(ngModel)]="beverageQuantity" name="beverageQuantity" type="text">
+                  <td>
+                </ng-container>
 
               <tr mat-header-row *matHeaderRowDef="columnsToDisplayBeverages"></tr>
               <tr class="hover" mat-row *matRowDef="let row; columns: columnsToDisplayBeverages;">
@@ -164,6 +182,12 @@
                 <ng-container matColumnDef="cart">
                   <th mat-header-cell class="text-center" *matHeaderCellDef> Carrinho de Compras </th>
                   <td mat-cell class="text-center" *matCellDef="let dessert"><a (click)="cart(dessert?.id)" href="javascript:void(0);"><mat-icon>shopping_cart</mat-icon></a><td>
+                </ng-container>
+                <ng-container matColumnDef="quantity">
+                  <th mat-header-cell class="text-center" *matHeaderCellDef></th>
+                  <td mat-cell class="text-center" *matCellDef="let dessert">
+                    <input matInput [(ngModel)]="dessertsQuantity" name="dessertsQuantity" type="text">
+                  <td>
                 </ng-container>
 
               <tr mat-header-row *matHeaderRowDef="columnsToDisplayDesserts"></tr>

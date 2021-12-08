@@ -16,7 +16,7 @@ export class MenuRestauranteComponent implements OnInit {
   // public searchField = "employeeName";
   // public searchValue: string;
 
-  public columnsToDisplayMainDishes = ['photo', 'name', 'accompaniments', 'price', 'details', 'cart']
+  public columnsToDisplayMainDishes = ['photo', 'name', 'accompaniments', 'price', 'details', 'cart', 'quantity']
   public columnsToDisplaySideDishes = ['photo', 'name', 'accompaniments', 'price', 'details', 'cart']
   public columnsToDisplayBeverages = ['photo', 'name', 'accompaniments', 'price', 'details', 'cart']
   public columnsToDisplayDesserts = ['photo', 'name', 'accompaniments', 'price', 'details', 'cart']
@@ -27,6 +27,11 @@ export class MenuRestauranteComponent implements OnInit {
   public beveragesProducts = new MatTableDataSource<any>();
   public dessertsProducts = new MatTableDataSource<any>();
 
+  public mainDishQuantity: number = 0;
+  public sideDishQuantity: number = 0;
+  public beverageQuantity: number = 0;
+  public dessertsQuantity: number = 0;
+
   constructor(@Inject('BASE_URL') public url: string, private restauranteService: RestauranteService) { }
 
   ngOnInit(): void {
@@ -34,20 +39,12 @@ export class MenuRestauranteComponent implements OnInit {
   }
 
   private getProductList() {
-
-    // if (this.isSearching) {
-    //     //
-    //   });
-    //   return;
-    // }
     this.restauranteService.getAllProducts().subscribe(res => {
       console.log(res[3])
       this.dessertsProducts.data = res[0].products;
       this.sideDishesProducts.data = res[1].products;
       this.mainDishesProducts.data = res[2].products;
       this.beveragesProducts.data = res[3].products;
-      
-      // this.listSize = res.response.result.size;
     })
   }
 
@@ -58,11 +55,6 @@ export class MenuRestauranteComponent implements OnInit {
   }
 
   public search(event: any){
-    // this.searchValue = !isNaN(event.value) ? event.value : event.target.value;
-
-    // this.isSearching = true;
-    // this.page = 0;
-    // this.limit = 5;
     this.getProductList();
   }
 
@@ -88,4 +80,37 @@ export class MenuRestauranteComponent implements OnInit {
     this.getProductList();
   }
 
+  public minus(name: string) {
+
+    if (name === 'mainDishes') {
+      if (this.mainDishQuantity >= 1) {
+        this.mainDishQuantity -= 1
+        console.log(this.mainDishQuantity)
+      }
+
+    } else if (name === 'sideDishes') {
+      if (this.sideDishQuantity >= 1) {
+        this.sideDishQuantity -= 1
+        console.log(this.sideDishQuantity)
+      }
+      
+    } else if (name === 'beverages') {
+      if (this.beverageQuantity >= 1) {
+        this.beverageQuantity -= 1
+        console.log(this.beverageQuantity)
+      }
+      
+    } else if (name === 'desserts') {
+      if (this.dessertsQuantity >= 1) {
+        this.dessertsQuantity -= 1
+        console.log(this.dessertsQuantity)
+      }
+      
+    }
+  }
+  public plus() {
+    this.mainDishQuantity += 1
+    console.log(this.mainDishQuantity)
+  }
+  
 }
