@@ -40,14 +40,24 @@ namespace Restaurante.Clientes.Infra.Baskets.Repositories
 
         public async Task<Domain.Baskets.Models.Basket> GetActiveBasket(int customerId, CancellationToken cancellationToken = default)
         {
-            var response = await _restauranteService.GetActiveBasketAsync(customerId, cancellationToken);
+            try
+            {
+                var response = await _restauranteService.GetActiveBasketAsync(customerId, cancellationToken);
 
-            if (!response.Success)
-                throw new Exception("Houve um erro ao tentar retornar a cesta!");
+                if (!response.Success)
+                    throw new Exception("Houve um erro ao tentar retornar a cesta!");
 
-            GetPhoto(response.Result.Items);
+                if (response.Result is null)
+                    return null;
 
-            return _mapper.Map<Domain.Baskets.Models.Basket>(response.Result);
+                GetPhoto(response.Result.Items);
+
+                return _mapper.Map<Domain.Baskets.Models.Basket>(response.Result);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         private void GetPhoto(IEnumerable<Integrations.BasketItem> basketItems)

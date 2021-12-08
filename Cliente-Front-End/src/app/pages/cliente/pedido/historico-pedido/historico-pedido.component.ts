@@ -3,6 +3,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PedidoDialogComponent } from 'src/app/components/dialogs/pedido-dialog/pedido-dialog.component';
 import { InvoiceStatus } from 'src/app/models/common/invoiceStatus';
+import { InvoiceHubServiceService } from 'src/app/services/invoice-hub-service/invoice-hub-service.service';
 import { ClienteService } from '../../services/cliente.service';
 
 @Component({
@@ -29,17 +30,22 @@ export class HistoricoPedidoComponent implements OnInit {
   constructor(
     @Inject('BASE_URL') public url: string,
     public clienteService: ClienteService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private invoiceHubService: InvoiceHubServiceService
   ) { }
 
   ngOnInit(): void {
     this.getAllInvoices();
+    this.invoiceHubService.emmiter.subscribe({
+      next: () => {
+        this.getAllInvoices();
+      }
+    })
   }
 
   private getAllInvoices() {
-
     this.clienteService.getInvoicesByCustomer().subscribe(res => {
-      this.pedidosList = res
+      this.pedidosList = res;
     })
   }
 

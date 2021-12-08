@@ -1,4 +1,4 @@
-import { EventEmitter, Inject, Injectable, Output } from '@angular/core';
+import { EventEmitter, Inject, Injectable } from '@angular/core';
 import { TokenService } from '../token.service';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 
@@ -8,7 +8,7 @@ import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 export class InvoiceHubServiceService {
 
   private hubConnection: HubConnection;
-  @Output() public emmiter = new EventEmitter();
+  public emmiter = new EventEmitter<any>();
 
   constructor(private tokenService: TokenService, @Inject("BASE_URL") private url: string) { }
 

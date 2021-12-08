@@ -1,5 +1,5 @@
 import { AfterContentChecked, Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { InvoiceHubServiceService } from './services/invoice-hub-service/invoice-hub-service.service';
@@ -37,19 +37,25 @@ export class AppComponent implements AfterContentChecked, OnInit {
   }
 
   private subscribeEventNotification() {
-    this.invoiceHubService.emmiter.subscribe(({id, status}) => {
-      this.snackBar.open(`Pedido ${id} atualizado status: ${status}!`, 'verificar', {
-        horizontalPosition: 'right',
-        verticalPosition: 'top',
-        duration: 5000
-      }).onAction().subscribe(res => {
-        console.log(res);
-      });
+    this.invoiceHubService.emmiter.subscribe((res: any) => {
+      this.showSnackbar(res.id)
+    })
+  }
+
+  private showSnackbar(id: any){
+    let config = new MatSnackBarConfig();
+    config.verticalPosition = 'bottom';
+    config.horizontalPosition = 'center';
+    this.snackBar.dismiss();
+    let ref = this.snackBar.open(`Pedido ${id} atualizado!`, 'verificar', config);
+
+    ref.onAction().subscribe(() => {
+      this.snackBar.dismiss();
     })
   }
 
   async showMenuEvent(): Promise<boolean> {
-    return new Promise((s, f) => {
+    return new Promise((s, _) => {
       this.router.events.pipe(filter(ev => ev instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
         s(event.url.indexOf('login') < 0);
       });
