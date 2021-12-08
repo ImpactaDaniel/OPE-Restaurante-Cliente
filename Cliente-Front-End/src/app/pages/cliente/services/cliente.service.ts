@@ -16,6 +16,10 @@ export class ClienteService {
     return this.httpClient.post<APIResponse<boolean>>(this.url + 'Cliente/CreateCustomer', cliente)
   }
 
+  public getCurrentCustomer() {
+    return this.httpClient.get<APIResponse<any>>(this.url + 'Cliente/GetCurrentCustomer')
+  }
+
   public getInvoicesByCustomer() {
     return this.httpClient.get<APIResponse<any>>(this.url + 'Invoice/InvoicesHistory')
   }
