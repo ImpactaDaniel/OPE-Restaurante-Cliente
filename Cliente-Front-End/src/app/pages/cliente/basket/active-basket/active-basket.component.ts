@@ -8,11 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ActiveBasketComponent implements OnInit {
 
+  public basketItems: any;
+
   constructor(private basketService: BasketService) { }
 
   ngOnInit() {
     this.basketService.getInvoicesByCustomer().subscribe(res => {
-      console.log(res);
+      this.basketItems = res.items;
+      console.log(this.basketItems)
     })
   }
 

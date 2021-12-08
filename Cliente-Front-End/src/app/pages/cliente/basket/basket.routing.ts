@@ -4,7 +4,7 @@ import { ActiveBasketComponent } from './active-basket/active-basket.component';
 const routes: Routes = [
   {
     path: '',
-    component: ActiveBasketComponent
+    loadChildren: () => import('./active-basket/active-basket.module').then(m => m.ActiveBasketModule)
   },
 ];
 
