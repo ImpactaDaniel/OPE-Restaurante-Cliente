@@ -40,6 +40,11 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
         canActivate: [ClienteGuard]
       },
       {
+        path: 'cliente/cart',
+        loadChildren: () => import('./pages/cliente/basket/basket.module').then(m => m.BasketModule),
+        canActivate: [ClienteGuard]
+      },
+      {
         path: '**',
         component: Error404Component,
         canActivate: [ClienteGuard]
