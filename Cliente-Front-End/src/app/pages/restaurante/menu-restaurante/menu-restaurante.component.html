@@ -38,12 +38,14 @@
             </ng-container>
             <ng-container matColumnDef="cart">
               <th mat-header-cell class="text-center" *matHeaderCellDef> Carrinho de Compras </th>
-              <td mat-cell class="text-center" *matCellDef="let mainDish"><a (click)="cart(mainDish?.id)" href="javascript:void(0);"><mat-icon>shopping_cart</mat-icon></a><td>
+              <td mat-cell class="text-center" *matCellDef="let mainDish"><a (click)="cart(mainDish)" href="javascript:void(0);"><mat-icon>shopping_cart</mat-icon></a><td>
             </ng-container>
             <ng-container matColumnDef="quantity">
               <th mat-header-cell class="text-center" *matHeaderCellDef></th>
               <td mat-cell class="text-center" *matCellDef="let mainDish">
-                <input matInput [(ngModel)]="mainDishQuantity" name="mainDishQuantity" type="number">
+                <mat-form-field >
+                  <input matInput [value]="mainDish?.quantity ? mainDish?.quantity: 0" (change)="qtdEvent(mainDish, $event.target.value)" type="number">
+                </mat-form-field>
               <td>
             </ng-container>
 
@@ -90,7 +92,9 @@
             <ng-container matColumnDef="quantity">
               <th mat-header-cell class="text-center" *matHeaderCellDef></th>
               <td mat-cell class="text-center" *matCellDef="let sideDish">
-                <input matInput [(ngModel)]="sideDishQuantity" name="sideDishQuantity" type="text">
+                <mat-form-field >
+                  <input matInput [value]="sideDish?.quantity ? sideDish?.quantity: 0" (change)="qtdEvent(sideDish, $event.target.value)" type="number">
+                </mat-form-field>
               <td>
             </ng-container>
 
@@ -138,7 +142,9 @@
                 <ng-container matColumnDef="quantity">
                   <th mat-header-cell class="text-center" *matHeaderCellDef></th>
                   <td mat-cell class="text-center" *matCellDef="let beverage">
-                    <input matInput [(ngModel)]="beverageQuantity" name="beverageQuantity" type="text">
+                    <mat-form-field >
+                      <input matInput [value]="beverage?.quantity ? beverage?.quantity: 0" (change)="qtdEvent(beverage, $event.target.value)" type="number">
+                    </mat-form-field>
                   <td>
                 </ng-container>
 
@@ -186,7 +192,9 @@
                 <ng-container matColumnDef="quantity">
                   <th mat-header-cell class="text-center" *matHeaderCellDef></th>
                   <td mat-cell class="text-center" *matCellDef="let dessert">
-                    <input matInput [(ngModel)]="dessertsQuantity" name="dessertsQuantity" type="text">
+                    <mat-form-field >
+                      <input matInput [value]="dessert?.quantity ? dessert?.quantity: 0" (change)="qtdEvent(dessert, $event.target.value)" type="number">
+                    </mat-form-field>
                   <td>
                 </ng-container>
 

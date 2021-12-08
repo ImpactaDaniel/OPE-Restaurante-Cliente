@@ -1,8 +1,6 @@
-<button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
-    {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
-  </button>
-  <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
-    <!-- <mat-step [stepControl]="firstFormGroup">
+
+  <mat-vertical-stepper #stepper>
+    <mat-step [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup">
         <ng-template matStepLabel>Fill out your name</ng-template>
         <mat-form-field appearance="fill">
@@ -35,5 +33,5 @@
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button (click)="stepper.reset()">Reset</button>
       </div>
-    </mat-step> -->
-  </mat-stepper>
+    </mat-step>
+  </mat-vertical-stepper>

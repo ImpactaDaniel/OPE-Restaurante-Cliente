@@ -26,6 +26,11 @@ export class SideNavComponent implements OnInit {
   }
 
   public toInvoice(): void {
+    this.router.navigate(['cliente/pedido/criar'])
+    this.onSidenavClose()
+  }
+
+  public toInvoiceHistoric(): void {
     this.router.navigate(['cliente/pedido/historico'])
     this.onSidenavClose()
   }

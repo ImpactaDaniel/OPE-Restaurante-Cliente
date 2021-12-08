@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { ClienteService } from '../../cliente/services/cliente.service';
 import { RestauranteService } from '../services/restaurante.service';
 
 @Component({
@@ -17,9 +18,9 @@ export class MenuRestauranteComponent implements OnInit {
   // public searchValue: string;
 
   public columnsToDisplayMainDishes = ['photo', 'name', 'accompaniments', 'price', 'details', 'cart', 'quantity']
-  public columnsToDisplaySideDishes = ['photo', 'name', 'accompaniments', 'price', 'details', 'cart']
-  public columnsToDisplayBeverages = ['photo', 'name', 'accompaniments', 'price', 'details', 'cart']
-  public columnsToDisplayDesserts = ['photo', 'name', 'accompaniments', 'price', 'details', 'cart']
+  public columnsToDisplaySideDishes = ['photo', 'name', 'accompaniments', 'price', 'details', 'cart', 'quantity']
+  public columnsToDisplayBeverages = ['photo', 'name', 'accompaniments', 'price', 'details', 'cart', 'quantity']
+  public columnsToDisplayDesserts = ['photo', 'name', 'accompaniments', 'price', 'details', 'cart', 'quantity']
 
   public expandedElement: any;
   public mainDishesProducts = new MatTableDataSource<any>();
@@ -32,7 +33,7 @@ export class MenuRestauranteComponent implements OnInit {
   public beverageQuantity: number = 0;
   public dessertsQuantity: number = 0;
 
-  constructor(@Inject('BASE_URL') public url: string, private restauranteService: RestauranteService) { }
+  constructor(@Inject('BASE_URL') public url: string, private restauranteService: RestauranteService, private clienteService: ClienteService) { }
 
   ngOnInit(): void {
     this.getProductList();
@@ -82,37 +83,21 @@ export class MenuRestauranteComponent implements OnInit {
     this.getProductList();
   }
 
-  public minus(name: string) {
-
-    if (name === 'mainDishes') {
-      if (this.mainDishQuantity >= 1) {
-        this.mainDishQuantity -= 1
-        console.log(this.mainDishQuantity)
-      }
-
-    } else if (name === 'sideDishes') {
-      if (this.sideDishQuantity >= 1) {
-        this.sideDishQuantity -= 1
-        console.log(this.sideDishQuantity)
-      }
-      
-    } else if (name === 'beverages') {
-      if (this.beverageQuantity >= 1) {
-        this.beverageQuantity -= 1
-        console.log(this.beverageQuantity)
-      }
-      
-    } else if (name === 'desserts') {
-      if (this.dessertsQuantity >= 1) {
-        this.dessertsQuantity -= 1
-        console.log(this.dessertsQuantity)
-      }
-      
+  public qtdEvent(product: any, qtd: string) {
+    let quantity = parseInt(qtd)
+    product.quantity = 0
+    if (quantity) {
+      product.quantity = quantity
     }
   }
-  public plus() {
-    this.mainDishQuantity += 1
-    console.log(this.mainDishQuantity)
+
+  public async cart(product: any){
+    console.log(product)
+    let retorno = await this.clienteService
+      .addInvoiceToCart({"obs": "", "productId": product.id ,"quantity": product.quantity})
+      .toPromise();
+
+      console.log(retorno)
   }
   
 }

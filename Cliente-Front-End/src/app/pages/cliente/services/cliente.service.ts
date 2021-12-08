@@ -23,4 +23,8 @@ export class ClienteService {
   public getInvoiceById(id: string): any {
     return this.httpClient.get<any>(this.url + 'Invoice/InvoiceById/' + id)
   }
+
+  public addInvoiceToCart(cart: any): Observable<APIResponse<boolean>> {
+    return this.httpClient.post<any>(this.url + 'Baskets/AddBasketItem', cart)
+  }
 }
