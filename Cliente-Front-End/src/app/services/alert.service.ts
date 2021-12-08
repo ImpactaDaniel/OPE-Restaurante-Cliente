@@ -31,4 +31,18 @@ export class AlertService {
       didClose: callBack
     });
   }
+
+  public showQuestion(title?: string, message?: string, callBack?: () => any): void{
+    Swal.fire({
+      position: 'center',
+      icon: 'question',
+      title: title || 'Confirmar?',
+      text: message || 'Confirma?',
+      showConfirmButton: true,
+      showCancelButton: true
+    }).then(res => {
+      if(res.isConfirmed)
+        callBack();
+    });
+  }
 }

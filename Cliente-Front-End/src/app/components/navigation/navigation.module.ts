@@ -8,14 +8,12 @@ import { SideNavComponent } from './side-nav/side-nav.component';
 
 
 @NgModule({
-  declarations: [ SideNavComponent],
   imports: [
     CommonModule,
     BrowserAnimationsModule,
     MaterialModule
   ],
   exports: [
-    SideNavComponent,
     BrowserAnimationsModule,
     MaterialModule
   ]

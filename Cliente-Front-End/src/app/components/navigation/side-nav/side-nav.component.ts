@@ -31,7 +31,7 @@ export class SideNavComponent implements OnInit {
   }
 
   public toCart(): void {
-    // this.router.navigate(['cliente/pedido/carrinho'])
+    this.router.navigate(['cliente/cart'])
     this.onSidenavClose()
   }
 

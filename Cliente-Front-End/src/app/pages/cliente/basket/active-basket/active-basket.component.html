@@ -5,7 +5,7 @@
   <mat-card-content class="">
     <div class="row p-5 justify-content-center">
       <div class="col-md-4 mb-4" *ngFor="let item of basketItems">
-        <mat-card class="mx-auto border">
+        <mat-card class="mx-auto h-100 border">
           <mat-card-header>
             <mat-card-title>{{ item?.product?.name }}</mat-card-title>
             <mat-card-subtitle>{{ item?.product?.description }}</mat-card-subtitle>
@@ -17,13 +17,13 @@
           <mat-card-footer class="p-2">
             <div class="row">
               <div class="col-4">
-                <input type="number" class="w-100 form-control" [value]="item?.quantity">
+                <input (change)="updateQuantity(item, $event.target.value)" type="number" class="w-100 form-control" [value]="item?.quantity">
               </div>
               <div class="col-4">
-                <button class="btn btn-success">Atualizar</button>
+                <button (click)="updateBasketItem(item?.product, item?.quantity)" class="btn btn-success">Atualizar</button>
               </div>
               <div class="col-4">
-                <button class="btn btn-danger">Remover</button>
+                <button (click)="removeBasketItem(item?.product)" class="btn btn-danger">Remover</button>
               </div>
             </div>
           </mat-card-footer>
