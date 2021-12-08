@@ -35,6 +35,10 @@ export class HeaderComponent implements OnInit {
     this.sidenavToggle.emit();
   };
 
+  public toCart = () => {
+    this.router.navigate(["/cliente/cart"]);
+  }
+
   logOut() {
     this.authService.logout();
     this.router.navigate(["/cliente/login"]);
