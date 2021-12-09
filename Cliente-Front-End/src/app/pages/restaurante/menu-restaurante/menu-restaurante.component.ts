@@ -19,10 +19,10 @@ export class MenuRestauranteComponent implements OnInit {
   // public searchField = "employeeName";
   // public searchValue: string;
 
-  public columnsToDisplayMainDishes = ['photo', 'name', 'accompaniments', 'price', 'details', 'cart', 'quantity']
-  public columnsToDisplaySideDishes = ['photo', 'name', 'accompaniments', 'price', 'details', 'cart', 'quantity']
-  public columnsToDisplayBeverages = ['photo', 'name', 'accompaniments', 'price', 'details', 'cart', 'quantity']
-  public columnsToDisplayDesserts = ['photo', 'name', 'accompaniments', 'price', 'details', 'cart', 'quantity']
+  public columnsToDisplayMainDishes = ['photo', 'name', 'accompaniments', 'price','cart', 'quantity']
+  public columnsToDisplaySideDishes = ['photo', 'name', 'accompaniments', 'price', 'cart', 'quantity']
+  public columnsToDisplayBeverages = ['photo', 'name', 'accompaniments', 'price', 'cart', 'quantity']
+  public columnsToDisplayDesserts = ['photo', 'name', 'accompaniments', 'price', 'cart', 'quantity']
 
   public expandedElement: any;
   public mainDishesProducts = new MatTableDataSource<any>();

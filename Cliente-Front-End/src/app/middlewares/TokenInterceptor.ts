@@ -18,26 +18,12 @@ export class RequestInterceptor implements HttpInterceptor {
       newReq = this.addToken(req, tokenResponse.token);
     }
 
-    return next.handle(newReq)
-      .pipe(catchError(error => {
-        if (error instanceof HttpErrorResponse && (error.status === 401)) {
-          this.refreshToken(newReq, next).then(res => {
-            return res;
-          });
-        }
-        return throwError(error);
-      }));
+    return next.handle(newReq);
   }
 
   private async refreshToken(req: HttpRequest<any>, next: HttpHandler): Promise<any> {
     return new Promise(async (s, _) => {
       console.log('refresh')
-      // let refreshed = await this.tokenService.renewToken();
-      // if (refreshed) {
-      //   let tokenResponse = this.tokenService.getToken();
-      //   req = this.addToken(req, tokenResponse.token);
-      //   s(next.handle(req));
-      // }
       let tokenResponse = this.tokenService.getToken();
         req = this.addToken(req, tokenResponse.token);
         s(next.handle(req));

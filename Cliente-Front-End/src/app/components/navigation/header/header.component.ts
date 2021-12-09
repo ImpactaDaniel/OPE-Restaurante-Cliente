@@ -34,9 +34,10 @@ export class HeaderComponent implements OnInit {
   }
 
   private getCartItemsLength() {
-    this.cartService.getBasketByCustomer().subscribe(cart => {
-      this.cartItemsLength = cart?.items?.length ? cart.items.length : 0;
-    });
+    if(this.authService.isAuthenticated())
+      this.cartService.getBasketByCustomer().subscribe(cart => {
+        this.cartItemsLength = cart?.items?.length ? cart.items.length : 0;
+      });
   }
 
   private getUserName() {

@@ -7,7 +7,7 @@
   </mat-card-header>
   <mat-card-content class="">
     <div class="row p-5 justify-content-center">
-      <div *ngIf="!basketItems">
+      <div *ngIf="!basketItems || basketItems.length <= 0">
         <span>Não há nada para mostrar aqui!</span>
       </div>
       <div class="col-md-4 mb-4" *ngFor="let item of basketItems">

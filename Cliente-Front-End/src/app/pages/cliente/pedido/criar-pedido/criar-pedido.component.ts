@@ -1,9 +1,8 @@
+import { AlertService } from 'src/app/services/alert.service';
 import { BasketService } from './../../basket/services/basket.service';
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Listener } from 'selenium-webdriver';
-import { Cliente } from 'src/app/models/cliente/cliente';
 import { ClienteService } from '../../services/cliente.service';
 
 @Component({
@@ -21,7 +20,7 @@ export class CriarPedidoComponent implements OnInit {
   public customerData: any;
   public customerAddress: any;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, public clienteService: ClienteService, private cartService: BasketService) {}
+  constructor(private formBuilder: FormBuilder, private router: Router, public clienteService: ClienteService, private cartService: BasketService, private alertService: AlertService) { }
 
   ngOnInit() {
     this.getCurrentCart();
@@ -47,6 +46,11 @@ export class CriarPedidoComponent implements OnInit {
 
   private getCurrentCart() {
     this.cartService.getBasketByCustomer().subscribe(res => {
+      if (!res || res.items.length <= 0) {
+        this.alertService.showError('Ops', 'Não há nada no carrinho, adicione itens para continuar', () => {
+          this.router.navigate(['/restaurante/menu']);
+        })
+      }
       this.cart = res;
       this.products = res?.items;
     })
@@ -60,6 +64,8 @@ export class CriarPedidoComponent implements OnInit {
     }
     this.clienteService.createInvoice(createInvoiceRequest).subscribe(res => {
       this.cartService.basketUpdated.emit(true);
+      this.alertService.showSuccess('Criado', 'Pedido criado com sucesso!');
+
     })
   }
 
