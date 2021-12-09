@@ -105,7 +105,7 @@ namespace Restaurante.Infra.Usuarios.Clientes
         private static IEnumerable<Endereco> GetAddresses(IEnumerable<CustomerAddress> customerAddress)
         {
             foreach (var address in customerAddress)
-                yield return new Endereco(address.Cep, address.Street, address.District, address.Number, String.Empty);
+                yield return new Endereco(address.Id, address.Cep, address.Street, address.District, address.Number, String.Empty);
         }
 
         public async Task<RespostaConsulta<Cliente>> Salvar(Cliente entidade, CancellationToken cancellationToken = default)

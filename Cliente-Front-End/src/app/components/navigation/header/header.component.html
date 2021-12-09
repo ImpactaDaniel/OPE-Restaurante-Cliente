@@ -10,7 +10,7 @@
     </button>
   </span>
 
-  <button (click)="toCart()" mat-raised-button color="ligth" matBadge="8" matBadgePosition="before" matBadgeColor="accent">
+  <button (click)="toCart()" mat-raised-button color="light" [(matBadge)]="cartItemsLength" matBadgePosition="before" matBadgeColor="accent">
     <mat-icon>shopping_cart</mat-icon>
   </button>
 

@@ -32,6 +32,23 @@ export class AlertService {
     });
   }
 
+  public showInfo(title?: string, confirmText?: string, message?: string, callBack?: () => any): void {
+    Swal.fire({
+      icon: 'info',
+      title: title || 'info',
+      text: message || 'Information',
+      position: 'center',
+      allowEnterKey: true,
+      showDenyButton: true,
+      showConfirmButton: true,
+      confirmButtonText: confirmText,
+      denyButtonText: 'Fechar '
+    }).then(res => {
+      if(res.isConfirmed)
+        callBack();
+    })
+  }
+
   public showQuestion(title?: string, message?: string, callBack?: () => any): void{
     Swal.fire({
       position: 'center',

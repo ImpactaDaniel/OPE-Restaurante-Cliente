@@ -38,7 +38,15 @@
             </ng-container>
             <ng-container matColumnDef="cart">
               <th mat-header-cell class="text-center" *matHeaderCellDef> Carrinho de Compras </th>
-              <td mat-cell class="text-center" *matCellDef="let mainDish"><a (click)="cart(mainDish?.id)" href="javascript:void(0);"><mat-icon>shopping_cart</mat-icon></a><td>
+              <td mat-cell class="text-center" *matCellDef="let mainDish"><a (click)="cart(mainDish)" href="javascript:void(0);"><mat-icon>shopping_cart</mat-icon></a><td>
+            </ng-container>
+            <ng-container matColumnDef="quantity">
+              <th mat-header-cell class="text-center" *matHeaderCellDef></th>
+              <td mat-cell class="text-center" *matCellDef="let mainDish">
+                <mat-form-field >
+                  <input matInput [value]="mainDish?.quantity ? mainDish?.quantity: 0" (change)="qtdEvent(mainDish, $event.target.value)" type="number">
+                </mat-form-field>
+              <td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="columnsToDisplayMainDishes"></tr>
@@ -79,7 +87,15 @@
             </ng-container>
             <ng-container matColumnDef="cart">
               <th mat-header-cell class="text-center" *matHeaderCellDef> Carrinho de Compras </th>
-              <td mat-cell class="text-center" *matCellDef="let sideDish"><a (click)="cart(sideDish?.id)" href="javascript:void(0);"><mat-icon>shopping_cart</mat-icon></a><td>
+              <td mat-cell class="text-center" *matCellDef="let sideDish"><a (click)="cart(sideDish)" href="javascript:void(0);"><mat-icon>shopping_cart</mat-icon></a><td>
+            </ng-container>
+            <ng-container matColumnDef="quantity">
+              <th mat-header-cell class="text-center" *matHeaderCellDef></th>
+              <td mat-cell class="text-center" *matCellDef="let sideDish">
+                <mat-form-field >
+                  <input matInput [value]="sideDish?.quantity ? sideDish?.quantity: 0" (change)="qtdEvent(sideDish, $event.target.value)" type="number">
+                </mat-form-field>
+              <td>
             </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="columnsToDisplaySideDishes"></tr>
@@ -121,7 +137,15 @@
                 </ng-container>
                 <ng-container matColumnDef="cart">
                   <th mat-header-cell class="text-center" *matHeaderCellDef> Carrinho de Compras </th>
-                  <td mat-cell class="text-center" *matCellDef="let beverage"><a (click)="cart(beverage?.id)" href="javascript:void(0);"><mat-icon>shopping_cart</mat-icon></a><td>
+                  <td mat-cell class="text-center" *matCellDef="let beverage"><a (click)="cart(beverage)" href="javascript:void(0);"><mat-icon>shopping_cart</mat-icon></a><td>
+                </ng-container>
+                <ng-container matColumnDef="quantity">
+                  <th mat-header-cell class="text-center" *matHeaderCellDef></th>
+                  <td mat-cell class="text-center" *matCellDef="let beverage">
+                    <mat-form-field >
+                      <input matInput [value]="beverage?.quantity ? beverage?.quantity: 0" (change)="qtdEvent(beverage, $event.target.value)" type="number">
+                    </mat-form-field>
+                  <td>
                 </ng-container>
 
               <tr mat-header-row *matHeaderRowDef="columnsToDisplayBeverages"></tr>
@@ -163,7 +187,15 @@
                 </ng-container>
                 <ng-container matColumnDef="cart">
                   <th mat-header-cell class="text-center" *matHeaderCellDef> Carrinho de Compras </th>
-                  <td mat-cell class="text-center" *matCellDef="let dessert"><a (click)="cart(dessert?.id)" href="javascript:void(0);"><mat-icon>shopping_cart</mat-icon></a><td>
+                  <td mat-cell class="text-center" *matCellDef="let dessert"><a (click)="cart(dessert)" href="javascript:void(0);"><mat-icon>shopping_cart</mat-icon></a><td>
+                </ng-container>
+                <ng-container matColumnDef="quantity">
+                  <th mat-header-cell class="text-center" *matHeaderCellDef></th>
+                  <td mat-cell class="text-center" *matCellDef="let dessert">
+                    <mat-form-field >
+                      <input matInput [value]="dessert?.quantity ? dessert?.quantity: 0" (change)="qtdEvent(dessert, $event.target.value)" type="number">
+                    </mat-form-field>
+                  <td>
                 </ng-container>
 
               <tr mat-header-row *matHeaderRowDef="columnsToDisplayDesserts"></tr>

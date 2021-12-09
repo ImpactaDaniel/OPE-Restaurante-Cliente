@@ -6,6 +6,7 @@ namespace Restaurante.Clientes.Domain.Baskets.Models
 {
     public class Basket
     {
+        public int Id { get; set; }
         public Cliente Customer { get; set; }
         public ICollection<BasketItem> Items { get; set; } = new List<BasketItem>();
         public DateTimeOffset CreatedDate { get; set; }

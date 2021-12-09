@@ -19,6 +19,22 @@ namespace Restaurante.Clientes.Infra.Invoices.Repositories
             _mapper = mapper;
         }
 
+        public async Task<Restaurante.Domain.Pedidos.Models.Invoice> CreateInvoice(int basketId, int customerId, int customerAddress, Restaurante.Domain.Pedidos.Models.Enum.PaymentType paymentType, CancellationToken cancellationToken = default)
+        {
+            var response = await _restauranteService.Create4Async(new CreateInvoiceRequest
+            {
+                BasketId = basketId,
+                CustomerId = customerId,
+                CustomerAddress = customerAddress,
+                PaymentType = paymentType == Restaurante.Domain.Pedidos.Models.Enum.PaymentType.Debit ? PaymentType._0 : PaymentType._1,
+            }, cancellationToken);
+
+            if (!response.Success)
+                return null;
+
+            return _mapper.Map<Restaurante.Domain.Pedidos.Models.Invoice>(response.Result);
+        }
+
         public async Task<IEnumerable<Restaurante.Domain.Pedidos.Models.Invoice>> GetByCustomer(int customerId, CancellationToken cancellationToken = default)
         {
             var invoices = await _restauranteService

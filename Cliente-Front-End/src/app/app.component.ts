@@ -1,3 +1,4 @@
+import { AlertService } from './services/alert.service';
 import { AfterContentChecked, Component, OnInit } from '@angular/core';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { NavigationEnd, Router } from '@angular/router';
@@ -14,7 +15,7 @@ export class AppComponent implements AfterContentChecked, OnInit {
   title = 'app';
   showMenu: Boolean;
 
-  constructor(private router: Router, private tokenService: TokenService, private invoiceHubService: InvoiceHubServiceService, private snackBar: MatSnackBar) {}
+  constructor(private router: Router, private tokenService: TokenService, private invoiceHubService: InvoiceHubServiceService, private alertService: AlertService ) {}
 
   async ngAfterContentChecked(){
     this.showMenu = await this.showMenuEvent()
@@ -43,14 +44,8 @@ export class AppComponent implements AfterContentChecked, OnInit {
   }
 
   private showSnackbar(id: any){
-    let config = new MatSnackBarConfig();
-    config.verticalPosition = 'bottom';
-    config.horizontalPosition = 'center';
-    this.snackBar.dismiss();
-    let ref = this.snackBar.open(`Pedido ${id} atualizado!`, 'verificar', config);
-
-    ref.onAction().subscribe(() => {
-      this.snackBar.dismiss();
+    this.alertService.showInfo('Pedido Atualizado', 'Visualizar', `Pedido ${id} atualizado!`, () => {
+      this.router.navigate(['/cliente/pedido/historico']);
     })
   }
 

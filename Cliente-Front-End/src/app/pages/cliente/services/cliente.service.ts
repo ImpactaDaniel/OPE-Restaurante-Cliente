@@ -16,11 +16,19 @@ export class ClienteService {
     return this.httpClient.post<APIResponse<boolean>>(this.url + 'Cliente/CreateCustomer', cliente)
   }
 
+  public getCurrentCustomer() {
+    return this.httpClient.get<APIResponse<any>>(this.url + 'Cliente/GetCurrentCustomer')
+  }
+
   public getInvoicesByCustomer() {
     return this.httpClient.get<APIResponse<any>>(this.url + 'Invoice/InvoicesHistory')
   }
 
   public getInvoiceById(id: string): any {
     return this.httpClient.get<any>(this.url + 'Invoice/InvoiceById/' + id)
+  }
+
+  public createInvoice(createInvoiceRequest: any) {
+    return this.httpClient.post<any>(this.url + "Invoice/CreateInvoice", createInvoiceRequest);
   }
 }

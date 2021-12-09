@@ -16,6 +16,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PedidoDialogModule } from './components/dialogs/pedido-dialog/pedido-dialog.module';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatStepperModule } from '@angular/material/stepper';
 
 
 @NgModule({
@@ -58,6 +59,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatDialogModule,
     MatSnackBarModule,
     PedidoDialogModule,
+    MatStepperModule
   ],
   providers: [
     {

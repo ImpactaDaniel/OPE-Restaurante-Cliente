@@ -1,0 +1,127 @@
+<div class="col-md-12">
+  <div class="row justify-content-center">
+    <div class="col-8">
+      <mat-horizontal-stepper #stepper>
+        <mat-step>
+          <ng-template matStepLabel>Produtos</ng-template>
+          <br>
+          <mat-card-content>
+            <mat-expansion-panel hideToggle expanded="true">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <h5>Confira seu Carrinho</h5>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <table mat-table [dataSource]="products" multiTemplateDataRows class="col-md-12 mat-elevation-z8 my-3">
+
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef> Sobremesa </th>
+                  <td mat-cell *matCellDef="let item"> {{ item?.product?.name }} </td>
+                </ng-container>
+                <ng-container matColumnDef="accompaniments">
+                  <th mat-header-cell *matHeaderCellDef> Acompanhamentos </th>
+                  <td mat-cell *matCellDef="let item"> {{ item?.product?.accompaniments }} </td>
+                </ng-container>
+                <ng-container matColumnDef="price">
+                  <th mat-header-cell *matHeaderCellDef> Preço </th>
+                  <td mat-cell *matCellDef="let item"> R${{ item?.product?.price }} </td>
+                </ng-container>
+                <ng-container matColumnDef="quantity">
+                  <th mat-header-cell class="text-center" *matHeaderCellDef>Qtd</th>
+                  <td mat-cell class="text-center" *matCellDef="let item">{{ item?.quantity }}
+                  <td>
+                </ng-container>
+
+                <ng-container matColumnDef="total">
+                  <th mat-header-cell class="text-center" *matHeaderCellDef>Total</th>
+                  <td mat-cell class="text-center" *matCellDef="let item">R${{ item?.product?.price * item?.quantity }}
+                  <td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+                <tr class="hover" mat-row *matRowDef="let row; columns: columnsToDisplay;">
+                </tr>
+              </table>
+            </mat-expansion-panel>
+          </mat-card-content>
+          <br>
+          <div>
+            <button mat-stroked-button color="primary" (click)="toCart()">Editar Produtos</button>
+          </div>
+          <br>
+          <div>
+            <button mat-raised-button color="primary" matStepperNext>Avançar</button>
+          </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Endereço</ng-template>
+          <br>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label class="mr-1">Endereço:</label>
+              <span class="mr-1">{{ customerData?.logradouro }}, {{ customerData?.numero }} - </span>
+              <span>{{ customerData?.bairro }}</span>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label class="mr-1">CEP:</label>
+              <span class="mr-1">{{ customerData?.cep}} - </span>
+              <span>{{ customerData?.cidade }} - </span>
+              <span>{{ customerData?.estado }}</span>
+            </div>
+          </div>
+          <br>
+          <div>
+            <button mat-stroked-button color="primary" matStepperPrevious>Voltar</button>
+            <button mat-raised-button color="primary" matStepperNext>Avançar</button>
+          </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Pagamento</ng-template>
+          <BR>
+          <form [formGroup]="form" (ngSubmit)="createCreditCard()">
+
+            <mat-radio-group formControlName="tipoPagamento" aria-label="Selecione uma opção de pagamento">
+              <mat-radio-button value="0">Débito</mat-radio-button>
+              <mat-radio-button value="1">Crédito</mat-radio-button>
+            </mat-radio-group>
+            <div class="row">
+              <div class="col-sm-12">
+                <mat-form-field>
+                  <mat-label>Número do cartão</mat-label>
+                  <input tabindex="1" type="text" matInput formControlName="numero" name="numero">
+                  <mat-error>Número é obrigatório</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <mat-form-field>
+                  <mat-label>Validade</mat-label>
+                  <input tabindex="1" mask="00/00" type="text" matInput formControlName="validade" name="validade">
+                  <mat-error>Validade é obrigatório</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-6">
+                <mat-form-field>
+                  <mat-label>Código de Segurança</mat-label>
+                  <input tabindex="1" mask="000" type="text" matInput formControlName="codigo" name="codigo">
+                  <mat-error>Código de Segurança é obrigatório</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </form>
+          <div>
+            <button mat-stroked-button color="primary" matStepperPrevious>Voltar</button>
+            <button mat-stroked-button color="primary" (click)="stepper.reset()">Voltar aos Pratos</button>
+          </div>
+          <br>
+          <div>
+            <button mat-raised-button color="primary" (click)="createInvoice()">Confirmar Pedido</button>
+          </div>
+        </mat-step>
+      </mat-horizontal-stepper>
+    </div>
+  </div>
+</div>

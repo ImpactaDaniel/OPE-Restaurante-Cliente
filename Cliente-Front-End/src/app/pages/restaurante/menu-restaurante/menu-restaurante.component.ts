@@ -1,5 +1,8 @@
+import { AlertService } from './../../../services/alert.service';
+import { BasketService } from './../../cliente/basket/services/basket.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { ClienteService } from '../../cliente/services/cliente.service';
 import { RestauranteService } from '../services/restaurante.service';
 
 @Component({
@@ -16,10 +19,10 @@ export class MenuRestauranteComponent implements OnInit {
   // public searchField = "employeeName";
   // public searchValue: string;
 
-  public columnsToDisplayMainDishes = ['photo', 'name', 'accompaniments', 'price', 'details', 'cart']
-  public columnsToDisplaySideDishes = ['photo', 'name', 'accompaniments', 'price', 'details', 'cart']
-  public columnsToDisplayBeverages = ['photo', 'name', 'accompaniments', 'price', 'details', 'cart']
-  public columnsToDisplayDesserts = ['photo', 'name', 'accompaniments', 'price', 'details', 'cart']
+  public columnsToDisplayMainDishes = ['photo', 'name', 'accompaniments', 'price', 'details', 'cart', 'quantity']
+  public columnsToDisplaySideDishes = ['photo', 'name', 'accompaniments', 'price', 'details', 'cart', 'quantity']
+  public columnsToDisplayBeverages = ['photo', 'name', 'accompaniments', 'price', 'details', 'cart', 'quantity']
+  public columnsToDisplayDesserts = ['photo', 'name', 'accompaniments', 'price', 'details', 'cart', 'quantity']
 
   public expandedElement: any;
   public mainDishesProducts = new MatTableDataSource<any>();
@@ -27,21 +30,19 @@ export class MenuRestauranteComponent implements OnInit {
   public beveragesProducts = new MatTableDataSource<any>();
   public dessertsProducts = new MatTableDataSource<any>();
 
-  constructor(@Inject('BASE_URL') public url: string, private restauranteService: RestauranteService) { }
+  public mainDishQuantity: number = 0;
+  public sideDishQuantity: number = 0;
+  public beverageQuantity: number = 0;
+  public dessertsQuantity: number = 0;
+
+  constructor(@Inject('BASE_URL') public url: string, private restauranteService: RestauranteService, private clienteService: ClienteService, private cartService: BasketService, private alertService: AlertService) { }
 
   ngOnInit(): void {
     this.getProductList();
   }
 
   private getProductList() {
-
-    // if (this.isSearching) {
-    //     //
-    //   });
-    //   return;
-    // }
     this.restauranteService.getAllProducts().subscribe(res => {
-      console.log(res[3])
       this.dessertsProducts.data = res[0]?.products;
       this.sideDishesProducts.data = res[1]?.products;
       this.mainDishesProducts.data = res[2]?.products;
@@ -57,12 +58,7 @@ export class MenuRestauranteComponent implements OnInit {
     this.getProductList();
   }
 
-  public search(event: any){
-    // this.searchValue = !isNaN(event.value) ? event.value : event.target.value;
-
-    // this.isSearching = true;
-    // this.page = 0;
-    // this.limit = 5;
+  public search(event: any) {
     this.getProductList();
   }
 
@@ -86,6 +82,24 @@ export class MenuRestauranteComponent implements OnInit {
     // this.searchField = "employeeName";
     // this.searchValue = "";
     this.getProductList();
+  }
+
+  public qtdEvent(product: any, qtd: string) {
+    let quantity = parseInt(qtd)
+    product.quantity = 0
+    if (quantity) {
+      product.quantity = quantity
+    }
+  }
+
+  public cart(product: any) {
+    this.cartService
+      .addBasketItem(product?.id, product?.quantity, (retorno) => {
+
+        let textDecoder = new TextDecoder();
+
+        this.alertService.showSuccess("Adicionado", textDecoder.decode(retorno));
+      })
   }
 
 }

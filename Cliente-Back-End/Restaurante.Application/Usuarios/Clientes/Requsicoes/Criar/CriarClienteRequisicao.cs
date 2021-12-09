@@ -27,7 +27,7 @@ namespace Restaurante.Application.Usuarios.Clientes.Requsicoes.Criar
             public async Task<RespostaRequisicao<bool>> Handle(CriarClienteRequisicao request, CancellationToken cancellationToken)
             {
                 var cliente = _clienteFactory
-                    .ComEndereco(new Endereco(request.Endereco.CEP, request.Endereco.Logradouro, request.Endereco.Bairro, request.Endereco.Numero, request.Endereco.Complemento) { Cidade = request.Endereco.Cidade, Estado = request.Endereco.Estado })
+                    .ComEndereco(new Endereco(request.Id, request.Endereco.CEP, request.Endereco.Logradouro, request.Endereco.Bairro, request.Endereco.Numero, request.Endereco.Complemento) { Cidade = request.Endereco.Cidade, Estado = request.Endereco.Estado })
                     .ComNome(request.Nome)
                     .ComTelefone(request.Telefone.DDD, request.Telefone.Telefone)
                     .ComEmail(request.Email)

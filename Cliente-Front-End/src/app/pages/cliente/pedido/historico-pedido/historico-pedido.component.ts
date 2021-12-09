@@ -62,8 +62,4 @@ export class HistoricoPedidoComponent implements OnInit {
 
   }
 
-  public cart(id: string) {
-    console.log(id)
-  }
-
 }
